@@ -516,36 +516,129 @@
       box-shadow: 0 0 30px rgba(0, 85, 255, 0.15);
     }
 
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-      padding: 0 5vw;
-      margin-bottom: 10vh;
+    /* KEY PROJECTS SECTION — Fits completely in a single page / screen on desktop */
+    .key-projects-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3vh 4vw;
+      box-sizing: border-box;
       position: relative;
       z-index: 55;
     }
 
-    /* SKILLS GRID — Single line on desktop screens */
+    .key-projects-section .section-title {
+      margin: 0 0 1rem 0;
+      padding-bottom: 0.5rem;
+      font-size: clamp(1.2rem, 2.2vw, 1.65rem);
+      letter-spacing: 2px;
+    }
+
+    .key-projects-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      z-index: 55;
+    }
+
+    .key-projects-grid .glass-card {
+      padding: 1.15rem 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      min-width: 0;
+    }
+
+    .key-projects-grid .tag {
+      font-size: 0.65rem;
+      padding: 0.2rem 0.45rem;
+      margin-bottom: 0.4rem;
+      white-space: nowrap;
+      display: inline-block;
+      letter-spacing: 0.5px;
+    }
+
+    .key-projects-grid h2 {
+      font-size: clamp(0.92rem, 1.1vw, 1.1rem);
+      line-height: 1.22;
+      margin-bottom: 0.25rem;
+      font-weight: 700;
+      color: var(--bone-white);
+      word-break: break-word;
+    }
+
+    .key-projects-grid .project-sub {
+      font-size: 0.74rem;
+      line-height: 1.35;
+      margin-bottom: 0.45rem;
+      color: var(--bone-white);
+      font-weight: 600;
+    }
+
+    .key-projects-grid ul {
+      padding-left: 0.95rem;
+      margin-bottom: 0.45rem;
+      list-style: square;
+    }
+
+    .key-projects-grid li {
+      font-size: 0.73rem;
+      line-height: 1.35;
+      margin-bottom: 0.3rem;
+      color: var(--text-muted);
+      word-break: break-word;
+    }
+
+    .key-projects-grid .project-stack {
+      font-size: 0.71rem;
+      color: var(--electric-blue);
+      line-height: 1.3;
+      margin-top: auto;
+      padding-top: 0.4rem;
+      border-top: 1px dashed rgba(0, 85, 255, 0.2);
+    }
+
+    .key-projects-grid .project-actions {
+      display: flex;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .key-projects-grid .link-btn {
+      padding: 0.35rem 0.65rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.5px;
+      margin-top: 0;
+    }
+
+    /* SKILLS GRID — 4-column balanced grid with span-2 wide tile for 7 tiles */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 1.25rem;
-      padding: 0 5vw;
-      margin-bottom: 10vh;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.15rem;
+      padding: 0 4vw;
+      margin-bottom: 8vh;
       position: relative;
       z-index: 55;
     }
 
     .skills-grid .glass-card {
-      padding: 1.4rem 1.1rem;
+      padding: 1.25rem 1rem;
     }
 
     .skills-grid .tag {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       padding: 0.2rem 0.5rem;
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.75rem;
       white-space: nowrap;
+      display: inline-block;
     }
 
     .skills-grid .card-content ul {
@@ -553,41 +646,85 @@
     }
 
     .skills-grid .card-content li {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       line-height: 1.45;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.35rem;
       word-break: break-word;
+    }
+
+    .skill-card-wide {
+      grid-column: span 2;
+    }
+
+    .skill-subgrid {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .skill-subgrid ul {
+      flex: 1;
+    }
+
+    /* ACHIEVEMENTS GRID */
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      padding: 0 4vw;
+      margin-bottom: 10vh;
+      position: relative;
+      z-index: 55;
     }
 
     /* TABLET RESPONSIVENESS */
     @media (max-width: 1200px) and (min-width: 860px) {
+      .key-projects-section {
+        min-height: auto;
+        padding: 4vh 4vw;
+      }
+      .key-projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.2rem;
+      }
       .skills-grid {
-        gap: 0.85rem;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+      }
+      .skill-card-wide {
+        grid-column: span 1;
+      }
+      .skill-subgrid {
+        flex-direction: column;
+        gap: 0;
       }
       .skills-grid .glass-card {
-        padding: 1.2rem 0.85rem;
+        padding: 1.1rem 0.85rem;
       }
-      .skills-grid .tag {
-        font-size: 0.68rem;
-        padding: 0.15rem 0.4rem;
-      }
-      .skills-grid .card-content li {
-        font-size: 0.78rem;
-      }
-      .projects-grid {
+      .achievements-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
+        gap: 1.25rem;
       }
     }
 
     @media (max-width: 859px) and (min-width: 641px) {
-      .skills-grid {
-        grid-template-columns: repeat(3, 1fr);
+      .key-projects-section {
+        min-height: auto;
+        padding: 4vh 4vw;
+      }
+      .key-projects-grid {
+        grid-template-columns: repeat(2, 1fr);
         gap: 1.2rem;
       }
-      .projects-grid {
+      .skills-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
+        gap: 1.1rem;
+      }
+      .skill-card-wide {
+        grid-column: span 2;
+      }
+      .achievements-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.2rem;
       }
     }
 
@@ -617,18 +754,29 @@
       .hero-content .glass-card {
         padding: 1.25rem;
       }
-      .projects-grid, .skills-grid {
+      .key-projects-section {
+        min-height: auto;
+        padding: 3vh 1.25rem;
+      }
+      .key-projects-grid, .skills-grid, .achievements-grid {
         grid-template-columns: 1fr;
         gap: 1.25rem;
-        padding: 0 1.25rem;
-        margin-bottom: 6vh;
+        padding: 0;
+        margin-bottom: 5vh;
+      }
+      .skill-card-wide {
+        grid-column: span 1;
+      }
+      .skill-subgrid {
+        flex-direction: column;
+        gap: 0;
       }
       .section-title {
         margin: 4vh 1.25rem 1.5rem 1.25rem;
         display: block;
       }
       .marquee-wrapper {
-        margin: 3vh 0 6vh 0;
+        margin: 2.5vh 0 4vh 0;
         padding: 0.75rem 0;
       }
       .marquee span {
@@ -974,73 +1122,75 @@
       </div>
     </div>
 
-    <h2 class="section-title">Key Projects</h2>
-    <section class="projects-grid">
-      <div class="glass-card">
-        <div class="card-content">
-          <span class="tag">Smart India Hackathon 2026</span>
-          <h2>S.A.G.A.R. (Ocean-X)</h2>
-          <p style="color: var(--text-main); font-weight: bold; margin-bottom: 0.6rem;">Seabed Survey Analysis & Anomaly Detection (PS 26057)</p>
-          <ul>
-            <li>Architected the technical specifications, assigned team roles, and integrated an ONNX model with the curated SAGAR dataset.</li>
-            <li>Engineered a 14-stage acoustic processing pipeline and open-world anomaly intelligence system to detect marine debris and seabed hazards.</li>
-            <li>Built a live interactive web prototype in TypeScript with geospatial acoustic visualization.</li>
-          </ul>
-          <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--electric-blue); line-height: 1.5;"><strong>Stack:</strong> Python, TypeScript, React, FastAPI, PyTorch, ONNX, MapLibre</p>
-          <div style="display: flex; gap: 1rem; margin-top: 1.2rem; flex-wrap: wrap;">
-            <a href="https://github.com/narayan-nkj/SAGAR-SonarVision" target="_blank" rel="noopener noreferrer" class="link-btn" style="margin-top: 0;">GitHub Repo &rarr;</a>
+    <section class="key-projects-section" id="key-projects">
+      <h2 class="section-title">Key Projects</h2>
+      <div class="key-projects-grid">
+        <div class="glass-card">
+          <div class="card-content">
+            <span class="tag">Smart India Hackathon 2026</span>
+            <h2>S.A.G.A.R. (Ocean-X)</h2>
+            <p class="project-sub">Seabed Survey Analysis & Anomaly Detection (PS 26057)</p>
+            <ul>
+              <li>Architected specifications and integrated ONNX model with curated SAGAR dataset.</li>
+              <li>Engineered 14-stage acoustic processing pipeline & open-world anomaly intelligence.</li>
+              <li>Built live interactive web prototype in TypeScript with geospatial acoustic visualization.</li>
+            </ul>
+            <p class="project-stack"><strong>Stack:</strong> Python, TypeScript, React, FastAPI, PyTorch, ONNX, MapLibre</p>
+            <div class="project-actions">
+              <a href="https://github.com/narayan-nkj/SAGAR-SonarVision" target="_blank" rel="noopener noreferrer" class="link-btn">GitHub Repo &rarr;</a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="glass-card">
-        <div class="card-content">
-          <span class="tag">Backend & Protocol Engineering</span>
-          <h2>Phoenix Protocol</h2>
-          <p style="color: var(--text-main); font-weight: bold; margin-bottom: 0.6rem;">Optimised Data Handling & Security Compliance Engine</p>
-          <ul>
-            <li>Developed custom Python backend scripts and protocols for optimised data handling and automated network compliance auditing.</li>
-            <li>Engineered cross-platform launcher with automatic port conflict detection and readiness polling across Flask and Vite.</li>
-            <li>Turned complex network configurations into structured security findings with actionable remediation steps.</li>
-          </ul>
-          <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--electric-blue); line-height: 1.5;"><strong>Stack:</strong> Python, Flask, Vite, Node.js, Shell</p>
-          <div style="display: flex; gap: 1rem; margin-top: 1.2rem; flex-wrap: wrap;">
-            <a href="https://github.com/HeX-ecutioner/phoenix-protocol" target="_blank" rel="noopener noreferrer" class="link-btn" style="margin-top: 0;">GitHub Repo &rarr;</a>
+        <div class="glass-card">
+          <div class="card-content">
+            <span class="tag">Backend & Protocol Engineering</span>
+            <h2>Phoenix Protocol</h2>
+            <p class="project-sub">Optimised Data Handling & Security Compliance Engine</p>
+            <ul>
+              <li>Developed custom Python backend scripts and protocols for data handling & auditing.</li>
+              <li>Engineered launcher with automatic port conflict detection across Flask and Vite.</li>
+              <li>Turned complex network configurations into structured findings & remediation steps.</li>
+            </ul>
+            <p class="project-stack"><strong>Stack:</strong> Python, Flask, Vite, Node.js, Shell</p>
+            <div class="project-actions">
+              <a href="https://github.com/HeX-ecutioner/phoenix-protocol" target="_blank" rel="noopener noreferrer" class="link-btn">GitHub Repo &rarr;</a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="glass-card">
-        <div class="card-content">
-          <span class="tag">Full-Stack & Creative UI</span>
-          <h2>Interactive Portfolios & Dashboards</h2>
-          <p style="color: var(--text-main); font-weight: bold; margin-bottom: 0.6rem;">Data-Driven Applications with React & Flask</p>
-          <ul>
-            <li>Constructed high-impact web applications utilizing void black and sunset orange themes, brutalist typography, and glassmorphism.</li>
-            <li>Architected custom portfolio milestone showcases (Vanguard, Apex, Ather) featuring interactive 3D WebGL scenes and horizontal work scrolls.</li>
-            <li>Engineered modular frontend components, responsive layout systems, and low-latency audio processing utilities.</li>
-          </ul>
-          <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--electric-blue); line-height: 1.5;"><strong>Stack:</strong> React, Flask, JavaScript (ES6+), Three.js, CSS3</p>
-          <div style="display: flex; gap: 1rem; margin-top: 1.2rem; flex-wrap: wrap;">
-            <a href="#projects" class="link-btn open-overlay-link" style="margin-top: 0;">View Showcase &rarr;</a>
-            <a href="https://github.com/narayan-nkj/Narayan.nkj" target="_blank" rel="noopener noreferrer" class="link-btn" style="margin-top: 0;">GitHub Suite &rarr;</a>
+        <div class="glass-card">
+          <div class="card-content">
+            <span class="tag">Full-Stack & Creative UI</span>
+            <h2>Interactive Portfolios & Dashboards</h2>
+            <p class="project-sub">Data-Driven Applications with React & Flask</p>
+            <ul>
+              <li>Constructed high-impact web apps utilizing void black themes, brutalism, and glassmorphism.</li>
+              <li>Architected custom portfolio showcases (Vanguard, Apex, Ather) with 3D WebGL scenes.</li>
+              <li>Engineered modular frontend components and low-latency audio processing utilities.</li>
+            </ul>
+            <p class="project-stack"><strong>Stack:</strong> React, Flask, JavaScript (ES6+), Three.js, CSS3</p>
+            <div class="project-actions">
+              <a href="#projects" class="link-btn open-overlay-link">View Showcase &rarr;</a>
+              <a href="https://github.com/narayan-nkj/Narayan.nkj" target="_blank" rel="noopener noreferrer" class="link-btn">GitHub Suite &rarr;</a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="glass-card">
-        <div class="card-content">
-          <span class="tag">AI Security // IBM Hackathon</span>
-          <h2>PhantomDeps</h2>
-          <p style="color: var(--text-main); font-weight: bold; margin-bottom: 0.6rem;">Pre-Install AI Dependency Claim Gate for IBM Bob</p>
-          <ul>
-            <li>Engineered an npm-first, verification-only claim gate designed to prevent AI coding agent package and symbol hallucinations.</li>
-            <li>Statically parses exported AST declarations directly from npm tarballs without executing third-party or untrusted package code.</li>
-            <li>Built core test infrastructure achieving 205/205 passing suites and integrated with IBM Bob via the PreToolUse hook interface.</li>
-          </ul>
-          <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--electric-blue); line-height: 1.5;"><strong>Stack:</strong> TypeScript, Node.js, IBM Bob Hooks, AST Parsing, CI/CD</p>
-          <div style="display: flex; gap: 1rem; margin-top: 1.2rem; flex-wrap: wrap;">
-            <a href="https://github.com/adishxm/phantomdeps" target="_blank" rel="noopener noreferrer" class="link-btn" style="margin-top: 0;">GitHub Repo &rarr;</a>
+        <div class="glass-card">
+          <div class="card-content">
+            <span class="tag">AI Security // IBM Hackathon</span>
+            <h2>PhantomDeps</h2>
+            <p class="project-sub">Pre-Install AI Dependency Claim Gate for IBM Bob</p>
+            <ul>
+              <li>Engineered npm-first verification gate preventing AI coding agent package & symbol hallucinations.</li>
+              <li>Statically parses exported AST declarations directly from npm tarballs without code execution.</li>
+              <li>Built core test infrastructure with 205/205 passing suites and IBM Bob PreToolUse hook.</li>
+            </ul>
+            <p class="project-stack"><strong>Stack:</strong> TypeScript, Node.js, IBM Bob Hooks, AST Parsing, CI/CD</p>
+            <div class="project-actions">
+              <a href="https://github.com/adishxm/phantomdeps" target="_blank" rel="noopener noreferrer" class="link-btn">GitHub Repo &rarr;</a>
+            </div>
           </div>
         </div>
       </div>
@@ -1105,10 +1255,39 @@
           </ul>
         </div>
       </div>
+      <div class="glass-card">
+        <div class="card-content">
+          <span class="tag">06. AI Security & AST Analysis</span>
+          <ul>
+            <li>AST Parsing & Static Analysis</li>
+            <li>AI Coding Agent Guardrails</li>
+            <li>Pre-Install Dependency Verification</li>
+            <li>PreToolUse Hook Integration</li>
+            <li>Automated Compliance Auditing</li>
+          </ul>
+        </div>
+      </div>
+      <div class="glass-card skill-card-wide">
+        <div class="card-content">
+          <span class="tag">07. Backend & Cloud Systems</span>
+          <div class="skill-subgrid">
+            <ul>
+              <li>FastAPI & REST Microservices</li>
+              <li>Docker Containerization</li>
+              <li>Geospatial Mapping (MapLibre)</li>
+            </ul>
+            <ul>
+              <li>Port & Process Automation</li>
+              <li>CI/CD & Automated Testing</li>
+              <li>Cloud & Vercel Edge Deployments</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
 
     <h2 class="section-title">Achievements & Engagements</h2>
-    <section class="projects-grid">
+    <section class="achievements-grid">
       <div class="glass-card">
         <div class="card-content">
           <span class="tag">Tech Symposium</span>

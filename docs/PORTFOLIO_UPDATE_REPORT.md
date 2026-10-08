@@ -168,3 +168,12 @@
    - **Fluid Typography:** Implemented `clamp()` typography across headings, subtitles, and section titles to prevent text clipping on smaller viewports.
    - **Grid Adaptation:** Configured 5 columns on desktop, 3 columns / 2 columns on tablet (`1200px` & `859px`), and 1 column on mobile (`<640px`).
    - **Performance & Battery:** Halts Three.js 3D render loop on screens `<= 1024px` where the 3D canvas is hidden, saving mobile battery and GPU usage. Added tap-to-dismiss for the signature loader on touch devices.
+
+6. **Key Projects Viewport-Fitted Single-Screen Display:**
+   - Wrapped Key Projects in `.key-projects-section` with `min-height: 100vh; display: flex; flex-direction: column; justify-content: center;`.
+   - Formatted `.key-projects-grid` with `grid-template-columns: repeat(4, 1fr)` and streamlined card padding/typography so the entire section (title, 4 cards, bullet points, tech stack tags, and buttons) is visible at once on desktop without vertical scrolling or cutoff.
+
+7. **Expanded Technical Skills with 2 Real Meaningful Tiles (7 Tiles Total):**
+   - **`06. AI Security & AST Analysis`:** AST Parsing & Static Analysis, AI Coding Agent Guardrails, Pre-Install Dependency Verification, PreToolUse Hook Integration, Automated Compliance Auditing (sourced directly from IBM Hackathon *PhantomDeps* engineering).
+   - **`07. Backend & Cloud Systems`:** FastAPI & REST Microservices, Docker Containerization, Geospatial Mapping (MapLibre), Port & Process Automation, CI/CD & Automated Testing, Cloud Deployments (sourced directly from *SAGAR-SonarVision* and *Phoenix Protocol* architectures).
+   - Rendered as an intentional 4-column bento grid where Tile 07 spans 2 columns (`.skill-card-wide`) with an internal `.skill-subgrid`, creating a visually flush, non-ragged layout.
