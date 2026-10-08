@@ -3,12 +3,18 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/vanguard", "destination": "/2.html" },
-    { "source": "/apex", "destination": "/3.html" },
-    { "source": "/ather", "destination": "/4.html" },
-    { "source": "/projects", "destination": "/index.html" },
+    { "source": "/vanguard", "destination": "/projects/vanguard.html" },
+    { "source": "/apex", "destination": "/projects/apex.html" },
+    { "source": "/ather", "destination": "/projects/ather.html" },
+    { "source": "/2", "destination": "/projects/vanguard.html" },
+    { "source": "/2.html", "destination": "/projects/vanguard.html" },
+    { "source": "/3", "destination": "/projects/apex.html" },
+    { "source": "/3.html", "destination": "/projects/apex.html" },
+    { "source": "/4", "destination": "/projects/ather.html" },
+    { "source": "/4.html", "destination": "/projects/ather.html" },
     { "source": "/1", "destination": "/index.html" },
-    { "source": "/1.html", "destination": "/index.html" }
+    { "source": "/1.html", "destination": "/index.html" },
+    { "source": "/projects", "destination": "/index.html" }
   ],
   "headers": [
     {
@@ -29,6 +35,15 @@
         {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
         }
       ]
     },

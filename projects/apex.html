@@ -9,7 +9,7 @@
   <meta name="theme-color" content="#050505">
   <meta property="og:title" content="Apex | Creative Developer — Narayan Kumar Jha">
   <meta property="og:description" content="Dynamic React-driven matrix engine featuring brutalist horizontal work scroll.">
-  <meta property="og:image" content="A.jpeg">
+  <meta property="og:image" content="../assets/images/A.jpeg">
   
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -263,7 +263,7 @@
       <a href="#about">About</a>
       <a href="#work">Work</a>
       <a href="#contact">Contact</a>
-      <a href="index.html#projects" class="nav-escape-btn">[ ESC // TERMINAL ]</a>
+      <a href="../index.html#projects" class="nav-escape-btn">[ ESC // TERMINAL ]</a>
     </div>
   </nav>
 
@@ -407,7 +407,7 @@
 
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        window.location.href = 'index.html#projects';
+        window.location.href = '../index.html#projects';
       }
     });
   </script>
@@ -416,21 +416,21 @@
     const { useRef, useEffect, useState } = React;
 
     const row1 = [
-      { id: 'A-01', title: 'Dharma Chariot', cat: 'Digital Art', imgSrc: 'A.jpeg' },
-      { id: 'A-02', title: 'Station Transit', cat: 'Cinematography', imgSrc: 'B.jpeg' },
-      { id: 'A-03', title: 'Pasoori Session', cat: 'Visual Aesthetics', imgSrc: 'C.jpeg' }
+      { id: 'A-01', title: 'Dharma Chariot', cat: 'Digital Art', imgSrc: '../assets/images/A.jpeg' },
+      { id: 'A-02', title: 'Station Transit', cat: 'Cinematography', imgSrc: '../assets/images/B.jpeg' },
+      { id: 'A-03', title: 'Pasoori Session', cat: 'Visual Aesthetics', imgSrc: '../assets/images/C.jpeg' }
     ];
 
     const row2 = [
-      { id: 'B-01', title: 'Wayfarer Route', cat: 'Street Photography', imgSrc: 'D.jpeg' },
-      { id: 'B-02', title: 'Window View', cat: 'Minimalist Framing', imgSrc: 'E.jpeg' },
-      { id: 'B-03', title: 'Crimson Ledger', cat: 'Key Art Poster', imgSrc: 'F.jpeg' }
+      { id: 'B-01', title: 'Wayfarer Route', cat: 'Street Photography', imgSrc: '../assets/images/D.jpeg' },
+      { id: 'B-02', title: 'Window View', cat: 'Minimalist Framing', imgSrc: '../assets/images/E.jpeg' },
+      { id: 'B-03', title: 'Crimson Ledger', cat: 'Key Art Poster', imgSrc: '../assets/images/F.jpeg' }
     ];
 
     const row3 = [
-      { id: 'C-01', title: 'Labyrinth Neo-Noir', cat: 'Typography Design', imgSrc: 'G.jpeg' },
-      { id: 'C-02', title: 'Dast-e-Bayaan', cat: 'Title Poster', imgSrc: 'H.jpeg' },
-      { id: 'C-03', title: 'Capture Sunlight', cat: 'Chiaroscuro Art', imgSrc: 'I.jpeg' }
+      { id: 'C-01', title: 'Labyrinth Neo-Noir', cat: 'Typography Design', imgSrc: '../assets/images/G.jpeg' },
+      { id: 'C-02', title: 'Dast-e-Bayaan', cat: 'Title Poster', imgSrc: '../assets/images/H.jpeg' },
+      { id: 'C-03', title: 'Capture Sunlight', cat: 'Chiaroscuro Art', imgSrc: '../assets/images/I.jpeg' }
     ];
 
     const WorkSection = () => {

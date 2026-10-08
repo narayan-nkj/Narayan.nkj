@@ -5,6 +5,27 @@
 
 ---
 
+## 📁 Organized Project Structure
+
+```
+Narayan.nkj/
+├── assets/
+│   └── images/               # High-fidelity project artworks & media assets
+│       ├── 1.jpeg, 2.jpeg, 3.jpeg, 3.jpg, 4.jpeg
+│       └── A.jpeg through I.jpeg
+├── projects/                 # Sub-application portfolios
+│   ├── vanguard.html         # Project Alpha (Luxury Editorial Agency)
+│   ├── apex.html             # Project Beta (Interactive React Parallax Matrix)
+│   └── ather.html            # Project Gamma (Cream & Particle Glassmorphism)
+├── .gitignore                # Clean Git exclusions
+├── index.html                # Master Hub with 3D Three.js Interactive Globe
+├── package.json              # Project metadata & local dev scripts
+├── README.md                 # Complete documentation & deployment guide
+└── vercel.json               # Zero-config Vercel routes, clean URLs & CDN caching
+```
+
+---
+
 ## 🚀 Overview
 
 An interconnected portfolio ecosystem combining four distinct interactive web experiences, optimized for high performance, smooth animations, and zero-configuration deployment on **Vercel**.
@@ -12,9 +33,9 @@ An interconnected portfolio ecosystem combining four distinct interactive web ex
 | Experience | Route | Technologies | Concept & Highlights |
 | :--- | :--- | :--- | :--- |
 | **Portfolio Hub** | `/` (`index.html`) | Three.js (r128), Vanilla JS, CSS Glassmorphism | Dark void aesthetic, interactive 3D rotating globe with particle field, HUD overlay, signature preloader, and projects launcher. |
-| **Project Alpha : Vanguard** | `/vanguard` (`2.html`) | Vanilla JS, Modern CSS Grid, Editorial Typography | Luxury editorial design, protocol loader, fluid typography (Playfair Display + DM Sans), high-fidelity media grid. |
-| **Project Beta : Apex** | `/apex` (`3.html`) | React 18, Smooth Parallax Physics, CSS Brutalism | Cybernetic boot sequence, multi-threaded 3-tier horizontal scroll matrix, zero-runtime JSX compiling overhead. |
-| **Project Gamma : Ather** | `/ather` (`4.html`) | Canvas 2D API, IntersectionObserver, Vanilla JS | Cream & Charcoal aesthetic, interactive floating stack universe, 2D particle simulation, horizontal sticky scroll. |
+| **Project Alpha : Vanguard** | `/vanguard` (`projects/vanguard.html`) | Vanilla JS, Modern CSS Grid, Editorial Typography | Luxury editorial design, protocol loader, fluid typography (Playfair Display + DM Sans), high-fidelity media grid. |
+| **Project Beta : Apex** | `/apex` (`projects/apex.html`) | React 18, Smooth Parallax Physics, CSS Brutalism | Cybernetic boot sequence, multi-threaded 3-tier horizontal scroll matrix, zero-runtime JSX compiling overhead. |
+| **Project Gamma : Ather** | `/ather` (`projects/ather.html`) | Canvas 2D API, IntersectionObserver, Vanilla JS | Cream & Charcoal aesthetic, interactive floating stack universe, 2D particle simulation, horizontal sticky scroll. |
 
 ---
 
@@ -22,11 +43,11 @@ An interconnected portfolio ecosystem combining four distinct interactive web ex
 
 1. **Zero-Configuration Vercel Deployment**:
    - `index.html` configured as root entry point.
-   - `vercel.json` provides clean URLs (`/vanguard`, `/apex`, `/ather`, `/projects`) and backwards-compatible routing.
+   - `vercel.json` provides clean URLs (`/vanguard`, `/apex`, `/ather`, `/projects`) and backwards-compatible routing (`/2.html`, `/3.html`, `/4.html`).
    - Long-term immutable asset caching headers (`Cache-Control: public, max-age=31536000, immutable`) for high Core Web Vitals scores.
    - Strict security headers (`X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy: strict-origin-when-cross-origin`).
 
-2. **Precompiled React Runtime in Apex (`3.html`)**:
+2. **Precompiled React Runtime in Apex (`projects/apex.html`)**:
    - Transpiled in-browser Babel dependency into native `React.createElement` calls, saving **~3.5 MB of CDN downloads** and eliminating script evaluation lag.
 
 3. **Core Web Vitals & Image Optimization**:
