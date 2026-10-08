@@ -301,6 +301,7 @@
       align-items: center;
       position: relative;
       pointer-events: auto; 
+      overflow: visible;
     }
 
     .hud-overlay {
@@ -1114,72 +1115,79 @@
     }
 
     .projects-overlay .projects-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 1.4vh;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
       flex: 1;
-      justify-content: space-between;
-      margin-top: 0 !important;
+      width: 100%;
+      margin-top: 2vh !important;
       padding: 0;
       min-height: 0;
+      box-sizing: border-box;
     }
 
     .projects-overlay .projects-grid .glass-card {
-      flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      padding: 1.4vh 2rem;
+      justify-content: space-between;
+      padding: 2rem 1.8rem;
+      height: 100%;
       min-height: 0;
       border: 1px solid var(--glass-border);
       background: var(--glass-bg);
-      transition: all 0.3s ease;
-      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      box-sizing: border-box;
     }
 
     .projects-overlay .projects-grid .glass-card:hover {
       border-color: var(--electric-blue);
-      transform: translateX(6px);
-      box-shadow: 0 0 25px rgba(0, 85, 255, 0.2);
+      transform: translateY(-6px);
+      box-shadow: 0 0 30px rgba(0, 85, 255, 0.25);
     }
 
     .projects-overlay .projects-grid .card-content {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      height: 100%;
+      justify-content: space-between;
     }
 
     .projects-overlay .projects-grid .tag {
-      margin-bottom: 0.35rem;
-      font-size: 0.68rem;
-      padding: 0.15rem 0.6rem;
+      margin-bottom: 0.8rem;
+      font-size: 0.72rem;
+      padding: 0.2rem 0.65rem;
       letter-spacing: 0.5px;
+      display: inline-block;
+      align-self: flex-start;
     }
 
     .projects-overlay .projects-grid h2 {
       font-family: 'Syncopate', sans-serif;
       font-size: clamp(0.95rem, 1.25vw, 1.25rem);
-      margin-bottom: 0.35rem;
-      line-height: 1.2;
+      margin-bottom: 0.8rem;
+      line-height: 1.25;
       color: var(--bone-white);
+      word-break: break-word;
     }
 
     .projects-overlay .projects-grid p {
-      font-size: clamp(0.78rem, 0.95vw, 0.88rem);
-      line-height: 1.4;
-      margin-bottom: 0.55rem;
+      font-size: clamp(0.82rem, 1vw, 0.92rem);
+      line-height: 1.55;
+      margin-bottom: 1.5rem;
       color: var(--text-muted);
+      flex-grow: 1;
     }
 
     .projects-overlay .projects-grid .link-btn {
-      margin-top: 0;
-      padding: 0.4rem 1.2rem;
-      font-size: 0.75rem;
-      align-self: flex-start;
+      margin-top: auto;
+      padding: 0.65rem 1.25rem;
+      font-size: 0.78rem;
+      text-align: center;
+      width: 100%;
       letter-spacing: 1px;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 860px) {
       .projects-overlay {
         overflow-y: auto !important;
       }
@@ -1190,10 +1198,11 @@
         padding: 1.5rem 1.25rem 4rem 1.25rem !important;
       }
       .projects-overlay .projects-grid {
+        grid-template-columns: 1fr !important;
         gap: 1.25rem !important;
       }
       .projects-overlay .projects-grid .glass-card {
-        padding: 1.25rem !important;
+        padding: 1.5rem 1.25rem !important;
       }
     }
     
@@ -1753,14 +1762,14 @@
       const container = document.getElementById('canvas-container');
       
       const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
+      const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
       const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); 
       
       renderer.setSize(container.clientWidth, container.clientHeight);
       renderer.setPixelRatio(window.devicePixelRatio);
       container.appendChild(renderer.domElement);
 
-      const geometry = new THREE.IcosahedronGeometry(9.2, 2);
+      const geometry = new THREE.IcosahedronGeometry(7.5, 2);
       const material = new THREE.MeshBasicMaterial({ 
         color: 0x0055FF, 
         wireframe: true, 
@@ -1770,7 +1779,7 @@
       
       const sphereMesh = new THREE.Mesh(geometry, material);
       
-      const innerGeometry = new THREE.IcosahedronGeometry(8.6, 2);
+      const innerGeometry = new THREE.IcosahedronGeometry(7.0, 2);
       const innerMaterial = new THREE.MeshBasicMaterial({ color: 0x050505 });
       const innerMesh = new THREE.Mesh(innerGeometry, innerMaterial);
       
@@ -1799,7 +1808,7 @@
       const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
       scene.add(particlesMesh);
 
-      camera.position.z = 21; 
+      camera.position.z = 25; 
 
       let mouseX = 0;
       let mouseY = 0;
