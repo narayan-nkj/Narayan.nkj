@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ather | Project Gamma — Narayan Kumar Jha</title>
+    <meta name="description" content="Ather: Minimalist glassmorphism interface highlighting predictive computational pipelines by Narayan Kumar Jha.">
+    <meta name="author" content="Narayan Kumar Jha">
+    <meta name="theme-color" content="#FDFBF7">
+    <meta property="og:title" content="Ather | Project Gamma — Narayan Kumar Jha">
+    <meta property="og:description" content="Minimalist glassmorphism interface highlighting predictive computational pipelines.">
+    <meta property="og:image" content="1.jpeg">
+    <style>
+        :root {
+            --cream: #FDFBF7;
+            --orange: #FF5500;
+            --slate: #5E6A75;
+            --charcoal: #2C3238;
+            --black: #1A1D20;
+
+            --bg-base: var(--cream);
+            --text-main: var(--slate);
+            --text-heading: var(--charcoal);
+            --text-muted: rgba(94, 106, 117, 0.8);
+            
+            --glass-bg: rgba(44, 50, 56, 0.03); 
+            --glass-border: rgba(44, 50, 56, 0.15); 
+            
+            --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --font-display: 'Impact', 'Arial Black', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+            outline: none;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 0%, #ffffff 0%, var(--cream) 60%);
+        }
+
+        h1, h2, h3, h4, h5, h6, strong { color: var(--text-heading); }
+        .cite { font-size: 0.6rem; vertical-align: super; opacity: 0.6; margin-left: 2px; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-base); }
+        ::-webkit-scrollbar-thumb { background: var(--slate); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--charcoal); }
+
+        #cursor-dot, #cursor-outline {
+            position: fixed;
+            top: 0; left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 10000;
+            pointer-events: none;
+        }
+        #cursor-dot { width: 8px; height: 8px; background: var(--orange); }
+        #cursor-outline {
+            width: 40px; height: 40px;
+            border: 1px solid var(--charcoal);
+            transition: width 0.2s, height 0.2s, background 0.2s, border-color 0.2s;
+        }
+        .cursor-hover #cursor-outline {
+            width: 60px; height: 60px;
+            background: rgba(255, 85, 0, 0.05);
+            border-color: var(--orange);
+        }
+
+        #loader {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: var(--bg-base);
+            z-index: 9999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 1s ease-out, visibility 1s ease-out;
+        }
+        .loader-logo { 
+            font-size: 3rem; font-weight: 900; letter-spacing: 10px; margin-bottom: 20px; 
+            color: var(--charcoal); animation: pulseFade 2s infinite; 
+        }
+        .loader-bar-container { width: 300px; height: 2px; background: rgba(44, 50, 56, 0.1); position: relative; margin-bottom: 10px; }
+        #loader-bar { height: 100%; width: 0%; background: var(--orange); transition: width 0.1s linear; }
+        #loader-text { font-size: 1rem; color: var(--text-muted); letter-spacing: 2px; }
+
+        @keyframes pulseFade {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.02); color: var(--orange); }
+        }
+
+        #canvas-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+        .relative-z { position: relative; z-index: 10; }
+        .glass-panel {
+            background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border); border-radius: 16px;
+        }
+
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 20px 50px;
+            display: flex; justify-content: space-between; align-items: center; z-index: 1000; transition: all 0.4s ease;
+        }
+        nav.scrolled {
+            background: rgba(253, 251, 247, 0.95); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border); padding: 15px 50px;
+        }
+        .logo { font-size: 1.5rem; font-weight: bold; letter-spacing: 4px; color: var(--charcoal); text-decoration: none; text-transform: uppercase; }
+        
+        .nav-right-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a {
+            color: var(--charcoal); text-decoration: none; font-size: 0.9rem; letter-spacing: 1px;
+            font-weight: 600; position: relative; padding: 5px 0; transition: color 0.3s;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background: var(--orange); transition: width 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--orange); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-escape-btn {
+            color: var(--orange) !important;
+            border: 1px solid var(--orange);
+            padding: 5px 15px !important;
+            border-radius: 20px;
+            margin-left: 10px;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        .nav-escape-btn:hover {
+            background: var(--orange);
+            color: var(--cream) !important;
+        }
+        .nav-escape-btn::after { display: none !important; }
+
+        #hero { height: 100vh; display: flex; align-items: center; padding: 0 10%; }
+        .hero-content { max-width: 900px; }
+        .headline {
+            font-size: clamp(3rem, 10vw, 9rem); font-family: var(--font-display); line-height: 0.9;
+            text-transform: uppercase; margin-bottom: 20px; color: var(--charcoal);
+        }
+        .line-mask { overflow: hidden; display: block; }
+        .line-mask span {
+            display: block; transform: translateY(100%); opacity: 0;
+            animation: textReveal 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        }
+        .line-mask:nth-child(1) span { animation-delay: 1.2s; }
+        .line-mask:nth-child(2) span { animation-delay: 1.4s; color: transparent; -webkit-text-stroke: 2px var(--charcoal); }
+        .line-mask:nth-child(3) span { animation-delay: 1.6s; color: var(--orange); }
+
+        @keyframes textReveal { to { transform: translateY(0); opacity: 1; } }
+
+        .hero-sub {
+            font-size: 2rem; color: var(--charcoal); margin-bottom: 20px; opacity: 0;
+            animation: fadeIn 1s ease forwards 1.8s; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;
+        }
+
+        .hero-desc {
+            font-size: 1.2rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 40px;
+            opacity: 0; animation: fadeIn 1s ease forwards 2s; max-width: 700px; font-weight: 500;
+        }
+
+        .cta-group { display: flex; gap: 20px; opacity: 0; animation: fadeIn 1s ease forwards 2.2s; }
+        .btn {
+            padding: 15px 40px; border-radius: 30px; font-size: 1rem; text-decoration: none;
+            text-transform: uppercase; letter-spacing: 2px; font-weight: bold; transition: all 0.3s ease;
+            position: relative; overflow: hidden; border: 1px solid transparent;
+        }
+        .btn-primary { background: var(--orange); color: var(--cream); }
+        .btn-primary:hover { background: var(--charcoal); transform: translateY(-3px); color: var(--cream); }
+        .btn-secondary { color: var(--charcoal); border: 1px solid var(--charcoal); }
+        .btn-secondary:hover { background: rgba(44, 50, 56, 0.05); transform: translateY(-3px); }
+
+        .scroll-indicator {
+            position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+            opacity: 0; animation: fadeIn 1s ease forwards 2.5s; display: flex; flex-direction: column; align-items: center; gap: 10px;
+        }
+        .mouse { width: 26px; height: 40px; border: 2px solid var(--text-muted); border-radius: 20px; position: relative; }
+        .wheel { width: 4px; height: 8px; background: var(--charcoal); border-radius: 2px; position: absolute; top: 6px; left: 50%; transform: translateX(-50%); animation: scrollWheel 2s infinite; }
+        @keyframes scrollWheel { 0% { top: 6px; opacity: 1; } 100% { top: 20px; opacity: 0; } }
+        @keyframes fadeIn { to { opacity: 1; } }
+
+        section { padding: 120px 10%; }
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); filter: blur(5px); }
+        .reveal.active { opacity: 1; transform: translateY(0); filter: blur(0); }
+        .section-title { font-size: clamp(2rem, 5vw, 4rem); text-transform: uppercase; margin-bottom: 20px; color: var(--charcoal); }
+
+        .story-block { display: flex; align-items: center; gap: 50px; margin-bottom: 100px; }
+        .story-block:nth-child(even) { flex-direction: row-reverse; }
+        .story-text { flex: 1; }
+        .story-visual {
+            flex: 1; height: 400px; background: rgba(44, 50, 56, 0.02);
+            border: 1px solid var(--glass-border); border-radius: 20px; position: relative; display: flex; justify-content: center; align-items: center;
+        }
+        .glowing-orb { width: 100px; height: 100px; border-radius: 50%; background: var(--orange); opacity: 0.2; animation: pulseOrb 4s infinite alternate; }
+        @keyframes pulseOrb { 0% { transform: scale(0.8); opacity: 0.15; } 100% { transform: scale(1.1); opacity: 0.3; } }
+
+        #universe { text-align: center; position: relative; }
+        .universe-container { height: 500px; position: relative; margin-top: 50px; border-radius: 20px; overflow: hidden; background: rgba(44, 50, 56, 0.02); border: 1px solid var(--glass-border); }
+        .node {
+            position: absolute; width: 16px; height: 16px; background: var(--charcoal); border-radius: 50%; cursor: pointer; transition: all 0.3s ease;
+        }
+        .node::after { content: ''; position: absolute; top: -8px; left: -8px; right: -8px; bottom: -8px; border: 1px solid var(--orange); border-radius: 50%; opacity: 0; transition: opacity 0.3s, transform 0.3s; }
+        .node:hover { transform: scale(1.4); background: var(--orange); }
+        .node:hover::after { opacity: 1; transform: scale(1.1); animation: spinNode 4s linear infinite; }
+        .node-info {
+            position: absolute; top: -80px; left: 50%; transform: translateX(-50%) translateY(10px); width: 200px; padding: 15px; opacity: 0; pointer-events: none; transition: all 0.3s; background: rgba(253, 251, 247, 0.98); border: 1px solid var(--glass-border);
+        }
+        .node:hover .node-info { opacity: 1; transform: translateX(-50%) translateY(0); }
+        @keyframes spinNode { 100% { transform: rotate(360deg) scale(1.1); } }
+
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+        .card { padding: 30px; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 15px; border: 1px solid var(--glass-border); }
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--orange), transparent); transform: translateX(-100%); transition: transform 0.5s;
+        }
+        .card:hover { transform: translateY(-6px); border-color: rgba(44, 50, 56, 0.4); }
+        .card:hover::before { transform: translateX(100%); }
+        .card-img { height: 200px; border-radius: 10px; margin-bottom: 15px; display:flex; justify-content:center; align-items:center; color: var(--cream); font-weight:bold; letter-spacing:2px; font-size:1.5rem; text-align:center;}
+
+        #horizontal-wrap { height: 500vh; position: relative; }
+        #horizontal-sticky { position: sticky; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; display: flex; align-items: center; }
+        #horizontal-container { display: flex; height: 100%; width: 500vw; will-change: transform; }
+        .h-panel {
+            width: 100vw; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 0 10%; text-align: center; position: relative;
+        }
+        
+        .h-panel h2 { 
+            font-size: clamp(3rem, 8vw, 8rem); 
+            font-family: var(--font-display); 
+            color: transparent; 
+            -webkit-text-stroke: 2px var(--slate); 
+            transition: all 0.3s ease-out; 
+            text-transform: uppercase;
+            display: inline-block;
+            letter-spacing: 2px;
+            transform: translateY(0);
+        }
+        
+        .h-panel:hover h2 { 
+            -webkit-text-stroke-color: var(--orange); 
+            color: var(--orange);
+            font-weight: 900;
+            transform: scale(1.05) translateY(-10px);
+            letter-spacing: 6px;
+        }
+        
+        .h-panel p { max-width: 600px; font-size: 1.2rem; margin-top: 25px; color: var(--text-muted); font-weight: 500; transition: color 0.4s ease; }
+        .h-panel:hover p { color: var(--charcoal); }
+
+        #timeline { position: relative; padding: 120px 0; }
+        .timeline-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: rgba(44, 50, 56, 0.1); transform: translateX(-50%); }
+        .timeline-progress { position: absolute; top: 0; left: 0; width: 100%; background: var(--orange); height: 0%; transition: height 0.1s ease-out; }
+        .timeline-item { width: 50%; padding: 40px; position: relative; opacity: 0; transition: all 0.8s; }
+        .timeline-item.left { left: 0; text-align: right; transform: translateX(-50px); }
+        .timeline-item.right { left: 50%; text-align: left; transform: translateX(50px); }
+        .timeline-item.active { opacity: 1; transform: translateX(0); }
+        .timeline-item::after {
+            content: ''; position: absolute; top: 50%; width: 18px; height: 18px; background: var(--cream); border: 2px solid var(--charcoal);
+            border-radius: 50%; transform: translateY(-50%); transition: background 0.5s, border-color 0.5s;
+        }
+        .timeline-item.left::after { right: -9px; }
+        .timeline-item.right::after { left: -9px; }
+        .timeline-item.active::after { background: var(--orange); border-color: var(--orange); }
+        .year { font-size: 1.5rem; font-weight: bold; color: var(--charcoal); margin-bottom: 10px; }
+
+        #stats { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; background: rgba(44, 50, 56, 0.02); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border); }
+        .stat-box { flex: 1; min-width: 200px; text-align: center; }
+        .stat-number { font-size: 4rem; font-family: var(--font-display); color: var(--orange); margin-bottom: 10px; }
+        .stat-label { font-size: 1.1rem; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; }
+
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
+        .info-card { padding: 40px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; text-align: left; border: 1px solid var(--glass-border); }
+        .info-card h3 { color: var(--orange); font-size: 1.5rem; margin-bottom: 15px;}
+        .info-card p { color: var(--text-main); font-weight: bold; font-size: 1.1rem; margin-bottom: 10px;}
+        
+        #cta { text-align: center; padding: 200px 10%; position: relative; overflow: hidden; }
+        #cta h2 { font-size: clamp(3rem, 6vw, 6rem); font-family: var(--font-display); text-transform: uppercase; margin-bottom: 30px; color: var(--charcoal); }
+        .cta-bg { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%; background: radial-gradient(circle, rgba(255,85,0,0.02) 0%, transparent 60%); z-index: -1; }
+
+        footer { padding: 50px 10%; display: flex; justify-content: space-between; align-items: center; background: var(--black); color: var(--cream); }
+        .social-links { display: flex; gap: 20px; }
+        .social-links a { color: var(--slate); text-decoration: none; transition: color 0.3s; font-weight: bold; }
+        .social-links a:hover { color: var(--orange); }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; } 
+            .nav-escape-btn { display: block; margin-left: 0; padding: 5px 10px !important; font-size: 0.8rem; }
+            .story-block, .story-block:nth-child(even) { flex-direction: column; }
+            .timeline-line { left: 20px; }
+            .timeline-item.left, .timeline-item.right { width: 100%; left: 0; padding-left: 60px; text-align: left; }
+            .timeline-item.left::after, .timeline-item.right::after { left: 10px; }
+            .contact-grid { grid-template-columns: 1fr; }
+            #cursor-dot, #cursor-outline { display: none; } 
+            * { cursor: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cursor-outline"></div>
+    <div id="cursor-dot"></div>
+
+    <div id="loader">
+        <div class="loader-logo">NKJ</div>
+        <div class="loader-bar-container"><div id="loader-bar"></div></div>
+        <div id="loader-text">0% INITIALIZED</div>
+    </div>
+
+    <canvas id="canvas-bg"></canvas>
+
+    <nav id="navbar">
+        <a href="index.html#projects" class="logo">NKJ</a>
+        <div class="nav-right-container">
+            <div class="nav-links">
+                <a href="#hero" class="hover-target">Home</a>
+                <a href="#about" class="hover-target">Profile</a>
+                <a href="#universe" class="hover-target">Stack</a>
+                <a href="#projects" class="hover-target">Projects</a>
+                <a href="#timeline" class="hover-target">Experience</a>
+                <a href="#contact" class="hover-target">Contact</a>
+            </div>
+            <a href="index.html#projects" class="nav-escape-btn hover-target">[ ESC // TERMINAL ]</a>
+        </div>
+    </nav>
+
+    <div class="relative-z">
+        
+        <header id="hero">
+            <div class="hero-content">
+                <h1 class="headline">
+                    <span class="line-mask"><span>Narayan</span></span>
+                    <span class="line-mask"><span>Kumar</span></span>
+                    <span class="line-mask"><span>Jha</span></span>
+                </h1>
+                <div class="hero-sub">Creative Developer & Data Scientist</div>
+                <p class="hero-desc">Analytical and creative undergraduate combining core system engineering perspectives from a B.Tech track with specialized analytics and data logic from IIT Madras.</p>
+                <div class="cta-group">
+                    <a href="#projects" class="btn btn-primary hover-target">View Projects</a>
+                    <a href="#contact" class="btn btn-secondary glass-panel hover-target">Get In Touch</a>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="mouse"><div class="wheel"></div></div>
+                <span style="font-size: 0.8rem; letter-spacing: 2px; color: var(--text-muted); font-weight: bold;">SCROLL</span>
+            </div>
+        </header>
+
+        <section id="about">
+            <div class="story-block reveal">
+                <div class="story-text">
+                    <h2 class="section-title">Academic Roots</h2>
+                    <p style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">My foundation stems from the rigorous engineering environments of the B.P. Poddar Institute of Management & Technology, pursuing a B.Tech to master foundational Computer Science paradigms and algorithmic logic. Simultaneously, I am deep-diving into predictive computational pipelines and systematic machine learning through the BS in Data Science program at IIT Madras.</p>
+                </div>
+                <div class="story-visual"><div class="glowing-orb"></div></div>
+            </div>
+            <div class="story-block reveal">
+                <div class="story-text">
+                    <h2 class="section-title">Technical Philosophy</h2>
+                    <p style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">I am passionate about intersecting computational rigor, linear algebra, and data architecture with high-fidelity, creative, and aesthetic digital interfaces. My goal is to synthesize structured logic with seamless UI/UX mechanics.</p>
+                </div>
+                <div class="story-visual" style="background: radial-gradient(circle, rgba(255,85,0,0.04) 0%, rgba(253,251,247,0) 70%);"><div class="glowing-orb" style="background: var(--charcoal);"></div></div>
+            </div>
+        </section>
+
+        <section id="universe" class="reveal">
+            <h2 class="section-title">Interactive Tech Stack</h2>
+            <p style="color: var(--text-muted); font-weight: 500;">Hover over the nodes to explore the frameworks and tools shaping my development pipeline.</p>
+            <div class="universe-container glass-panel" id="nodes-container">
+            </div>
+        </section>
+
+        <section id="projects" class="reveal">
+            <h2 class="section-title">Key Projects</h2>
+            <div class="grid-container">
+                <div class="card glass-panel hover-target">
+                    <div class="card-img" style="background: linear-gradient(45deg, var(--orange), var(--charcoal));">SINGULARITY</div>
+                    <h3>Project Singularity</h3>
+                    <p style="color: var(--text-muted);">As Lead Developer & Designer, I architected an advanced digital portfolio featuring custom SVG animations, infinite scroll logic, and highly polished glassmorphism UI/UX mechanics to showcase interactive front-end frameworks.</p>
+                </div>
+                <div class="card glass-panel hover-target">
+                    <div class="card-img" style="background: linear-gradient(45deg, var(--slate), var(--black));">CODEBEE & TECHSTROM</div>
+                    <h3>Techstrom Platforms</h3>
+                    <p style="color: var(--text-muted);">Engineered unified branding assets and supported full-stack technical coordination for large-scale inter-collegiate technical symposiums. Designed administrative dashboards optimizing enrollment data.</p>
+                </div>
+                <div class="card glass-panel hover-target">
+                    <div class="card-img" style="background: linear-gradient(45deg, var(--black), var(--orange));">CINEMATIC AUDIO</div>
+                    <h3>Narrative Pipeline</h3>
+                    <p style="color: var(--text-muted);">Designed a specialized low-latency processing pipeline for digital audio enhancement, isolation filters, and custom subtitle automation algorithms for surrealist film production projects.</p>
+                </div>
+            </div>
+        </section>
+
+        <div id="horizontal-wrap">
+            <div id="horizontal-sticky">
+                <div id="horizontal-container">
+                    <div class="h-panel">
+                        <h2>DATA SCIENCE</h2>
+                        <p>Linear Algebra, Vector Spaces, Statistical Analysis, Predictive Modeling & ML.</p>
+                    </div>
+                    <div class="h-panel">
+                        <h2>UI/UX DESIGN</h2>
+                        <p>SVG Animation, Glassmorphism, Brutalist Aesthetics, Responsive Layouts.</p>
+                    </div>
+                    <div class="h-panel">
+                        <h2>SYSTEM CORE</h2>
+                        <p>Python, JavaScript (ES6+), HTML5, CSS3, C/C++ Development, Bash Scripting.</p>
+                    </div>
+                    <div class="h-panel">
+                        <h2>INTERESTS</h2>
+                        <p>Surrealist Filmmaking, Mechanical Keyboard Customization, AI Generative Art.</p>
+                    </div>
+                    <div class="h-panel">
+                        <h2>NARAYAN</h2>
+                        <p>Bridging the gap between strict logic and pure creativity.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section id="timeline">
+            <div class="timeline-line"><div class="timeline-progress" id="tl-progress"></div></div>
+            
+            <div class="timeline-item left reveal">
+                <div class="year">2025 - Present</div>
+                <h3>B.Tech Candidate</h3>
+                <p style="color:var(--text-muted);">B.P. Poddar Institute of Management & Technology. Focusing on foundational Computer Science Engineering paradigms and core object-oriented structures.</p>
+            </div>
+            <div class="timeline-item right reveal">
+                <div class="year">2026 - Present</div>
+                <h3>BS Data Science</h3>
+                <p style="color:var(--text-muted);">Indian Institute of Technology (IIT), Madras. Deep-diving into advanced predictive computational pipelines and systematic machine learning.</p>
+            </div>
+            <div class="timeline-item left reveal">
+                <div class="year">Mar 2026</div>
+                <h3>Volunteer at CodeBee & Techstrom</h3>
+                <p style="color:var(--text-muted);">Served as a Technical Volunteer and Organizer for CodeBee 2.26 and Techstrom platforms. Supported full-stack technical coordination and managed centralized registration lists.</p>
+            </div>
+            <div class="timeline-item right reveal">
+                <div class="year">Feb & Apr 2026</div>
+                <h3>Independent Projects</h3>
+                <p style="color:var(--text-muted);">Developed Project Singularity as Lead Developer and served as Technical Producer for Cinematic Narrative & Audio Pipelines.</p>
+            </div>
+        </section>
+
+        <section id="stats" class="reveal">
+            <div class="stat-box">
+                <div class="stat-number" data-target="3">0</div>
+                <div class="stat-label">Core Roles Held</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" data-target="2">0</div>
+                <div class="stat-label">Degrees Pursued</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" data-target="15">0</div>
+                <div class="stat-label">Tech Frameworks</div>
+            </div>
+        </section>
+
+        <section id="contact" class="reveal">
+            <h2 class="section-title">Connect With Me</h2>
+            <div class="contact-grid">
+                <div class="glass-panel info-card">
+                    <h3>Transmission Lines</h3>
+                    <p>Email: narayankumarjha9631@gmail.com</p>
+                    <p>Phone: +91 8777623129</p>
+                    <p>Location: Kolkata, India</p>
+                </div>
+                <div class="glass-panel info-card" style="align-items: center; text-align: center;">
+                    <div class="glowing-orb" style="width: 60px; height: 60px; margin-bottom: 20px; background: var(--charcoal); opacity: 0.2;"></div>
+                    <h3 style="color: var(--charcoal);">Digital Footprint</h3>
+                    <p style="color: var(--text-muted); font-weight: normal; margin-top: 10px;">Review my open-source code and development history.</p>
+                    <a href="https://github.com/narayan-nkj" target="_blank" rel="noopener noreferrer" class="btn btn-secondary glass-panel hover-target" style="margin-top: 20px;">github.com/narayan-nkj</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta">
+            <div class="cta-bg"></div>
+            <h2 class="reveal">Let's Build The Future</h2>
+            <p class="reveal" style="font-size: 1.5rem; color: var(--text-muted); margin-bottom: 40px; font-weight: 500;">Ready to engineer data-driven creative solutions.</p>
+            <a href="mailto:narayankumarjha9631@gmail.com" class="btn btn-primary hover-target reveal" style="font-size: 1.2rem; padding: 20px 60px;">INITIATE CONTACT</a>
+        </section>
+
+        <footer>
+            <div>
+                <h2 style="letter-spacing: 4px; color: var(--cream);">NARAYAN KUMAR JHA</h2>
+                <p style="color: var(--slate); margin-top: 10px;">Creative Developer & Data Scientist</p>
+            </div>
+            <div class="social-links">
+                <a href="#" class="hover-target">Kolkata, India</a>
+                <a href="https://github.com/narayan-nkj" target="_blank" rel="noopener noreferrer" class="hover-target">GitHub</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                window.location.href = 'index.html#projects';
+            }
+        });
+
+        const loader = document.getElementById('loader');
+        const loaderBar = document.getElementById('loader-bar');
+        const loaderText = document.getElementById('loader-text');
+        let loadProgress = 0;
+        
+        const loadInterval = setInterval(() => {
+            loadProgress += Math.floor(Math.random() * 10) + 5;
+            if(loadProgress >= 100) {
+                loadProgress = 100;
+                clearInterval(loadInterval);
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    loader.style.visibility = 'hidden';
+                    document.body.style.overflowY = 'auto'; 
+                }, 500);
+            }
+            loaderBar.style.width = loadProgress + '%';
+            loaderText.innerText = loadProgress + '% INITIALIZED';
+        }, 150);
+
+        document.body.style.overflowY = 'hidden';
+
+        const dot = document.getElementById('cursor-dot');
+        const outline = document.getElementById('cursor-outline');
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let outlineX = mouseX;
+        let outlineY = mouseY;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+        });
+
+        const loopCursor = () => {
+            outlineX += (mouseX - outlineX) * 0.15;
+            outlineY += (mouseY - outlineY) * 0.15;
+            outline.style.transform = `translate(${outlineX}px, ${outlineY}px)`;
+            requestAnimationFrame(loopCursor);
+        };
+        loopCursor();
+
+        document.querySelectorAll('a, button, .hover-target').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+        });
+
+        const nav = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if(window.scrollY > 50) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particlesArray = [];
+        const numberOfParticles = 80;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() * 1) - 0.5;
+                this.speedY = (Math.random() * 1) - 0.5;
+                this.color = Math.random() > 0.5 ? '#FF5500' : '#5E6A75';
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+                
+                let dx = mouseX - this.x;
+                let dy = mouseY - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                if(distance < 100) {
+                    this.x -= dx * 0.05;
+                    this.y -= dy * 0.05;
+                }
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function handleParticles() {
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+                for (let j = i; j < particlesArray.length; j++) {
+                    let dx = particlesArray[i].x - particlesArray[j].x;
+                    let dy = particlesArray[i].y - particlesArray[j].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 120) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(44, 50, 56, ${0.15 - distance/1000})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                        ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            handleParticles();
+            requestAnimationFrame(animateParticles);
+        }
+        initParticles();
+        animateParticles();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        });
+
+        const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        const skillsArray = [
+            "Python", "JavaScript (ES6+)", "C/C++", "HTML5 & CSS3", 
+            "Linear Algebra", "Vector Spaces", "Statistical Analysis", 
+            "Predictive Modeling", "Prompt Engineering", "SVG Animation", 
+            "Glassmorphism UI", "Brutalist Aesthetics", "Git/GitHub", 
+            "Bash Scripting", "Audio Processing"
+        ];
+        
+        const uContainer = document.getElementById('nodes-container');
+        skillsArray.forEach(skill => {
+            let node = document.createElement('div');
+            node.classList.add('node');
+            node.style.left = Math.random() * 90 + 5 + '%';
+            node.style.top = Math.random() * 80 + 10 + '%';
+            
+            let info = document.createElement('div');
+            info.classList.add('glass-panel', 'node-info');
+            info.innerHTML = `<strong style="color: var(--charcoal)">${skill}</strong><br><span style="font-size:0.8rem;color:var(--text-muted);">Proficiency: Active</span>`;
+            
+            node.appendChild(info);
+            uContainer.appendChild(node);
+        });
+
+        const hzWrap = document.getElementById('horizontal-wrap');
+        const hzContainer = document.getElementById('horizontal-container');
+        
+        window.addEventListener('scroll', () => {
+            let offsetTop = hzWrap.offsetTop;
+            let scrollY = window.scrollY;
+            let wrapHeight = hzWrap.offsetHeight;
+            let windowHeight = window.innerHeight;
+            
+            if (scrollY >= offsetTop && scrollY <= offsetTop + wrapHeight - windowHeight) {
+                let percentage = (scrollY - offsetTop) / (wrapHeight - windowHeight);
+                let move = percentage * (hzContainer.offsetWidth - window.innerWidth);
+                hzContainer.style.transform = `translateX(-${move}px)`;
+            }
+        });
+
+        const timeline = document.getElementById('timeline');
+        const tlProgress = document.getElementById('tl-progress');
+        
+        window.addEventListener('scroll', () => {
+            let tlTop = timeline.offsetTop - window.innerHeight / 2;
+            let tlHeight = timeline.offsetHeight;
+            if(window.scrollY > tlTop) {
+                let p = ((window.scrollY - tlTop) / tlHeight) * 100;
+                tlProgress.style.height = Math.min(Math.max(p, 0), 100) + '%';
+            }
+        });
+
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                    entry.target.classList.add('counted');
+                    const target = +entry.target.getAttribute('data-target');
+                    let count = 0;
+                    let increment = target / 50; 
+                    const updateCount = () => {
+                        count += increment;
+                        if(count < target) {
+                            entry.target.innerText = Math.ceil(count);
+                            requestAnimationFrame(updateCount);
+                        } else {
+                            entry.target.innerText = target;
+                        }
+                    };
+                    updateCount();
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        document.querySelectorAll('.stat-number').forEach(stat => statObserver.observe(stat));
+    </script>
+</body>
+</html>

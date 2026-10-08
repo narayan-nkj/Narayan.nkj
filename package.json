@@ -1,0 +1,22 @@
+{
+  "name": "narayan.nkj",
+  "version": "1.0.0",
+  "description": "Portfolio Suite — Narayan Kumar Jha | Creative Developer & Data Scientist",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve .",
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "portfolio",
+    "creative-developer",
+    "data-scientist",
+    "threejs",
+    "react",
+    "web-audio",
+    "glassmorphism",
+    "iit-madras"
+  ],
+  "author": "Narayan Kumar Jha <narayankumarjha9631@gmail.com> (https://github.com/narayan-nkj)",
+  "license": "MIT"
+}

@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vanguard | Creative Digital Agency — Narayan Kumar Jha</title>
+  <meta name="description" content="Vanguard: Creative digital agency portfolio by Narayan Kumar Jha, fusing Data Science with creative editorial design.">
+  <meta name="author" content="Narayan Kumar Jha">
+  <meta name="theme-color" content="#121212">
+  <meta property="og:title" content="Vanguard | Creative Digital Agency — Narayan Kumar Jha">
+  <meta property="og:description" content="Fusing Data Science with creative editorial design to architect high-impact digital experiences.">
+  <meta property="og:image" content="3.jpg">
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+    :root {
+      --bg-dark: #121212;
+      --bg-light: #F4F4F0;
+      --text-light: #F4F4F0;
+      --text-dark: #121212;
+      --accent-color: #E24F33;
+      --border-color: rgba(244, 244, 240, 0.2);
+      
+      --font-sans: 'DM Sans', sans-serif;
+      --font-serif: 'Playfair Display', serif;
+      
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      font-family: var(--font-sans);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body.loading {
+      overflow: hidden;
+    }
+
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: var(--bg-dark);
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2rem 4vw;
+      transition: transform 1.2s var(--ease-out-expo);
+      will-change: transform;
+    }
+
+    #preloader.hidden {
+      transform: translateY(-100%);
+      pointer-events: none;
+    }
+
+    .loader-top {
+      color: var(--accent-color);
+      animation: blink 1.5s infinite;
+    }
+
+    .loader-center {
+      align-self: center;
+      font-family: var(--font-serif);
+      font-size: clamp(6rem, 20vw, 20rem);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1;
+      display: flex;
+      align-items: baseline;
+      color: var(--text-light);
+    }
+
+    .loader-percent {
+      font-family: var(--font-sans);
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      font-style: normal;
+      margin-left: 1rem;
+      color: var(--accent-color);
+    }
+
+    .loader-bottom {
+      align-self: flex-end;
+      text-align: right;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .container {
+      width: 100%;
+      padding: 0 4vw;
+      margin: 0 auto;
+    }
+
+    .bracket-title {
+      font-family: var(--font-sans);
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      display: block;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 4vw;
+      z-index: 100;
+      mix-blend-mode: difference;
+    }
+
+    .logo {
+      font-family: var(--font-sans);
+      font-weight: 900;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .nav-btn {
+      color: #fff;
+      border: 1px solid #fff;
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .nav-btn:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 10vh;
+      position: relative;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at 50% 30%, #2a2a2a 0%, var(--bg-dark) 70%);
+      z-index: -2;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(to top, var(--bg-dark) 0%, transparent 60%);
+      z-index: -1;
+    }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(4rem, 12vw, 12rem);
+      line-height: 0.85;
+      font-weight: 400;
+      letter-spacing: -2px;
+      margin-bottom: 2rem;
+      max-width: 90%;
+    }
+
+    .hero h1 i {
+      font-style: italic;
+      color: var(--accent-color);
+    }
+
+    .hero-manifesto {
+      font-family: var(--font-sans);
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      font-weight: 400;
+      line-height: 1.4;
+      max-width: 800px;
+    }
+
+    .manifesto-section {
+      padding: 15vh 0;
+      background-color: var(--bg-dark);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .manifesto-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+    }
+
+    .manifesto-text {
+      font-family: var(--font-sans);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.1;
+      font-weight: 500;
+      letter-spacing: -1px;
+    }
+
+    .work-section {
+      padding: 15vh 0;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+    }
+
+    .work-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 5rem;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      padding-bottom: 2rem;
+    }
+
+    .work-header h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 2rem;
+    }
+
+    .project-card {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .project-1 { grid-column: 1 / 8; }
+    .project-2 { grid-column: 9 / 13; margin-top: 10vh; }
+    .project-3 { grid-column: 2 / 7; margin-top: 10vh; }
+    .project-4 { grid-column: 8 / 13; }
+
+    .project-image {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background-color: #ddd;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+    
+    .project-1 .project-image { aspect-ratio: 16/9; }
+    .project-4 .project-image { aspect-ratio: 1/1; }
+
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s var(--ease-out-expo);
+      filter: grayscale(20%);
+    }
+
+    .project-card:hover .project-image img {
+      transform: scale(1.05);
+      filter: grayscale(0%);
+    }
+
+    .project-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .project-info h3 {
+      font-family: var(--font-sans);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-tags {
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .capabilities-section {
+      padding: 15vh 0;
+      background-color: var(--bg-dark);
+      border-top: 1px solid var(--border-color);
+    }
+
+    .cap-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .cap-column h3 {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      font-weight: 400;
+      margin-bottom: 2rem;
+      color: var(--accent-color);
+    }
+
+    .cap-list {
+      list-style: none;
+    }
+
+    .cap-list li {
+      font-family: var(--font-sans);
+      font-size: 1.2rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      transition: color 0.3s;
+      cursor: default;
+    }
+
+    .cap-list li:hover {
+      color: var(--accent-color);
+    }
+
+    footer {
+      background-color: var(--accent-color);
+      color: var(--bg-dark);
+      padding: 10vh 0 5vh 0;
+    }
+
+    .footer-huge-text {
+      font-family: var(--font-serif);
+      font-size: clamp(4rem, 15vw, 15rem);
+      line-height: 0.8;
+      font-weight: 400;
+      margin-bottom: 5vh;
+      text-align: center;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(18,18,18,0.2);
+      padding-top: 2rem;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    .footer-links a {
+      color: var(--bg-dark);
+      text-decoration: none;
+    }
+
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+    }
+
+    .reveal-up.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="loading">
+
+  <div id="preloader">
+    <div class="loader-top bracket-title">[ Vanguard Agency ]</div>
+    
+    <div class="loader-center">
+      <span id="loader-count">0</span>
+      <span class="loader-percent">%</span>
+    </div>
+    
+    <div class="loader-bottom bracket-title" id="loader-text">[ Initializing Protocol ]</div>
+  </div>
+
+  <nav>
+    <a href="index.html#projects" class="logo">Vanguard</a>
+    <div class="nav-links">
+      <a href="index.html#projects">Back to Portfolio</a>
+      <a href="#work">Work</a>
+      <a href="#capabilities">Expertise</a>
+      <a href="#about">About us</a>
+    </div>
+    <a href="mailto:narayankumarjha9631@gmail.com" class="nav-btn">Start a project</a>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-overlay"></div>
+      <div class="container">
+        <span class="bracket-title">[ We are Vanguard ]</span>
+        <h1 class="reveal-up">All in or <i>nothing.</i></h1>
+        <p class="hero-manifesto reveal-up" style="transition-delay: 0.1s;">At Vanguard, We fuse Data Science with creative development to architect high-impact digital experiences.</p>
+      </div>
+    </section>
+
+    <section class="manifesto-section" id="about">
+      <div class="container manifesto-grid">
+        <div>
+          <span class="bracket-title">[ Who we are ]</span>
+        </div>
+        <div>
+          <p class="manifesto-text reveal-up">Developers, designers, data scientists, and creators. Precision-led and passion-fueled. Serious about craft, not about ego.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="work-section" id="work">
+      <div class="container">
+        <div class="work-header">
+          <h2 class="reveal-up">Featured work</h2>
+          <span class="bracket-title" style="margin: 0; color: #666;">( View All )</span>
+        </div>
+
+        <div class="work-grid">
+          
+          <div class="project-card project-1 reveal-up">
+            <div class="project-image">
+              <img src="3.jpg" alt="Vision Stare" fetchpriority="high" decoding="async">
+            </div>
+            <div class="project-info">
+              <div>
+                <h3>Vision</h3>
+                <p class="project-tags">Finding patterns in the noise.</p>
+              </div>
+              <span class="bracket-title" style="margin:0;">( View + )</span>
+            </div>
+          </div>
+
+          <div class="project-card project-2 reveal-up" style="transition-delay: 0.1s;">
+            <div class="project-image">
+              <img src="1.jpeg" alt="The Transit" loading="lazy" decoding="async">
+            </div>
+            <div class="project-info">
+              <div>
+                <h3>The Transit</h3>
+                <p class="project-tags">Color fades; the pulse remains.</p>
+              </div>
+              <span class="bracket-title" style="margin:0;">( View + )</span>
+            </div>
+          </div>
+
+          <div class="project-card project-3 reveal-up">
+            <div class="project-image">
+              <img src="4.jpeg" alt="Enduring Thesis Grind" loading="lazy" decoding="async">
+            </div>
+            <div class="project-info">
+              <div>
+                <h3>Tech</h3>
+                <p class="project-tags">Innovation is the art of endurance.</p>
+              </div>
+              <span class="bracket-title" style="margin:0;">( View + )</span>
+            </div>
+          </div>
+
+          <div class="project-card project-4 reveal-up" style="transition-delay: 0.1s;">
+            <div class="project-image">
+              <img src="2.jpeg" alt="Inward Focus" loading="lazy" decoding="async">
+            </div>
+            <div class="project-info">
+              <div>
+                <h3>Inward Focus</h3>
+                <p class="project-tags">Stillness found in human connection.</p>
+              </div>
+              <span class="bracket-title" style="margin:0;">( View + )</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="capabilities-section">
+      <div class="container">
+        <span class="bracket-title">[ What we do ]</span>
+        <div class="cap-grid">
+          
+          <div class="cap-column reveal-up">
+            <h3>Programming</h3>
+            <ul class="cap-list">
+              <li><span>Python</span></li>
+              <li><span>JavaScript (ES6+)</span></li>
+              <li><span>HTML5 / CSS3</span></li>
+              <li><span>C/C++ Development</span></li>
+            </ul>
+          </div>
+
+          <div class="cap-column reveal-up" style="transition-delay: 0.1s;">
+            <h3>Data Science & Math</h3>
+            <ul class="cap-list">
+              <li><span>Linear Algebra & Vector Spaces</span></li>
+              <li><span>Calculus & Dynamic Optimizations</span></li>
+              <li><span>Statistical Analysis</span></li>
+              <li><span>Predictive Modeling</span></li>
+              <li><span>Advanced Prompt Engineering</span></li>
+            </ul>
+          </div>
+
+          <div class="cap-column reveal-up" style="transition-delay: 0.2s;">
+            <h3>Design & Architecture</h3>
+            <ul class="cap-list">
+              <li><span>Brutalist Aesthetics & UI/UX</span></li>
+              <li><span>Glassmorphism Mechanics</span></li>
+              <li><span>SVG Animation</span></li>
+              <li><span>Data Structures & Algorithmic Logic</span></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span class="bracket-title" style="color: var(--bg-dark);">[ Get in touch ]</span>
+      <h1 class="footer-huge-text reveal-up">Say no more.</h1>
+      
+      <div class="footer-bottom">
+        <p>Kolkata based</p>
+        <div class="footer-links">
+          <a href="https://github.com/narayan-nkj" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="mailto:narayankumarjha9631@gmail.com">Email</a>
+        </div>
+        <p>&copy; 2026 Vanguard</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          window.location.href = 'index.html#projects';
+        }
+      });
+
+      const loaderCount = document.getElementById('loader-count');
+      const loaderText = document.getElementById('loader-text');
+      const preloader = document.getElementById('preloader');
+      
+      let count = 0;
+      const texts = [
+        "[ Initializing Protocol ]", 
+        "[ Loading Data Structures ]", 
+        "[ Rendering Brutalist Aesthetics ]", 
+        "[ System Ready ]"
+      ];
+      
+      const updateLoader = setInterval(() => {
+        count += Math.floor(Math.random() * 8) + 1; 
+        
+        if (count >= 100) {
+          count = 100;
+          clearInterval(updateLoader);
+          
+          setTimeout(() => {
+            preloader.classList.add('hidden');
+            document.body.classList.remove('loading');
+            
+            setTimeout(() => {
+              document.querySelectorAll('.hero .reveal-up').forEach(el => {
+                el.classList.add('active');
+              });
+            }, 300); 
+            
+          }, 400);
+        }
+        
+        loaderCount.textContent = count;
+        
+        if (count < 30) loaderText.textContent = texts[0];
+        else if (count < 60) loaderText.textContent = texts[1];
+        else if (count < 90) loaderText.textContent = texts[2];
+        else loaderText.textContent = texts[3];
+        
+      }, 50);
+
+      const revealOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px" 
+      };
+
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, revealOptions);
+
+      document.querySelectorAll('.reveal-up:not(.hero .reveal-up)').forEach(el => {
+        revealObserver.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>

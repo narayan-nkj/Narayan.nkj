@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex | Creative Developer — Narayan Kumar Jha</title>
+  <meta name="description" content="Apex: Matrix-driven interactive portfolio experience by Narayan Kumar Jha, featuring brutalist horizontal work scroll.">
+  <meta name="author" content="Narayan Kumar Jha">
+  <meta name="theme-color" content="#050505">
+  <meta property="og:title" content="Apex | Creative Developer — Narayan Kumar Jha">
+  <meta property="og:description" content="Dynamic React-driven matrix engine featuring brutalist horizontal work scroll.">
+  <meta property="og:image" content="A.jpeg">
+  
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <style>
+    :root {
+      --void-black: #050505;
+      --text-white: #e0e0e0;
+      --sunset-orange: #FF5A00;
+      --mono-font: 'Courier New', Courier, monospace;
+      --sans-font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+    body { background-color: var(--void-black); color: var(--text-white); font-family: var(--sans-font); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+    .global-boot-screen { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--void-black); color: var(--sunset-orange); font-family: var(--mono-font); z-index: 99998; display: flex; flex-direction: column; justify-content: center; align-items: center; animation: hideBootScreen 0.6s cubic-bezier(0.85, 0, 0.15, 1) 3.5s forwards; pointer-events: none; }
+    .boot-container { width: 450px; max-width: 90vw; }
+    .boot-logo { font-size: 2.5rem; font-weight: 900; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: flex-end; letter-spacing: -1px; }
+    .boot-logo span { font-size: 1rem; color: rgba(255, 255, 255, 0.5); font-weight: normal; letter-spacing: 2px; }
+    .boot-progress-bar { width: 100%; height: 2px; background: rgba(255, 255, 255, 0.1); margin-bottom: 2rem; position: relative; overflow: hidden; }
+    .boot-progress-fill { height: 100%; background: var(--sunset-orange); width: 0%; animation: bootFill 2s ease-in-out forwards; }
+    .boot-logs p { font-size: 0.85rem; margin-bottom: 0.8rem; opacity: 0; color: rgba(255, 255, 255, 0.7); }
+    .boot-logs p:nth-child(1) { animation: showLog 0.1s 0.3s forwards; }
+    .boot-logs p:nth-child(2) { animation: showLog 0.1s 1.0s forwards; }
+    .boot-logs p:nth-child(3) { animation: showLog 0.1s 1.8s forwards; }
+    .boot-logs p.final-log { animation: showLog 0.1s 2.5s forwards, flashLog 0.5s 2.5s infinite alternate; color: var(--sunset-orange); font-weight: bold; margin-top: 1.5rem; }
+    @keyframes bootFill { 0% { width: 0%; } 30% { width: 35%; } 70% { width: 85%; } 100% { width: 100%; } }
+    @keyframes showLog { to { opacity: 1; } }
+    @keyframes flashLog { to { text-shadow: 0 0 8px rgba(255, 90, 0, 0.8); } }
+    @keyframes hideBootScreen { to { opacity: 0; visibility: hidden; } }
+
+    .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 99999; pointer-events: none; opacity: 0; transition: opacity 0.3s ease; }
+    .cursor-dot { width: 6px; height: 6px; background-color: var(--sunset-orange); }
+    .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(255, 255, 255, 0.5); transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1), height 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s, opacity 0.3s ease; mix-blend-mode: difference; will-change: transform; }
+
+    .navbar { display: flex; justify-content: space-between; align-items: center; padding: 2.5rem; font-family: var(--mono-font); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; position: fixed; width: 100%; top: 0; z-index: 100; mix-blend-mode: difference; }
+    .nav-left { transition: color 0.4s; }
+    .nav-left:hover { color: var(--sunset-orange); letter-spacing: 2px; }
+    .nav-right { display: flex; align-items: center; }
+    .nav-right a { color: var(--text-white); text-decoration: none; margin-left: 3rem; position: relative; overflow: hidden; display: inline-block; }
+    .nav-right a::before { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background: var(--sunset-orange); transform: translateX(-101%); transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1); }
+    .nav-right a:hover::before { transform: translateX(0); }
+    
+    .nav-escape-btn {
+      color: var(--sunset-orange) !important;
+      font-weight: bold;
+      border: 1px solid rgba(255, 90, 0, 0.3);
+      padding: 0.3rem 0.8rem;
+      margin-left: 3rem;
+      transition: all 0.3s ease;
+    }
+    .nav-escape-btn:hover {
+      background: var(--sunset-orange);
+      color: var(--void-black) !important;
+      box-shadow: 0 0 15px rgba(255, 90, 0, 0.4);
+    }
+
+    .section-1 { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .binary-decor { font-family: var(--mono-font); font-size: 0.75rem; color: rgba(255, 255, 255, 0.08); line-height: 1.5; text-align: justify; position: absolute; top: 0; left: 5%; width: 90%; height: 200%; overflow: hidden; z-index: 0; animation: binaryScroll 40s linear infinite; word-break: break-all; }
+    @keyframes binaryScroll { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
+    .hero-title { font-size: 11vw; text-transform: uppercase; line-height: 0.9; text-align: center; font-weight: 800; letter-spacing: -4px; z-index: 2; position: relative; color: var(--text-white); }
+    .hero-title .line { display: block; position: relative; }
+    .glitch { position: relative; }
+    .glitch::before, .glitch::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--void-black); }
+    .glitch::before { left: 3px; text-shadow: -2px 0 var(--sunset-orange); clip-path: inset(24px 0 90px 0); animation: glitch-anim-1 2.5s infinite linear alternate-reverse; }
+    .glitch::after { left: -3px; text-shadow: -2px 0 #00ffff; clip-path: inset(10px 0 40px 0); animation: glitch-anim-2 3s infinite linear alternate-reverse; }
+    @keyframes glitch-anim-1 { 0% { clip-path: inset(20% 0 80% 0); transform: translate(2px, 1px); } 20% { clip-path: inset(60% 0 10% 0); transform: translate(-2px, -1px); } 40% { clip-path: inset(40% 0 50% 0); transform: translate(2px, 2px); } 60% { clip-path: inset(80% 0 5% 0); transform: translate(-2px, -2px); } 80% { clip-path: inset(10% 0 70% 0); transform: translate(2px, -1px); } 100% { clip-path: inset(30% 0 50% 0); transform: translate(-2px, 1px); } }
+    @keyframes glitch-anim-2 { 0% { clip-path: inset(10% 0 60% 0); transform: translate(-2px, 1px); } 20% { clip-path: inset(30% 0 20% 0); transform: translate(2px, -1px); } 40% { clip-path: inset(70% 0 10% 0); transform: translate(-2px, 2px); } 60% { clip-path: inset(20% 0 50% 0); transform: translate(2px, -2px); } 80% { clip-path: inset(50% 0 30% 0); transform: translate(-2px, -1px); } 100% { clip-path: inset(5% 0 80% 0); transform: translate(2px, 1px); } }
+    .hero-title span.char { display: inline-block; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .hero-title:hover span.char { transform: translateY(-20px) scaleY(1.2); color: var(--sunset-orange); }
+
+    .section-2 { padding: 15vh 5vw; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .section-2 h2 { font-family: var(--mono-font); font-size: 1.2rem; text-transform: uppercase; margin-bottom: 3rem; color: var(--sunset-orange); }
+    .section-2 p { font-size: clamp(2.5rem, 5vw, 5rem); line-height: 1.1; font-weight: 500; letter-spacing: -2px; max-width: 90%; }
+    .highlight { color: transparent; -webkit-text-stroke: 1px var(--text-white); transition: all 0.4s ease; }
+    .section-2 p:hover .highlight { color: var(--sunset-orange); -webkit-text-stroke: 0px; }
+
+    .section-3 { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; overflow: hidden; background: var(--sunset-orange); color: var(--void-black); padding: 10vh 0; }
+    .marquee-huge { white-space: nowrap; display: flex; }
+    .marquee-huge h3 { font-size: 18vw; font-weight: 900; text-transform: uppercase; line-height: 0.8; padding-right: 5vw; letter-spacing: -5px; }
+    .marquee-huge.left { animation: scrollLeft 25s linear infinite; }
+    .marquee-huge.right { animation: scrollRight 30s linear infinite; }
+    .marquee-huge.outline h3 { color: transparent; -webkit-text-stroke: 3px var(--void-black); }
+    @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    @keyframes scrollRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+
+    .work-container { position: relative; background-color: var(--void-black); }
+    .sticky-wrapper { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; overflow: hidden; }
+    .horizontal-scroll-track { display: flex; flex-direction: row; align-items: center; height: 100vh; width: max-content; will-change: transform; padding-left: 10vw; }
+
+    .work-intro-section { display: flex; flex-direction: column; justify-content: center; padding-right: 15vw; height: 100vh; flex-shrink: 0; perspective: 1200px; }
+    .layered-text-container { position: relative; font-size: clamp(8rem, 25vw, 30rem); font-weight: 900; line-height: 0.8; letter-spacing: -5px; transform-style: preserve-3d; width: max-content; }
+    
+    .layer { position: absolute; top: 0; left: 0; color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.08); transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); white-space: nowrap; }
+    
+    .layer.l-1 { position: relative; color: rgba(255, 255, 255, 0.02); -webkit-text-stroke: 0px; z-index: 5; }
+    .layer.l-2 { transform: translateZ(-20px) translateY(5px); }
+    .layer.l-3 { transform: translateZ(-40px) translateY(10px); }
+    .layer.l-4 { transform: translateZ(-60px) translateY(15px); }
+    .layer.l-5 { transform: translateZ(-80px) translateY(20px); }
+
+    .layered-text-container:hover .layer.l-1 { transform: translateZ(120px) translateY(-30px); color: var(--sunset-orange); -webkit-text-stroke: 0px; text-shadow: 0 20px 40px rgba(255,90,0,0.3); }
+    .layered-text-container:hover .layer.l-2 { transform: translateZ(80px) translateY(-15px); -webkit-text-stroke: 2px rgba(255, 90, 0, 0.6); }
+    .layered-text-container:hover .layer.l-3 { transform: translateZ(40px) translateY(0px); -webkit-text-stroke: 2px rgba(255, 90, 0, 0.4); }
+    .layered-text-container:hover .layer.l-4 { transform: translateZ(0px) translateY(15px); -webkit-text-stroke: 2px rgba(255, 90, 0, 0.2); }
+    .layered-text-container:hover .layer.l-5 { transform: translateZ(-40px) translateY(30px); -webkit-text-stroke: 2px rgba(255, 90, 0, 0.1); filter: blur(4px); }
+
+    @keyframes layerBreathe { 0%, 100% { transform: translateY(0) translateZ(calc(var(--z-index) * -20px)); } 50% { transform: translateY(-10px) translateZ(calc(var(--z-index) * -20px)); } }
+    .layered-text-container:not(:hover) .layer.l-2 { --z-index: 1; animation: layerBreathe 4s ease-in-out infinite 0.1s; }
+    .layered-text-container:not(:hover) .layer.l-3 { --z-index: 2; animation: layerBreathe 4s ease-in-out infinite 0.2s; }
+    .layered-text-container:not(:hover) .layer.l-4 { --z-index: 3; animation: layerBreathe 4s ease-in-out infinite 0.3s; }
+    .layered-text-container:not(:hover) .layer.l-5 { --z-index: 4; animation: layerBreathe 4s ease-in-out infinite 0.4s; }
+
+    .intro-subtext { font-family: var(--mono-font); color: var(--sunset-orange); margin-top: 3rem; letter-spacing: 4px; font-size: 1rem; animation: blinkText 1.5s infinite step-end; transform: translateZ(50px); }
+
+    .rows-wrapper { display: flex; flex-direction: column; justify-content: center; gap: 4vh; width: max-content; padding-right: 15vw; flex-shrink: 0; }
+    .work-row { display: flex; gap: 4vw; width: max-content; align-items: center; will-change: transform; }
+    .row-top { margin-left: 0vw; } .row-mid { margin-left: 10vw; } .row-bottom { margin-left: -5vw; }
+
+    .sys-end-text { font-size: clamp(8rem, 25vw, 30rem); font-weight: 900; color: transparent; -webkit-text-stroke: 3px rgba(255, 255, 255, 0.1); white-space: nowrap; padding-right: 25vw; transition: -webkit-text-stroke 0.4s, color 0.4s; flex-shrink: 0; line-height: 0.8; letter-spacing: -5px; }
+    .sys-end-text:hover { -webkit-text-stroke: 3px var(--sunset-orange); color: rgba(255, 90, 0, 0.05); }
+
+    @keyframes blinkText { 50% { opacity: 0.3; } }
+
+    .work-item { width: clamp(240px, 35vh, 400px); flex-shrink: 0; display: flex; flex-direction: column; opacity: 0.85; transform: scale(0.95); transition: opacity 0.4s, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+    .work-item:hover { opacity: 1; transform: scale(1.02); }
+    .work-image-wrapper { width: 100%; aspect-ratio: 16 / 9; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); position: relative; overflow: hidden; margin-bottom: 1rem; transition: border-color 0.4s, clip-path 0.4s ease; clip-path: inset(0% 0% 0% 0%); }
+    .work-item:hover .work-image-wrapper { border-color: var(--sunset-orange); clip-path: inset(1% 1% 1% 1%); }
+    .work-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; opacity: 1; transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
+    .work-item:hover .work-img { transform: scale(1.08); }
+    .work-meta { display: flex; justify-content: space-between; font-family: var(--mono-font); font-size: 0.75rem; color: rgba(255, 255, 255, 0.4); border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.5rem; margin-bottom: 0.5rem; }
+    .work-title { font-size: 1.4rem; font-weight: 700; text-transform: uppercase; letter-spacing: -0.5px; transition: color 0.3s, padding-left 0.3s; }
+    .work-item:hover .work-title { color: var(--sunset-orange); padding-left: 5px; }
+
+    .work-loading-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--void-black); z-index: 20; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: var(--mono-font); color: var(--sunset-orange); pointer-events: none; animation: completeLoading 1.2s cubic-bezier(0.85, 0, 0.15, 1) forwards; }
+    .loading-text { font-size: 1.5rem; letter-spacing: 5px; margin-bottom: 1rem; animation: textFlicker 0.6s infinite alternate; }
+    .loading-bar { width: 200px; height: 2px; background: rgba(255, 90, 0, 0.2); position: relative; overflow: hidden; }
+    .loading-bar::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--sunset-orange); transform: translateX(-100%); animation: barLoad 0.9s ease-in-out forwards; }
+    @keyframes textFlicker { 0% { opacity: 0.2; text-shadow: 0 0 2px var(--sunset-orange); } 100% { opacity: 1; text-shadow: 0 0 8px var(--sunset-orange); } }
+    @keyframes barLoad { 100% { transform: translateX(0); } }
+    @keyframes completeLoading { 90% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
+
+    .section-5 { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 10vh 5vw; text-align: center; background: var(--void-black); position: relative; }
+    .ethos-text { font-size: 8vw; line-height: 0.9; font-weight: 900; text-transform: uppercase; letter-spacing: -2px; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.3); transition: -webkit-text-stroke 0.4s, color 0.4s; }
+    .ethos-text:hover { color: var(--sunset-orange); -webkit-text-stroke: 0px; }
+
+    .section-6-data { min-height: 100vh; background: radial-gradient(circle at center, #0a0a0a 0%, var(--void-black) 100%); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); font-family: var(--mono-font); padding: 8rem 4rem; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
+    .telemetry-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+    .radar-ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; border: 1px dashed rgba(255, 90, 0, 0.15); animation: spinRadar 40s linear infinite; }
+    .radar-ring.r-1 { width: 35vw; height: 35vw; border-style: solid; border-color: rgba(255,255,255,0.03); }
+    .radar-ring.r-2 { width: 60vw; height: 60vw; animation-direction: reverse; }
+    .radar-ring.r-3 { width: 90vw; height: 90vw; border: 1px dotted rgba(255, 90, 0, 0.08); }
+    .crosshair-x { position: absolute; top: 50%; left: 0; width: 100%; height: 1px; background: rgba(255,255,255,0.03); }
+    .crosshair-y { position: absolute; top: 0; left: 50%; width: 1px; height: 100%; background: rgba(255,255,255,0.03); }
+
+    .telemetry-header { position: relative; z-index: 1; margin-bottom: 4rem; font-size: 0.85rem; color: rgba(255,255,255,0.5); letter-spacing: 2px; display: flex; align-items: center; gap: 1rem; }
+    .status-dot { width: 8px; height: 8px; background: var(--sunset-orange); border-radius: 50%; box-shadow: 0 0 10px var(--sunset-orange); animation: pulseDot 1.5s infinite; }
+
+    .data-grid-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; position: relative; z-index: 1; }
+    .data-block { background: rgba(10, 10, 10, 0.6); backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.05); padding: 3rem; position: relative; transition: all 0.4s ease; }
+    
+    .data-block::before, .data-block::after { content: ''; position: absolute; width: 20px; height: 20px; border: 2px solid transparent; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .data-block::before { top: -2px; left: -2px; border-top-color: rgba(255,255,255,0.2); border-left-color: rgba(255,255,255,0.2); }
+    .data-block::after { bottom: -2px; right: -2px; border-bottom-color: rgba(255,255,255,0.2); border-right-color: rgba(255,255,255,0.2); }
+
+    .data-block:hover { transform: translateY(-10px) scale(1.02); border-color: rgba(255, 90, 0, 0.2); background: rgba(255, 90, 0, 0.02); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+    .data-block:hover::before, .data-block:hover::after { border-color: var(--sunset-orange); width: 40px; height: 40px; }
+
+    .data-block h4 { color: var(--sunset-orange); font-size: 1.1rem; margin-bottom: 1.5rem; text-transform: uppercase; display: flex; justify-content: space-between; align-items: flex-end;}
+    .data-block h4 span { font-size: 0.7rem; color: rgba(255,255,255,0.3); font-weight: normal; letter-spacing: 1px;}
+    .data-block p { font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+    @keyframes spinRadar { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+    @keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.8); } }
+
+    .section-7-grid { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 5vw; }
+    .grid-row { display: flex; justify-content: space-between; align-items: center; padding: 2.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); transition: padding-left 0.3s ease; }
+    .grid-row:hover { border-color: var(--sunset-orange); padding-left: 2rem; }
+    .grid-row h4 { font-size: 3.5rem; text-transform: uppercase; font-weight: 800; }
+    .grid-row span { font-family: var(--mono-font); color: rgba(255,255,255,0.4); }
+
+    .section-8 { padding: 8rem 0; background: var(--void-black); border-top: 1px solid rgba(255,255,255,0.1); overflow: hidden; display: flex; flex-direction: column; gap: 2rem; }
+    .marquee-footer { display: flex; white-space: nowrap; width: fit-content; }
+    .marquee-footer h2 { font-size: 6rem; text-transform: uppercase; font-weight: 900; padding-right: 2rem; letter-spacing: -2px; }
+    .marquee-footer.left { animation: scrollLeft 20s linear infinite; }
+    .marquee-footer.right { animation: scrollRight 20s linear infinite; }
+    .marquee-footer.right h2 { color: transparent; -webkit-text-stroke: 2px var(--sunset-orange); }
+
+    @media (hover: none) and (pointer: coarse) {
+      .cursor-dot, .cursor-outline { display: none !important; }
+      * { cursor: auto !important; }
+    }
+
+    @media (max-width: 768px) {
+      .navbar { flex-direction: column; gap: 1.5rem; padding: 1.5rem; }
+      .nav-right a { margin: 0 1rem; }
+      .nav-escape-btn { margin-left: 0; margin-top: 0.5rem; }
+      
+      .hero-title { font-size: 15vw; }
+      
+      .section-2 { padding: 15vh 8vw; }
+      .section-2 p { font-size: 2.2rem; }
+      
+      .marquee-huge h3 { font-size: 25vw; }
+      
+      .work-intro-section { padding-right: 8vw; }
+      .layered-text-container { font-size: 28vw; }
+      
+      .rows-wrapper { gap: 2vh; }
+      .work-row { gap: 6vw; }
+      
+      .sys-end-text { font-size: 28vw; padding-right: 15vw; }
+      
+      .ethos-text { font-size: 12vw; }
+      
+      .section-6-data { padding: 6rem 2vw; }
+      .data-block { padding: 2rem; }
+      
+      .grid-row h4 { font-size: 2rem; }
+      .grid-row span { font-size: 0.8rem; }
+      
+      .section-8 { padding: 4rem 0; }
+      .marquee-footer h2 { font-size: 3.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="global-boot-screen" id="global-boot">
+    <div class="boot-container">
+      <div class="boot-logo">APEX OS <span>v2.0</span></div>
+      <div class="boot-progress-bar">
+        <div class="boot-progress-fill"></div>
+      </div>
+      <div class="boot-logs">
+        <p>> INITIALIZING NARAYAN.SYS...</p>
+        <p>> BYPASSING IIT_M / BPPIMT FIREWALLS...</p>
+        <p>> COMPILING VOID_BLACK & SUNSET_ORANGE...</p>
+        <p class="final-log">> APEX MATRIX ONLINE</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-outline" id="cursor-outline"></div>
+
+  <nav class="navbar">
+    <div class="nav-left">APEX © 2026 — INDIA</div>
+    <div class="nav-right">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+      <a href="index.html#projects" class="nav-escape-btn">[ ESC // TERMINAL ]</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="section-1" id="home">
+      <div class="binary-decor" aria-hidden="true">
+        01010110 01000001 01001110 01000111 01010101 01000001 01010010 01000100 1000001110111011101001101111110100111011101101011010111110111111001001101110110100111000011100011110101101010110 01000001 01001110 01000111 01010101 01000001 01010010 01000100 10000011101110111010011011111101001110111011010110101111101111110010011011101101001110000111000111101011
+      </div>
+      <h1 class="hero-title">
+        <div class="line glitch" data-text="CREATIVE">
+          <span class="char">C</span><span class="char">R</span><span class="char">E</span><span class="char">A</span><span class="char">T</span><span class="char">I</span><span class="char">V</span><span class="char">E</span>
+        </div>
+        <div class="line glitch" data-text="DEVELOPER">
+          <span class="char">D</span><span class="char">E</span><span class="char">V</span><span class="char">E</span><span class="char">L</span><span class="char">O</span><span class="char">P</span><span class="char">E</span><span class="char">R</span>
+        </div>
+      </h1>
+    </section>
+
+    <section class="section-2" id="about">
+      <h2>[ DATA NODE: 01 ]</h2>
+      <p>
+        I am Narayan Kumar Jha. Architecting high-octane engineering systems at <span class="highlight">IIT Madras</span> & B.P. Poddar. Shifting creative development paradigms via <span class="highlight">Apex Engines</span> since <span class="highlight">2021</span>.
+      </p>
+    </section>
+
+    <section class="section-3">
+      <div class="marquee-huge left outline">
+        <h3>FRONTEND DEVELOPMENT / REACT JS / UI UX DESIGN / </h3>
+      </div>
+      <div class="marquee-huge right">
+        <h3>BRUTALISM / MOTION GRAPHICS / 3D WEBGL / AI GEN / </h3>
+      </div>
+      <div class="marquee-huge left outline">
+        <h3>CREATIVE DIRECTION / APEX MATRIX / PRODUCTION / </h3>
+      </div>
+    </section>
+
+    <div id="react-work-root"></div>
+
+    <section class="section-5">
+      <div class="ethos-text">CODE IS ART.</div>
+      <div class="ethos-text">VOID BLACK.</div>
+      <div class="ethos-text">SUNSET ORANGE.</div>
+      <div class="ethos-text">PUSH THE LIMITS.</div>
+    </section>
+
+    <section class="section-6-data">
+      <div class="telemetry-bg">
+        <div class="crosshair-x"></div>
+        <div class="crosshair-y"></div>
+        <div class="radar-ring r-1"></div>
+        <div class="radar-ring r-2"></div>
+        <div class="radar-ring r-3"></div>
+      </div>
+      
+      <div class="telemetry-header">
+        <span class="status-dot"></span> LIVE TELEMETRY NODE // APEX_MATRIX_ACTIVE
+      </div>
+
+      <div class="data-grid-wrapper">
+        <div class="data-block">
+          <h4>// ENGINE RESOLUTION <span>[T-01]</span></h4>
+          <p>Core rendering pipelines running dynamic viewports asynchronously. Standard mapping scales processing speeds via React hardware matrix layers.</p>
+        </div>
+        <div class="data-block">
+          <h4>// INTERPOLATION <span>[T-02]</span></h4>
+          <p>Linear weight limits tuned to 0.08 scaling factors. High-frequency velocity transfers reduce display latency variables significantly.</p>
+        </div>
+        <div class="data-block">
+          <h4>// STAGGER ARCHITECTURE <span>[T-03]</span></h4>
+          <p>Three multi-threaded horizontal coordinate lines tracking layout metrics cleanly across all standard cross-origin device frameworks.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-7-grid">
+      <div class="grid-row">
+        <h4>01 // CORE UTILITIES</h4>
+        <span>[ ENG_RUNNING ]</span>
+      </div>
+      <div class="grid-row">
+        <h4>02 // GRAPHIC COMPILERS</h4>
+        <span>[ RAW_VECTORS ]</span>
+      </div>
+      <div class="grid-row">
+        <h4>03 // PIPELINE CHANNELS</h4>
+        <span>[ SYNC_OK ]</span>
+      </div>
+    </section>
+
+    <footer class="section-8" id="contact">
+      <div class="marquee-footer left">
+        <h2>CODING MY WAY SINCE 2021 — APEX CORE ENGINE — CODING MY WAY SINCE 2021 — APEX CORE ENGINE —</h2>
+      </div>
+      <div class="marquee-footer right">
+        <h2>AVAILABLE FOR FREELANCE — NARAYANKUMARJHA9631@GMAIL.COM — AVAILABLE FOR FREELANCE —</h2>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const dot = document.getElementById("cursor-dot");
+    const outline = document.getElementById("cursor-outline");
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let outlineX = mouseX;
+    let outlineY = mouseY;
+
+    window.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      dot.style.opacity = 1;
+      outline.style.opacity = 1;
+      dot.style.transform = `translate(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%))`;
+    });
+
+    const renderCursor = () => {
+      outlineX += (mouseX - outlineX) * 0.15;
+      outlineY += (mouseY - outlineY) * 0.15;
+      outline.style.transform = `translate(calc(${outlineX}px - 50%), calc(${outlineY}px - 50%))`;
+      requestAnimationFrame(renderCursor);
+    };
+    requestAnimationFrame(renderCursor);
+
+    const links = document.querySelectorAll('a, .ethos-text, .grid-row, .data-block');
+    links.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        outline.style.width = '70px'; outline.style.height = '70px';
+        outline.style.backgroundColor = 'rgba(255, 90, 0, 0.8)'; outline.style.mixBlendMode = 'normal';
+      });
+      link.addEventListener('mouseleave', () => {
+        outline.style.width = '40px'; outline.style.height = '40px';
+        outline.style.backgroundColor = 'transparent'; outline.style.mixBlendMode = 'difference';
+      });
+    });
+
+    document.addEventListener("mouseleave", () => {
+      dot.style.opacity = 0; outline.style.opacity = 0;
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        window.location.href = 'index.html#projects';
+      }
+    });
+  </script>
+
+  <script>
+    const { useRef, useEffect, useState } = React;
+
+    const row1 = [
+      { id: 'A-01', title: 'Dharma Chariot', cat: 'Digital Art', imgSrc: 'A.jpeg' },
+      { id: 'A-02', title: 'Station Transit', cat: 'Cinematography', imgSrc: 'B.jpeg' },
+      { id: 'A-03', title: 'Pasoori Session', cat: 'Visual Aesthetics', imgSrc: 'C.jpeg' }
+    ];
+
+    const row2 = [
+      { id: 'B-01', title: 'Wayfarer Route', cat: 'Street Photography', imgSrc: 'D.jpeg' },
+      { id: 'B-02', title: 'Window View', cat: 'Minimalist Framing', imgSrc: 'E.jpeg' },
+      { id: 'B-03', title: 'Crimson Ledger', cat: 'Key Art Poster', imgSrc: 'F.jpeg' }
+    ];
+
+    const row3 = [
+      { id: 'C-01', title: 'Labyrinth Neo-Noir', cat: 'Typography Design', imgSrc: 'G.jpeg' },
+      { id: 'C-02', title: 'Dast-e-Bayaan', cat: 'Title Poster', imgSrc: 'H.jpeg' },
+      { id: 'C-03', title: 'Capture Sunlight', cat: 'Chiaroscuro Art', imgSrc: 'I.jpeg' }
+    ];
+
+    const WorkSection = () => {
+      const containerRef = useRef(null);
+      const trackRef = useRef(null);
+      
+      const row1Ref = useRef(null);
+      const row2Ref = useRef(null);
+      const row3Ref = useRef(null);
+      
+      const targetScroll = useRef(0);
+      const currentScroll = useRef(0);
+      const requestRef = useRef(null);
+
+      const [isLoading, setIsLoading] = useState(true);
+
+      useEffect(() => {
+        const timer = setTimeout(() => setIsLoading(false), 4500);
+
+        const onScroll = () => {
+          if (!containerRef.current || !trackRef.current) return;
+          
+          const container = containerRef.current;
+          const { top, height } = container.getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+
+          if (top <= 0 && top > -(height - windowHeight)) {
+            const scrollDistance = -top; 
+            const trackScrollWidth = trackRef.current.scrollWidth - window.innerWidth;
+            const scrollRatio = scrollDistance / (height - windowHeight);
+            targetScroll.current = scrollRatio * trackScrollWidth;
+          } else if (top > 0) {
+            targetScroll.current = 0;
+          } else {
+            targetScroll.current = trackRef.current.scrollWidth - window.innerWidth;
+          }
+        };
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        const updatePhysics = () => {
+          currentScroll.current += (targetScroll.current - currentScroll.current) * 0.08;
+          
+          if (trackRef.current) {
+            trackRef.current.style.transform = `translate3d(-${currentScroll.current}px, 0, 0)`;
+          }
+
+          if (row1Ref.current) row1Ref.current.style.transform = `translate3d(-${currentScroll.current * 0.06}px, 0, 0)`;
+          if (row2Ref.current) row2Ref.current.style.transform = `translate3d(${currentScroll.current * 0.04}px, 0, 0)`;
+          if (row3Ref.current) row3Ref.current.style.transform = `translate3d(-${currentScroll.current * 0.03}px, 0, 0)`;
+
+          requestRef.current = requestAnimationFrame(updatePhysics);
+        };
+
+        requestRef.current = requestAnimationFrame(updatePhysics);
+
+        return () => {
+          clearTimeout(timer);
+          window.removeEventListener('scroll', onScroll);
+          cancelAnimationFrame(requestRef.current);
+        };
+      }, []);
+
+      const renderCard = (project, idx, isFirst) => React.createElement(
+        'div',
+        { className: 'work-item', key: idx },
+        React.createElement(
+          'div',
+          { className: 'work-image-wrapper' },
+          React.createElement('img', {
+            src: project.imgSrc,
+            alt: project.title,
+            className: 'work-img',
+            loading: isFirst ? undefined : 'lazy',
+            fetchPriority: isFirst ? 'high' : undefined,
+            decoding: 'async'
+          })
+        ),
+        React.createElement(
+          'div',
+          { className: 'work-meta' },
+          React.createElement('span', null, project.cat),
+          React.createElement('span', null, `${project.id} // SYS`)
+        ),
+        React.createElement('div', { className: 'work-title' }, project.title)
+      );
+
+      return React.createElement(
+        'section',
+        { ref: containerRef, className: 'work-container', id: 'work', style: { height: '700vh' } },
+        React.createElement(
+          'div',
+          { className: 'work-loading-overlay', style: { animationDelay: '3.5s' } },
+          React.createElement('div', { className: 'loading-text' }, 'INITIALIZING APEX MATRIX'),
+          React.createElement('div', { className: 'loading-bar' })
+        ),
+        React.createElement(
+          'div',
+          { className: 'sticky-wrapper' },
+          React.createElement(
+            'div',
+            { ref: trackRef, className: 'horizontal-scroll-track' },
+            React.createElement(
+              'div',
+              { className: 'work-intro-section' },
+              React.createElement(
+                'div',
+                { className: 'layered-text-container' },
+                React.createElement('div', { className: 'layer l-5' }, 'WORK'),
+                React.createElement('div', { className: 'layer l-4' }, 'WORK'),
+                React.createElement('div', { className: 'layer l-3' }, 'WORK'),
+                React.createElement('div', { className: 'layer l-2' }, 'WORK'),
+                React.createElement('div', { className: 'layer l-1' }, 'WORK')
+              ),
+              React.createElement('div', { className: 'intro-subtext' }, '// INITIATE MATRIX SCROLL')
+            ),
+            React.createElement(
+              'div',
+              { className: 'rows-wrapper' },
+              React.createElement(
+                'div',
+                { ref: row1Ref, className: 'work-row row-top' },
+                row1.map((p, i) => renderCard(p, i, i === 0))
+              ),
+              React.createElement(
+                'div',
+                { ref: row2Ref, className: 'work-row row-mid' },
+                row2.map((p, i) => renderCard(p, i, false))
+              ),
+              React.createElement(
+                'div',
+                { ref: row3Ref, className: 'work-row row-bottom' },
+                row3.map((p, i) => renderCard(p, i, false))
+              )
+            ),
+            React.createElement('div', { className: 'sys-end-text' }, 'SYS / END')
+          )
+        )
+      );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById('react-work-root'));
+    root.render(React.createElement(WorkSection));
+  </script>
+</body>
+</html>
