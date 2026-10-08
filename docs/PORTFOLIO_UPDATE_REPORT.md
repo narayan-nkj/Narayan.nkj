@@ -173,7 +173,10 @@
    - Wrapped Key Projects in `.key-projects-section` with `min-height: 100vh; display: flex; flex-direction: column; justify-content: center;`.
    - Formatted `.key-projects-grid` with `grid-template-columns: repeat(4, 1fr)` and streamlined card padding/typography so the entire section (title, 4 cards, bullet points, tech stack tags, and buttons) is visible at once on desktop without vertical scrolling or cutoff.
 
-7. **Expanded Technical Skills with 2 Real Meaningful Tiles (7 Tiles Total):**
-   - **`06. AI Security & AST Analysis`:** AST Parsing & Static Analysis, AI Coding Agent Guardrails, Pre-Install Dependency Verification, PreToolUse Hook Integration, Automated Compliance Auditing (sourced directly from IBM Hackathon *PhantomDeps* engineering).
-   - **`07. Backend & Cloud Systems`:** FastAPI & REST Microservices, Docker Containerization, Geospatial Mapping (MapLibre), Port & Process Automation, CI/CD & Automated Testing, Cloud Deployments (sourced directly from *SAGAR-SonarVision* and *Phoenix Protocol* architectures).
-   - Rendered as an intentional 4-column bento grid where Tile 07 spans 2 columns (`.skill-card-wide`) with an internal `.skill-subgrid`, creating a visually flush, non-ragged layout.
+7. **Narrower Floating Header:**
+   - Reduced `.glass-navbar` width from full-viewport edge-to-edge to a sleek, centered floating glass bar (`width: 90%; max-width: 1200px; margin: 1.25rem auto; top: 1rem; border: 1px solid var(--glass-border);`).
+
+8. **Added Figma & Uniform Equal-Sized Square Grids:**
+   - **Figma Added:** Integrated Figma as the lead design skill in `05. Design & UI`.
+   - **Technical Skills (8 Identical Squares):** Structured as a clean 4-column by 2-row grid of equal-sized cards (`01. Languages`, `02. Frameworks & Web`, `03. ML & Data`, `04. Tools & OS`, `05. Design & UI`, `06. AI Security & AST Analysis`, `07. Backend Systems`, `08. Cloud & DevOps`), each sharing identical width and min-height (`275px`).
+   - **Achievements & Engagements (8 Identical Squares):** Streamlined descriptions across all 8 cards to uniform 3-line paragraphs with `min-height: 245px`, ensuring every nearby square in both rows shares identical geometry and proportions.

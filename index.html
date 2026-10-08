@@ -224,14 +224,18 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 2rem 5vw;
-      border-bottom: 1px solid var(--glass-border);
-      background: rgba(5, 5, 5, 0.5);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      padding: 1.15rem 2.25rem;
+      width: 90%;
+      max-width: 1200px;
+      margin: 1.25rem auto 0 auto;
+      border: 1px solid var(--glass-border);
+      background: rgba(8, 8, 8, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       position: sticky;
-      top: 0;
+      top: 1rem;
       z-index: 100;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
     .glass-navbar .logo {
@@ -618,7 +622,7 @@
       margin-top: 0;
     }
 
-    /* SKILLS GRID — 4-column balanced grid with span-2 wide tile for 7 tiles */
+    /* SKILLS GRID — 4-column balanced grid of 8 equal-sized squares */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -630,54 +634,83 @@
     }
 
     .skills-grid .glass-card {
-      padding: 1.25rem 1rem;
+      padding: 1.3rem 1.1rem;
+      min-height: 275px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      min-width: 0;
     }
 
     .skills-grid .tag {
-      font-size: 0.7rem;
-      padding: 0.2rem 0.5rem;
+      font-size: 0.68rem;
+      padding: 0.2rem 0.45rem;
       margin-bottom: 0.75rem;
       white-space: nowrap;
       display: inline-block;
     }
 
     .skills-grid .card-content ul {
-      padding-left: 1rem;
+      padding-left: 0.95rem;
     }
 
     .skills-grid .card-content li {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       line-height: 1.45;
       margin-bottom: 0.35rem;
       word-break: break-word;
     }
 
-    .skill-card-wide {
-      grid-column: span 2;
-    }
-
-    .skill-subgrid {
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    .skill-subgrid ul {
-      flex: 1;
-    }
-
-    /* ACHIEVEMENTS GRID */
+    /* ACHIEVEMENTS GRID — 4-column balanced grid of 8 equal-sized squares */
     .achievements-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 1.25rem;
+      gap: 1.15rem;
       padding: 0 4vw;
       margin-bottom: 10vh;
       position: relative;
       z-index: 55;
     }
 
+    .achievements-grid .glass-card {
+      min-height: 245px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 1.35rem 1.15rem;
+      min-width: 0;
+    }
+
+    .achievements-grid .tag {
+      font-size: 0.65rem;
+      padding: 0.2rem 0.45rem;
+      margin-bottom: 0.55rem;
+      white-space: nowrap;
+      display: inline-block;
+    }
+
+    .achievements-grid h2 {
+      font-size: clamp(0.92rem, 1.1vw, 1.1rem);
+      line-height: 1.25;
+      margin-bottom: 0.5rem;
+      color: var(--bone-white);
+      word-break: break-word;
+    }
+
+    .achievements-grid p {
+      font-size: 0.78rem;
+      line-height: 1.45;
+      color: var(--text-muted);
+    }
+
     /* TABLET RESPONSIVENESS */
     @media (max-width: 1200px) and (min-width: 860px) {
+      .glass-navbar {
+        width: 92%;
+        padding: 1rem 1.8rem;
+      }
       .key-projects-section {
         min-height: auto;
         padding: 4vh 4vw;
@@ -687,26 +720,27 @@
         gap: 1.2rem;
       }
       .skills-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
-      }
-      .skill-card-wide {
-        grid-column: span 1;
-      }
-      .skill-subgrid {
-        flex-direction: column;
-        gap: 0;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.9rem;
       }
       .skills-grid .glass-card {
         padding: 1.1rem 0.85rem;
+        min-height: 260px;
       }
       .achievements-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.25rem;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.9rem;
+      }
+      .achievements-grid .glass-card {
+        min-height: 240px;
       }
     }
 
     @media (max-width: 859px) and (min-width: 641px) {
+      .glass-navbar {
+        width: 94%;
+        padding: 0.9rem 1.5rem;
+      }
       .key-projects-section {
         min-height: auto;
         padding: 4vh 4vw;
@@ -719,12 +753,9 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 1.1rem;
       }
-      .skill-card-wide {
-        grid-column: span 2;
-      }
       .achievements-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 1.2rem;
+        gap: 1.1rem;
       }
     }
 
@@ -734,7 +765,10 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem 1.25rem;
+        width: 94%;
+        margin: 0.75rem auto 0 auto;
+        top: 0.5rem;
+        padding: 0.85rem 1.15rem;
       }
       .glass-navbar .logo {
         font-size: 0.95rem;
@@ -764,12 +798,8 @@
         padding: 0;
         margin-bottom: 5vh;
       }
-      .skill-card-wide {
-        grid-column: span 1;
-      }
-      .skill-subgrid {
-        flex-direction: column;
-        gap: 0;
+      .skills-grid .glass-card, .achievements-grid .glass-card {
+        min-height: auto;
       }
       .section-title {
         margin: 4vh 1.25rem 1.5rem 1.25rem;
@@ -1216,7 +1246,9 @@
           <ul>
             <li>React</li>
             <li>Flask</li>
+            <li>Vite</li>
             <li>Interactive Web Dashboards</li>
+            <li>Three.js & WebGL</li>
           </ul>
         </div>
       </div>
@@ -1227,7 +1259,7 @@
             <li>Object Detection</li>
             <li>Acoustic Processing</li>
             <li>Side-Scan Sonar Analysis</li>
-            <li>ONNX</li>
+            <li>ONNX Runtime</li>
             <li>Data Processing Pipelines</li>
           </ul>
         </div>
@@ -1238,7 +1270,9 @@
           <ul>
             <li>macOS Terminal Utilities</li>
             <li>Linux Environments</li>
-            <li>Git</li>
+            <li>Git & GitHub</li>
+            <li>Shell Scripting</li>
+            <li>VS Code & Diagnostics</li>
           </ul>
         </div>
       </div>
@@ -1246,6 +1280,7 @@
         <div class="card-content">
           <span class="tag">05. Design & UI</span>
           <ul>
+            <li>Figma</li>
             <li>Adobe Illustrator</li>
             <li>Lightroom</li>
             <li>Brutalist Design</li>
@@ -1261,27 +1296,34 @@
           <ul>
             <li>AST Parsing & Static Analysis</li>
             <li>AI Coding Agent Guardrails</li>
-            <li>Pre-Install Dependency Verification</li>
+            <li>Pre-Install Dependency Gates</li>
             <li>PreToolUse Hook Integration</li>
             <li>Automated Compliance Auditing</li>
           </ul>
         </div>
       </div>
-      <div class="glass-card skill-card-wide">
+      <div class="glass-card">
         <div class="card-content">
-          <span class="tag">07. Backend & Cloud Systems</span>
-          <div class="skill-subgrid">
-            <ul>
-              <li>FastAPI & REST Microservices</li>
-              <li>Docker Containerization</li>
-              <li>Geospatial Mapping (MapLibre)</li>
-            </ul>
-            <ul>
-              <li>Port & Process Automation</li>
-              <li>CI/CD & Automated Testing</li>
-              <li>Cloud & Vercel Edge Deployments</li>
-            </ul>
-          </div>
+          <span class="tag">07. Backend Systems</span>
+          <ul>
+            <li>FastAPI & REST Microservices</li>
+            <li>Flask Backend Architecture</li>
+            <li>Geospatial Mapping (MapLibre)</li>
+            <li>Port & Process Automation</li>
+            <li>WebSocket Stream Handling</li>
+          </ul>
+        </div>
+      </div>
+      <div class="glass-card">
+        <div class="card-content">
+          <span class="tag">08. Cloud & DevOps</span>
+          <ul>
+            <li>Docker Containerization</li>
+            <li>CI/CD Test Pipelines</li>
+            <li>Vercel Edge Deployments</li>
+            <li>Automated Network Auditing</li>
+            <li>Multi-Environment Launchers</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -1292,7 +1334,7 @@
         <div class="card-content">
           <span class="tag">Tech Symposium</span>
           <h2>Innovision 2.26</h2>
-          <p>Strategised and prepared presentation scripts, technical defences, and poster explanations for a major tech symposium.</p>
+          <p>Strategised and prepared technical defences, presentation scripts, and poster explanations for college tech symposium.</p>
         </div>
       </div>
 
@@ -1300,7 +1342,7 @@
         <div class="card-content">
           <span class="tag">Feb 2026</span>
           <h2>CodeBee 2.26 & Techstrom</h2>
-          <p>Designed creative branding concepts and pixel-art logo assets for college events.</p>
+          <p>Designed creative branding concepts, visual themes, and pixel-art logo assets for official college events.</p>
         </div>
       </div>
 
@@ -1316,7 +1358,7 @@
         <div class="card-content">
           <span class="tag">Cultural Engagement</span>
           <h2>NSS Cell</h2>
-          <p>Authored a recognised essay submission on language and culture for Paschimbanga Divas.</p>
+          <p>Authored a recognised essay submission on state heritage, linguistic preservation, and culture for Paschimbanga Divas.</p>
         </div>
       </div>
 
@@ -1324,7 +1366,7 @@
         <div class="card-content">
           <span class="tag">Visual Arts</span>
           <h2>Creative Works</h2>
-          <p>Authored short film scripts and storyboards exploring daily human connection.</p>
+          <p>Authored short film scripts, cinematic treatments, and visual storyboards focused on daily human connection.</p>
         </div>
       </div>
 
@@ -1332,7 +1374,7 @@
         <div class="card-content">
           <span class="tag">Hackathon</span>
           <h2>TIU Hackathon</h2>
-          <p>Collaborated in rapid software prototyping, technical formulation, and competitive hackathon engineering at Techno India University.</p>
+          <p>Collaborated in rapid software prototyping, technical formulation, and competitive hackathon engineering at TIU.</p>
         </div>
       </div>
 
@@ -1340,7 +1382,7 @@
         <div class="card-content">
           <span class="tag">IIT Guwahati // Hackyard 2026</span>
           <h2>Hackyard Build 2026</h2>
-          <p><strong>Idea Submission: OrbitScore</strong> — Architected an automated satellite compliance and sustainability-scoring platform for satellite operators calculating the Orbital Credit Index and generating submission-ready ODAR plans.</p>
+          <p><strong>Idea Submission: OrbitScore</strong> — Architected automated compliance & satellite sustainability scoring platform computing Orbital Credit Index.</p>
         </div>
       </div>
 
@@ -1348,7 +1390,7 @@
         <div class="card-content">
           <span class="tag">Devfolio Residency 2026</span>
           <h2>Hacker House Goa 2026</h2>
-          <p>Candidate builder for India's premier AI x Crypto residency in Goa, collaborating with selected developers and creators to design decentralized autonomous systems.</p>
+          <p>Candidate builder for India's premier AI x Crypto residency in Goa, collaborating to design decentralized autonomous systems.</p>
         </div>
       </div>
     </section>
