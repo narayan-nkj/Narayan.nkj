@@ -1130,7 +1130,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 2rem 1.8rem;
+      padding: 1.4rem 1.45rem;
       height: 100%;
       min-height: 0;
       border: 1px solid var(--glass-border);
@@ -1153,9 +1153,9 @@
     }
 
     .projects-overlay .projects-grid .tag {
-      margin-bottom: 0.8rem;
-      font-size: 0.72rem;
-      padding: 0.2rem 0.65rem;
+      margin-bottom: 0.45rem;
+      font-size: 0.68rem;
+      padding: 0.18rem 0.55rem;
       letter-spacing: 0.5px;
       display: inline-block;
       align-self: flex-start;
@@ -1163,25 +1163,55 @@
 
     .projects-overlay .projects-grid h2 {
       font-family: 'Syncopate', sans-serif;
-      font-size: clamp(0.95rem, 1.25vw, 1.25rem);
-      margin-bottom: 0.8rem;
+      font-size: clamp(0.88rem, 1.1vw, 1.1rem);
+      margin-bottom: 0.3rem;
       line-height: 1.25;
       color: var(--bone-white);
       word-break: break-word;
     }
 
-    .projects-overlay .projects-grid p {
-      font-size: clamp(0.82rem, 1vw, 0.92rem);
-      line-height: 1.55;
-      margin-bottom: 1.5rem;
+    .projects-overlay .overlay-project-sub {
+      font-size: 0.73rem;
+      color: var(--bone-white);
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      line-height: 1.35;
+    }
+
+    .projects-overlay .overlay-project-desc {
+      font-size: 0.72rem;
+      line-height: 1.42;
+      margin-bottom: 0.5rem;
       color: var(--text-muted);
-      flex-grow: 1;
+    }
+
+    .projects-overlay .overlay-project-bullets {
+      padding-left: 0.95rem;
+      margin-bottom: 0.55rem;
+      list-style-type: square;
+    }
+
+    .projects-overlay .overlay-project-bullets li {
+      font-size: 0.7rem;
+      line-height: 1.38;
+      margin-bottom: 0.3rem;
+      color: var(--text-muted);
+      word-break: break-word;
+    }
+
+    .projects-overlay .overlay-project-stack {
+      font-size: 0.69rem;
+      color: var(--electric-blue);
+      line-height: 1.35;
+      border-top: 1px dashed rgba(0, 85, 255, 0.25);
+      padding-top: 0.45rem;
+      margin-bottom: 0.65rem;
     }
 
     .projects-overlay .projects-grid .link-btn {
-      margin-top: auto;
-      padding: 0.65rem 1.25rem;
-      font-size: 0.78rem;
+      margin-top: 0;
+      padding: 0.5rem 1rem;
+      font-size: 0.74rem;
       text-align: center;
       width: 100%;
       letter-spacing: 1px;
@@ -1255,31 +1285,64 @@
       <h1><span class="highlight-name">MY</span> PROJECTS</h1>
       <p class="subtitle" style="margin-top: 1rem;">Secondary web applications and interactive frameworks.</p>
       
-      <div class="projects-grid" style="margin-top: 5vh; padding: 0;">
+      <div class="projects-grid" style="margin-top: 1.5vh; padding: 0;">
         <div class="glass-card">
           <div class="card-content">
-            <span class="tag">Web App 01</span>
-            <h2>[ PROJECT ALPHA : Vanguard ]</h2>
-            <p style="color: var(--text-muted);">Fusing Data Science with creative editorial design to architect high-impact digital experiences.</p>
-            <a href="projects/vanguard.html" class="link-btn">Initialize Connection</a>
+            <div>
+              <span class="tag">Web App 01 // Editorial Design</span>
+              <h2>[ PROJECT ALPHA : Vanguard ]</h2>
+              <p class="overlay-project-sub">Creative Editorial Agency & Design Showcase</p>
+              <p class="overlay-project-desc">Fusing Data Science with creative editorial design to architect high-impact digital experiences.</p>
+              <ul class="overlay-project-bullets">
+                <li>Engineered high-fashion brutalist layouts with Playfair Display & DM Sans typography pairing.</li>
+                <li>Built custom interactive preloader sequences and full-viewport project discovery galleries.</li>
+                <li>Integrated responsive client showcase grids with high-contrast monochrome and crimson styling.</li>
+              </ul>
+            </div>
+            <div>
+              <p class="overlay-project-stack"><strong>Stack:</strong> HTML5, CSS3, JavaScript (ES6+), Canvas, Responsive</p>
+              <a href="projects/vanguard.html" class="link-btn">Initialize Connection &rarr;</a>
+            </div>
           </div>
         </div>
 
         <div class="glass-card">
           <div class="card-content">
-            <span class="tag">Web App 02</span>
-            <h2>[ PROJECT BETA : Apex ]</h2>
-            <p style="color: var(--text-muted);">Dynamic React-driven matrix engine featuring brutalist horizontal work scroll.</p>
-            <a href="projects/apex.html" class="link-btn">Initialize Connection</a>
+            <div>
+              <span class="tag">Web App 02 // React Matrix</span>
+              <h2>[ PROJECT BETA : Apex ]</h2>
+              <p class="overlay-project-sub">Brutalist Horizontal Work Matrix Engine</p>
+              <p class="overlay-project-desc">Dynamic React-driven matrix engine featuring brutalist horizontal work scroll and terminal boot.</p>
+              <ul class="overlay-project-bullets">
+                <li>Constructed custom terminal system boot sequence with animated memory buffer logs.</li>
+                <li>Architected dual-axis horizontal canvas scroll engine for seamless project exploration.</li>
+                <li>Implemented custom difference cursor states, reactive UI hooks, and sunset orange styling.</li>
+              </ul>
+            </div>
+            <div>
+              <p class="overlay-project-stack"><strong>Stack:</strong> React 18, JavaScript (ES6+), CSS3 Grid, Custom Cursor</p>
+              <a href="projects/apex.html" class="link-btn">Initialize Connection &rarr;</a>
+            </div>
           </div>
         </div>
 
         <div class="glass-card">
           <div class="card-content">
-            <span class="tag">Web App 03</span>
-            <h2>[ PROJECT GAMMA : Ather ]</h2>
-            <p style="color: var(--text-muted);">Minimalist glassmorphism interface highlighting predictive computational pipelines.</p>
-            <a href="projects/ather.html" class="link-btn">Initialize Connection</a>
+            <div>
+              <span class="tag">Web App 03 // Glassmorphism UI</span>
+              <h2>[ PROJECT GAMMA : Ather ]</h2>
+              <p class="overlay-project-sub">Minimalist Computational Pipeline Interface</p>
+              <p class="overlay-project-desc">Minimalist glassmorphism interface highlighting predictive computational pipelines and research workflows.</p>
+              <ul class="overlay-project-bullets">
+                <li>Designed warm cream aesthetic with slate typography and frosted glass panel mechanics.</li>
+                <li>Showcases interactive computational pipelines, mathematical models, and research methodologies.</li>
+                <li>Crafted subtle micro-interactions, responsive typography scaling, and streamlined UI hierarchy.</li>
+              </ul>
+            </div>
+            <div>
+              <p class="overlay-project-stack"><strong>Stack:</strong> HTML5, Vanilla CSS3, JavaScript, UI/UX Systems</p>
+              <a href="projects/ather.html" class="link-btn">Initialize Connection &rarr;</a>
+            </div>
           </div>
         </div>
       </div>
