@@ -224,18 +224,16 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.15rem 2.25rem;
-      width: 90%;
-      max-width: 1200px;
-      margin: 1.25rem auto 0 auto;
-      border: 1px solid var(--glass-border);
-      background: rgba(8, 8, 8, 0.7);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      padding: 1.15rem 5vw;
+      width: 100%;
+      border-bottom: 1px solid var(--glass-border);
+      background: rgba(5, 5, 5, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       position: sticky;
-      top: 1rem;
+      top: 0;
+      left: 0;
       z-index: 100;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
     .glass-navbar .logo {
@@ -274,30 +272,30 @@
     }
 
     .hero-wrapper {
-      height: calc(100vh - 90px);
-      max-height: calc(100vh - 90px);
+      height: calc(100vh - 65px);
+      max-height: calc(100vh - 65px);
       min-height: auto;
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      padding: 1vh 5vw 2vh 5vw;
+      padding: 1.5vh 5vw 2.5vh 5vw;
       position: relative;
-      gap: 2rem;
+      gap: 2.5rem;
       z-index: 55;
       box-sizing: border-box;
     }
 
     .hero-content {
-      flex: 1;
-      max-width: 600px;
+      flex: 1.1;
+      max-width: 640px;
       position: relative;
       z-index: 60;
     }
 
     .hero-3d-container {
       flex: 1;
-      height: clamp(340px, 45vh, 520px);
+      height: clamp(380px, 55vh, 520px);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -310,8 +308,8 @@
       top: 0; left: 0; width: 100%; height: 100%;
       pointer-events: none;
       z-index: 10;
-      opacity: 0;
-      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 0.85;
+      transition: opacity 0.4s ease;
       color: var(--electric-blue);
     }
 
@@ -352,32 +350,32 @@
       stroke: var(--electric-blue);
       stroke-width: 1px;
       stroke-dasharray: 600;
-      stroke-dashoffset: 600;
+      stroke-dashoffset: 0;
       transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-      opacity: 0.6;
+      opacity: 0.65;
     }
 
     .hero-3d-container:hover .hud-line {
-      stroke-dashoffset: 0;
+      opacity: 0.95;
     }
 
     .globe-view-btn {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%) scale(0.85);
+      transform: translate(-50%, -50%) scale(1);
       pointer-events: auto;
-      padding: 0.95rem 2.2rem;
-      background: rgba(5, 5, 5, 0.9);
+      padding: 0.85rem 2rem;
+      background: rgba(5, 5, 5, 0.92);
       border: 1px solid var(--electric-blue);
       color: var(--text-main);
       font-family: 'Syncopate', sans-serif;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
-      opacity: 0;
-      visibility: hidden;
+      opacity: 0.92;
+      visibility: visible;
       transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
       box-shadow: none !important;
       backdrop-filter: blur(8px);
@@ -391,7 +389,7 @@
     .hero-3d-container:hover .globe-view-btn {
       opacity: 1;
       visibility: visible;
-      transform: translate(-50%, -50%) scale(1);
+      transform: translate(-50%, -50%) scale(1.05);
     }
 
     .globe-view-btn:hover {
@@ -399,7 +397,7 @@
       color: var(--void-black);
       box-shadow: none !important;
       border-color: var(--electric-blue);
-      transform: translate(-50%, -50%) scale(1.05) !important;
+      transform: translate(-50%, -50%) scale(1.08) !important;
     }
 
     .globe-view-btn .btn-arrow {
@@ -483,10 +481,10 @@
 
     h1 {
       font-family: 'Syncopate', sans-serif;
-      font-size: clamp(1.8rem, 3.8vw, 3.6rem);
-      line-height: 0.95;
+      font-size: clamp(2.1rem, 4.3vw, 3.9rem);
+      line-height: 0.98;
       text-transform: uppercase;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.75rem;
       color: var(--text-main);
       position: relative;
       white-space: nowrap;
@@ -501,33 +499,33 @@
 
     .subtitle {
       color: var(--electric-blue);
-      font-size: clamp(0.82rem, 1.1vw, 0.95rem);
-      max-width: 580px;
-      margin-bottom: 1.1rem;
-      line-height: 1.45;
+      font-size: clamp(0.85rem, 1.1vw, 1.05rem);
+      max-width: 600px;
+      margin-bottom: 1.25rem;
+      line-height: 1.48;
     }
 
-    /* HERO PROFILE CARD COMPACT STYLING */
+    /* HERO PROFILE CARD COMPACT & PROPORTIONATE */
     .hero-profile-card {
-      max-width: 540px;
-      padding: 1.1rem 1.25rem !important;
+      max-width: 580px;
+      padding: 1.2rem 1.45rem !important;
     }
 
     .hero-card-meta {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.65rem;
     }
 
     .hero-card-meta .tag {
       margin-bottom: 0 !important;
-      font-size: 0.7rem;
-      padding: 0.2rem 0.5rem;
+      font-size: 0.72rem;
+      padding: 0.22rem 0.6rem;
     }
 
     .hero-location {
-      font-size: 0.78rem;
+      font-size: 0.82rem;
       color: var(--bone-white);
       font-weight: bold;
       letter-spacing: 0.5px;
@@ -535,17 +533,17 @@
 
     .hero-summary {
       color: var(--text-muted);
-      font-size: 0.82rem;
-      line-height: 1.45;
-      margin-bottom: 0.75rem;
+      font-size: 0.84rem;
+      line-height: 1.48;
+      margin-bottom: 0.85rem;
     }
 
     .hero-edu-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
+      gap: 1rem;
       border-top: 1px dashed rgba(0, 85, 255, 0.25);
-      padding-top: 0.65rem;
+      padding-top: 0.75rem;
     }
 
     .hero-edu-badge {
@@ -555,15 +553,15 @@
 
     .edu-degree {
       color: var(--bone-white);
-      font-size: 0.76rem;
+      font-size: 0.78rem;
       font-weight: 700;
-      line-height: 1.25;
-      margin-bottom: 0.2rem;
+      line-height: 1.3;
+      margin-bottom: 0.25rem;
     }
 
     .edu-school {
       color: var(--text-muted);
-      font-size: 0.72rem;
+      font-size: 0.74rem;
       line-height: 1.3;
     }
 
@@ -1041,17 +1039,19 @@
       position: fixed;
       top: 0; left: 0;
       width: 100vw; height: 100vh;
+      max-height: 100vh;
       background: var(--void-black);
       z-index: 100000;
       display: flex;
       flex-direction: column;
       transform: translateY(100%);
       transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
-      overflow-y: auto;
+      overflow: hidden;
       background-image: 
         linear-gradient(var(--glass-border) 1px, transparent 1px),
         linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
       background-size: 50px 50px;
+      box-sizing: border-box;
     }
 
     .projects-overlay.active {
@@ -1059,15 +1059,15 @@
     }
 
     .overlay-header {
-      padding: 2rem 5vw;
+      padding: 0.85rem 5vw;
       display: flex;
       justify-content: flex-end;
+      align-items: center;
       border-bottom: 1px solid var(--glass-border);
-      background: rgba(5, 5, 5, 0.5);
+      background: rgba(5, 5, 5, 0.75);
       backdrop-filter: blur(16px);
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      flex-shrink: 0;
+      box-sizing: border-box;
     }
 
     .close-btn {
@@ -1075,9 +1075,11 @@
       border: 1px solid var(--electric-blue);
       color: var(--electric-blue);
       font-family: 'Space Mono', monospace;
-      padding: 0.5rem 1.5rem;
-      font-size: 1rem;
+      padding: 0.45rem 1.25rem;
+      font-size: 0.85rem;
+      font-weight: 700;
       transition: all 0.3s ease;
+      cursor: pointer;
     }
 
     .close-btn:hover {
@@ -1087,8 +1089,112 @@
     }
 
     .overlay-content {
-      padding: 5vw;
+      padding: 2vh 5vw 2.5vh 5vw;
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: calc(100vh - 58px);
+      max-height: calc(100vh - 58px);
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .overlay-content h1 {
+      font-family: 'Syncopate', sans-serif;
+      font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+      margin-bottom: 0.2rem;
+      line-height: 1.1;
+    }
+
+    .overlay-content .subtitle {
+      margin-top: 0.2rem !important;
+      margin-bottom: 1.5vh !important;
+      font-size: clamp(0.8rem, 1vw, 0.95rem);
+    }
+
+    .projects-overlay .projects-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.4vh;
+      flex: 1;
+      justify-content: space-between;
+      margin-top: 0 !important;
+      padding: 0;
+      min-height: 0;
+    }
+
+    .projects-overlay .projects-grid .glass-card {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 1.4vh 2rem;
+      min-height: 0;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    .projects-overlay .projects-grid .glass-card:hover {
+      border-color: var(--electric-blue);
+      transform: translateX(6px);
+      box-shadow: 0 0 25px rgba(0, 85, 255, 0.2);
+    }
+
+    .projects-overlay .projects-grid .card-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .projects-overlay .projects-grid .tag {
+      margin-bottom: 0.35rem;
+      font-size: 0.68rem;
+      padding: 0.15rem 0.6rem;
+      letter-spacing: 0.5px;
+    }
+
+    .projects-overlay .projects-grid h2 {
+      font-family: 'Syncopate', sans-serif;
+      font-size: clamp(0.95rem, 1.25vw, 1.25rem);
+      margin-bottom: 0.35rem;
+      line-height: 1.2;
+      color: var(--bone-white);
+    }
+
+    .projects-overlay .projects-grid p {
+      font-size: clamp(0.78rem, 0.95vw, 0.88rem);
+      line-height: 1.4;
+      margin-bottom: 0.55rem;
+      color: var(--text-muted);
+    }
+
+    .projects-overlay .projects-grid .link-btn {
+      margin-top: 0;
+      padding: 0.4rem 1.2rem;
+      font-size: 0.75rem;
+      align-self: flex-start;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 768px) {
+      .projects-overlay {
+        overflow-y: auto !important;
+      }
+      .overlay-content {
+        height: auto !important;
+        max-height: none !important;
+        overflow-y: visible !important;
+        padding: 1.5rem 1.25rem 4rem 1.25rem !important;
+      }
+      .projects-overlay .projects-grid {
+        gap: 1.25rem !important;
+      }
+      .projects-overlay .projects-grid .glass-card {
+        padding: 1.25rem !important;
+      }
     }
     
     .link-btn {
@@ -1654,17 +1760,17 @@
       renderer.setPixelRatio(window.devicePixelRatio);
       container.appendChild(renderer.domElement);
 
-      const geometry = new THREE.IcosahedronGeometry(8, 2);
+      const geometry = new THREE.IcosahedronGeometry(9.2, 2);
       const material = new THREE.MeshBasicMaterial({ 
         color: 0x0055FF, 
         wireframe: true, 
         transparent: true, 
-        opacity: 0.45 
+        opacity: 0.5 
       });
       
       const sphereMesh = new THREE.Mesh(geometry, material);
       
-      const innerGeometry = new THREE.IcosahedronGeometry(7.5, 2);
+      const innerGeometry = new THREE.IcosahedronGeometry(8.6, 2);
       const innerMaterial = new THREE.MeshBasicMaterial({ color: 0x050505 });
       const innerMesh = new THREE.Mesh(innerGeometry, innerMaterial);
       
@@ -1693,7 +1799,7 @@
       const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
       scene.add(particlesMesh);
 
-      camera.position.z = 25; 
+      camera.position.z = 21; 
 
       let mouseX = 0;
       let mouseY = 0;

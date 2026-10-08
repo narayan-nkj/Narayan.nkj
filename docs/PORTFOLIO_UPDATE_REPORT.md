@@ -188,3 +188,8 @@
 10. **Interactive Portfolios & Dashboards Cutoff Resolution:**
    - Fixed vertical overflow clipping in the `Interactive Portfolios & Dashboards` project card.
    - Formatted `.key-projects-grid .link-btn` with `flex: 1; white-space: nowrap;` to keep both `[ View Showcase &rarr; ]` and `[ GitHub Suite &rarr; ]` on a single horizontal row, eliminating line-wrapping height spikes and keeping all 4 project cards perfectly flush.
+
+11. **My Projects Overlay Single-Screen Fit & Full-Bleed Sleek Navbar:**
+   - **Header Restoration:** Restored `.glass-navbar` to a full-width edge-to-edge top header bar (`top: 0; width: 100%; border-bottom: 1px solid var(--glass-border);`) with sleek, reduced padding (`1.15rem 5vw`), keeping its natural horizontal orientation.
+   - **Home Screen & Globe Resizing:** Scaled up hero typography (`clamp(2.1rem, 4.3vw, 3.9rem)`) and profile card proportions while keeping `calc(100vh - 65px)` fit. Enlarged the 3D globe (radius 9.2, camera z=21, container `clamp(380px, 55vh, 520px)`) and made HUD diagnostics and center button visible by default for a commanding cyberpunk presence.
+   - **My Projects Overlay (`#projects-page`):** Structured the 3 secondary web apps (Vanguard, Apex, Ather) as 3 full-width vertical stacked boxes inside a fixed `100vh` non-scrolling container (`overflow: hidden;`), so all 3 projects fit seamlessly on a single page view without requiring any vertical scrolling.
