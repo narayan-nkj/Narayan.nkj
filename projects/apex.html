@@ -365,6 +365,9 @@
   </main>
 
   <script>
+    // Silently disable right-click
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+
     const dot = document.getElementById("cursor-dot");
     const outline = document.getElementById("cursor-outline");
 

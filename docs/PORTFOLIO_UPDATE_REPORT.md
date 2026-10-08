@@ -144,3 +144,27 @@
    - *Reason:* Early mirror/fork of `SAGAR-SonarVision`; unified under canonical `SAGAR-SonarVision`.
 3. **`SagarNetra` & `SwarRakshak`**:
    - *Reason:* Strictly excluded per Hard Rule 3 (Private repositories must never be exposed).
+
+---
+
+## 9. Supplemental Enhancements (Mobile/Tablet, Skills Row, Hackathons, LinkedIn)
+
+1. **Desktop Single-Line Skills Layout:**
+   - Updated `.skills-grid` to `grid-template-columns: repeat(5, minmax(0, 1fr))` with balanced gap and card padding (`padding: 1.4rem 1.1rem;`).
+   - Ensures all 5 cards (`01. Languages`, `02. Frameworks & Web`, `03. ML & Data`, `04. Tools & OS`, `05. Design & UI`) render horizontally in a single unbroken row on desktop.
+
+2. **Hackathons & Engagements Added:**
+   - **Hackyard Build 2026 (IIT Guwahati // Hackyard 2026):** Added Idea Submission for *OrbitScore* — automated satellite compliance and sustainability-scoring platform computing the Orbital Credit Index and generating submission-ready ODAR plans.
+   - **Hacker House Goa 2026 (Devfolio Residency 2026):** Added candidate builder card for India's AI x Crypto builder residency in Goa.
+
+3. **LinkedIn Integration:**
+   - Added verified LinkedIn profile URL (`https://www.linkedin.com/in/narayan-kumar-jha-4bb65638b`) to footer social links, Schema.org `Person` JSON-LD `sameAs` array, and secondary showcase page footers.
+
+4. **Silent Right-Click Suppression:**
+   - Added silent `document.addEventListener('contextmenu', e => e.preventDefault())` across all site pages (`index.html`, `projects/vanguard.html`, `projects/apex.html`, `projects/ather.html`) without displaying any alert popups or interruptions.
+
+5. **Mobile & Tablet Flawless Responsiveness:**
+   - **Navbar:** Designed clean mobile flex layout (`padding: 1rem 1.25rem`) replacing vertical stacking.
+   - **Fluid Typography:** Implemented `clamp()` typography across headings, subtitles, and section titles to prevent text clipping on smaller viewports.
+   - **Grid Adaptation:** Configured 5 columns on desktop, 3 columns / 2 columns on tablet (`1200px` & `859px`), and 1 column on mobile (`<640px`).
+   - **Performance & Battery:** Halts Three.js 3D render loop on screens `<= 1024px` where the 3D canvas is hidden, saving mobile battery and GPU usage. Added tap-to-dismiss for the signature loader on touch devices.
