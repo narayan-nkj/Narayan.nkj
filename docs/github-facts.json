@@ -1,0 +1,94 @@
+{
+  "user": {
+    "login": "narayan-nkj",
+    "name": "Narayan Kumar Jha",
+    "bio": "BS in Data Science student at IIT Madras & student at B.P. Poddar Institute. Focused on computer science, linear algebra, and programming logic.",
+    "location": "Kolkata, West Bengal, India",
+    "html_url": "https://github.com/narayan-nkj",
+    "avatar_url": "https://avatars.githubusercontent.com/u/301786589?v=4",
+    "public_repos": 5,
+    "followers": 1,
+    "company": "B.P. Poddar Institute of Management & Technology / IIT Madras"
+  },
+  "public_repositories": [
+    {
+      "name": "SAGAR-SonarVision",
+      "html_url": "https://github.com/narayan-nkj/SAGAR-SonarVision",
+      "org_url": "https://github.com/BPPIMTSIH26/SIH26057",
+      "description": "🌊 S.A.G.A.R. (Ocean-X) — AI-assisted seabed survey analysis, 14-stage acoustic processing & open-world anomaly intelligence for SIH 2026 (Problem Statement 26057).",
+      "primary_language": "TypeScript",
+      "languages": ["TypeScript", "Python", "Shell", "HTML", "CSS", "Dockerfile"],
+      "tech_stack": ["FastAPI", "React", "TypeScript", "PyTorch", "ONNX", "MapLibre", "Docker"],
+      "features": [
+        "14-stage acoustic image processing pipeline",
+        "Open-world anomaly intelligence system",
+        "Integrated ONNX runtime with curated SAGAR dataset",
+        "Geospatial visualization of seabed acoustic swaths"
+      ],
+      "role": "Lead Architect & Deep Learning Engineer",
+      "dataset_url": "https://huggingface.co/datasets/narayan-nkj/sagar-sss",
+      "pushed_at": "2026-10-05T17:27:39Z"
+    },
+    {
+      "name": "phoenix-protocol",
+      "html_url": "https://github.com/HeX-ecutioner/phoenix-protocol",
+      "description": "Network security compliance auditor and optimized data handling scripts with Flask backend and Vite frontend.",
+      "primary_language": "Python",
+      "languages": ["Python", "JavaScript", "HTML", "CSS"],
+      "tech_stack": ["Python", "Flask", "Vite", "Node.js"],
+      "features": [
+        "Custom Python launcher and cross-platform process management",
+        "Automated port conflict resolution and readiness polling",
+        "Configuration weakness analysis and remediation reporting"
+      ],
+      "role": "Backend Scripting & Protocol Engineering"
+    },
+    {
+      "name": "needlens",
+      "html_url": "https://github.com/narayan-nkj/needlens",
+      "description": "Civic Needs Explorer — hackathon decision-support prototype assisting urban planners with infrastructure request analysis.",
+      "primary_language": "JavaScript",
+      "languages": ["JavaScript", "HTML", "CSS"],
+      "tech_stack": ["JavaScript", "HTML5", "CSS3"],
+      "features": [
+        "District context aggregation and explainable review shortlist",
+        "Interactive exploratory UI for infrastructure submissions"
+      ],
+      "role": "Frontend / Full-stack Developer",
+      "pushed_at": "2026-09-28T18:47:32Z"
+    },
+    {
+      "name": "Narayan.nkj",
+      "html_url": "https://github.com/narayan-nkj/Narayan.nkj",
+      "homepage_url": "https://narayan-nkj.vercel.app",
+      "description": "Portfolio Suite — Narayan Kumar Jha | Creative Developer & Data Scientist",
+      "primary_language": "HTML",
+      "languages": ["HTML", "CSS", "JavaScript"],
+      "tech_stack": ["Vanilla HTML5", "Vanilla CSS3", "JavaScript", "Three.js", "React UMD"],
+      "features": [
+        "Interactive 3D wireframe icosahedron and orbital system",
+        "Modular project showcases (Vanguard, Apex, Ather)",
+        "Responsive brutalist and glassmorphism interface"
+      ],
+      "role": "Creator & Maintainer",
+      "pushed_at": "2026-10-08T16:50:20Z"
+    }
+  ],
+  "excluded_repositories": [
+    {
+      "name": "SIH26060",
+      "html_url": "https://github.com/narayan-nkj/SIH26060",
+      "reason": "Forked repository without direct code commits by Narayan Kumar Jha (authored by teammate Sayantan Pachal)."
+    },
+    {
+      "name": "phantomdeps",
+      "html_url": "https://github.com/adishxm/phantomdeps",
+      "reason": "External collaborator repository where primary ownership belongs to external contributor."
+    },
+    {
+      "name": "SagaRSonaR",
+      "html_url": "https://github.com/narayan-nkj/SagaRSonaR",
+      "reason": "Duplicate/mirror repository of SAGAR-SonarVision; consolidated under SAGAR-SonarVision."
+    }
+  ]
+}
