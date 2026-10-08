@@ -180,3 +180,11 @@
    - **Figma Added:** Integrated Figma as the lead design skill in `05. Design & UI`.
    - **Technical Skills (8 Identical Squares):** Structured as a clean 4-column by 2-row grid of equal-sized cards (`01. Languages`, `02. Frameworks & Web`, `03. ML & Data`, `04. Tools & OS`, `05. Design & UI`, `06. AI Security & AST Analysis`, `07. Backend Systems`, `08. Cloud & DevOps`), each sharing identical width and min-height (`275px`).
    - **Achievements & Engagements (8 Identical Squares):** Streamlined descriptions across all 8 cards to uniform 3-line paragraphs with `min-height: 245px`, ensuring every nearby square in both rows shares identical geometry and proportions.
+
+9. **Hero / Home Screen Viewport Fit & Name Wrap Resolution:**
+   - Fixed "NARAYAN" splitting across lines ("NARAYA" / "N") by applying `white-space: nowrap;` and calibrated `clamp(1.8rem, 3.8vw, 3.6rem)` font sizing.
+   - Refactored the `Profile & Education` card to a compact layout with 2-column degree badges, bringing total hero height inside `calc(100vh - 90px)` on desktop so the entire home screen fits in a single page view without any bottom cutoff or scrolling.
+
+10. **Interactive Portfolios & Dashboards Cutoff Resolution:**
+   - Fixed vertical overflow clipping in the `Interactive Portfolios & Dashboards` project card.
+   - Formatted `.key-projects-grid .link-btn` with `flex: 1; white-space: nowrap;` to keep both `[ View Showcase &rarr; ]` and `[ GitHub Suite &rarr; ]` on a single horizontal row, eliminating line-wrapping height spikes and keeping all 4 project cards perfectly flush.
