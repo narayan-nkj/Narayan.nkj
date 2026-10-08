@@ -72,6 +72,20 @@
       ],
       "role": "Creator & Maintainer",
       "pushed_at": "2026-10-08T16:50:20Z"
+    {
+      "name": "phantomdeps",
+      "html_url": "https://github.com/adishxm/phantomdeps",
+      "description": "Pre-install AI dependency claim gate for IBM Bob built during IBM Hackathon. Statically verifies exported AST declarations from npm tarballs without executing target package code.",
+      "primary_language": "TypeScript",
+      "languages": ["TypeScript", "JavaScript", "Shell"],
+      "tech_stack": ["TypeScript 5.5", "Node.js", "IBM Bob Hooks", "AST Parsing", "CI/CD"],
+      "features": [
+        "Pre-install verification gate to prevent AI agent package & symbol hallucinations",
+        "Direct integration into IBM Bob via PreToolUse hook interface",
+        "205/205 passing unit & integration tests covering AST declaration parsing"
+      ],
+      "role": "Core Implementation & Test Engineer",
+      "pushed_at": "2026-09-27T14:36:36Z"
     }
   ],
   "excluded_repositories": [
@@ -79,11 +93,6 @@
       "name": "SIH26060",
       "html_url": "https://github.com/narayan-nkj/SIH26060",
       "reason": "Forked repository without direct code commits by Narayan Kumar Jha (authored by teammate Sayantan Pachal)."
-    },
-    {
-      "name": "phantomdeps",
-      "html_url": "https://github.com/adishxm/phantomdeps",
-      "reason": "External collaborator repository where primary ownership belongs to external contributor."
     },
     {
       "name": "SagaRSonaR",

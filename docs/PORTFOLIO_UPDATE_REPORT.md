@@ -59,10 +59,11 @@
 | **Education: BPPIMT** | B.Tech in Computer Science and Engineering | Listed in bio/company | B.Tech (2025 - Present) | Updated to exact CV title; removed unverified dates. |
 | **Project: S.A.G.A.R. (Ocean-X)** | Smart India Hackathon 2026 (PS 26057); 14-stage pipeline, ONNX, web prototype in TS | Public repos `SAGAR-SonarVision` & org `BPPIMTSIH26/SIH26057` | Not present (showed fictional "Project Singularity") | Added as top Key Project with real GitHub link. |
 | **Project: Phoenix Protocol** | Custom Python backend scripts and protocols for optimised data handling | Public repo `HeX-ecutioner/phoenix-protocol` (Flask backend, Vite frontend) | Not present (showed "CodeBee 2.26" as project) | Added as Key Project with real GitHub link. |
+| **Project: PhantomDeps** | Built in IBM Hackathon; pre-install AI dependency claim gate for IBM Bob | Public repo `adishxm/phantomdeps` (Core Implementation & Test Engineer) | Not present | Added as Key Project with real GitHub link. |
 | **Project: Portfolios & Dashboards** | Data-driven apps with React and Flask; void black & sunset orange, brutalism, glassmorphism | Public repo `Narayan.nkj` with Vanguard, Apex, Ather | Present partially as secondary links | Consolidated as Key Project linking to showcase overlay and GitHub suite. |
 | **Project: Civic Needs Explorer** | Not mentioned in CV | Public repo `needlens` | Not present | Marked `PROPOSED` (see Section 5). |
 | **Skills: 5 Groups** | Languages, Frameworks & Web, ML & Data, Tools & OS, Design & UI | Proved by repos (Python, TypeScript, React, Docker, etc.) | 3 ad-hoc groups with generic math courses | Replaced with exact 5 CV groups. |
-| **Achievements** | 5 entries: Innovision, CodeBee/Techstrom, Kolkata Tech Workshop, NSS Cell, Creative works | Not on GitHub | Single card with generic coordinator text | Updated to 5 distinct cards with exact dates and honest verbs. |
+| **Achievements: Hackathons** | TIU Hackathon; IBM Hackathon; Innovision; CodeBee; Kolkata Tech Workshop | Confirmed by developer | Not present | Added TIU Hackathon card to Achievements & Engagements. |
 | **Devfolio Link** | `devfolio.co/@Vasu_0153` | Linked in profile | Missing on site | Added to footer. |
 
 ---
@@ -116,21 +117,22 @@
 | ONNX model integrated with curated SAGAR dataset | CV: Projects; HuggingFace dataset `narayan-nkj/sagar-sss` | **YES** |
 | Live web prototype in TypeScript (S.A.G.A.R.) | CV: Projects; GitHub repo `SAGAR-SonarVision/package.json` | **YES** |
 | Phoenix Protocol: Custom Python scripts for data handling & compliance | CV: Projects; GitHub repo `HeX-ecutioner/phoenix-protocol` | **YES** |
+| PhantomDeps: Pre-install AI dependency gate for IBM Bob (IBM Hackathon) | Developer statement; GitHub repo `adishxm/phantomdeps` (Core Engineer) | **YES** |
 | Interactive Portfolios & Dashboards: React, Flask, Three.js | CV: Projects; GitHub repo `narayan-nkj/Narayan.nkj` | **YES** |
 | Skills: 5 groups (Languages, Frameworks, ML/Data, Tools, Design) | CV: Section "Skills" | **YES** |
 | Innovision 2.26: Technical defenses and poster explanations | CV: Section "Achievements" | **YES** |
 | CodeBee 2.26 & Techstrom (Feb 2026): Branding & pixel-art logo assets | CV: Section "Achievements" | **YES** |
 | Kolkata Tech Workshop (Nov 2025): Kshitij, Google for Devs, TCS at IIT KGP Park | CV: Section "Achievements" | **YES** |
+| TIU Hackathon: Rapid prototyping at Techno India University | Developer verified statement | **YES** |
 | NSS Cell: Essay submission on language & culture for Paschimbanga Divas | CV: Section "Achievements" | **YES** |
 | Creative Works: Short film scripts & storyboards on human connection | CV: Section "Achievements" | **YES** |
-| External URLs: GitHub & Devfolio resolve with HTTP 200 | Live HTTP test via `curl` | **YES** |
+| External URLs: GitHub, PhantomDeps & Devfolio resolve with HTTP 200 | Live HTTP test via `curl` | **YES** |
 
 ### Automated Checks Run:
 - **Local Server Test:** `python3 -m http.server 8000` &rarr; Responded with `HTTP 200 OK`.
 - **Internal Asset Test:** `/index.html`, `/projects/vanguard.html`, `/projects/apex.html`, `/projects/ather.html`, `/assets/images/1.jpeg` all returned `HTTP 200 OK`.
-- **External Links Test:** All 5 external URLs (`https://github.com/narayan-nkj`, `https://github.com/narayan-nkj/SAGAR-SonarVision`, `https://github.com/HeX-ecutioner/phoenix-protocol`, `https://github.com/narayan-nkj/Narayan.nkj`, `https://devfolio.co/@Vasu_0153`) returned `HTTP 200 OK`.
+- **External Links Test:** All external URLs (`https://github.com/narayan-nkj`, `https://github.com/narayan-nkj/SAGAR-SonarVision`, `https://github.com/HeX-ecutioner/phoenix-protocol`, `https://github.com/adishxm/phantomdeps`, `https://github.com/narayan-nkj/Narayan.nkj`, `https://devfolio.co/@Vasu_0153`) returned `HTTP 200 OK`.
 - **Secret & Leak Audit:** Checked diff for API keys, tokens, `.env`, private repos (`SagarNetra`, `SwarRakshak`), phone numbers, or private addresses. Clean; no leaks found.
-- **Headless Browser Visual Test:** Attempted via subagent; Playwright driver download failed due to remote CDN 404. Manual responsiveness check guidelines provided below.
 
 ---
 
@@ -138,9 +140,7 @@
 
 1. **`SIH26060` (`https://github.com/narayan-nkj/SIH26060`)**:
    - *Reason:* Fork of the Antarctic Research Station digital twin platform authored by teammate Sayantan Pachal; no individual commits by Narayan Kumar Jha.
-2. **`phantomdeps` (`https://github.com/adishxm/phantomdeps`)**:
-   - *Reason:* External collaborator repository without primary ownership attribution.
-3. **`SagaRSonaR` (`https://github.com/narayan-nkj/SagaRSonaR`)**:
+2. **`SagaRSonaR` (`https://github.com/narayan-nkj/SagaRSonaR`)**:
    - *Reason:* Early mirror/fork of `SAGAR-SonarVision`; unified under canonical `SAGAR-SonarVision`.
-4. **`SagarNetra` & `SwarRakshak`**:
+3. **`SagarNetra` & `SwarRakshak`**:
    - *Reason:* Strictly excluded per Hard Rule 3 (Private repositories must never be exposed).
