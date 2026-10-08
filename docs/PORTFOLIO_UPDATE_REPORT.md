@@ -189,7 +189,13 @@
    - Fixed vertical overflow clipping in the `Interactive Portfolios & Dashboards` project card.
    - Formatted `.key-projects-grid .link-btn` with `flex: 1; white-space: nowrap;` to keep both `[ View Showcase &rarr; ]` and `[ GitHub Suite &rarr; ]` on a single horizontal row, eliminating line-wrapping height spikes and keeping all 4 project cards perfectly flush.
 
-11. **My Projects 3 Vertical Cards & Unclipped Globe Resolution:**
+11. **My Projects 3 Vertical Cards & Blank Space Elimination:**
    - **Header Restoration:** Restored `.glass-navbar` to a full-width edge-to-edge top header bar (`top: 0; width: 100%; border-bottom: 1px solid var(--glass-border);`) with sleek, reduced padding (`1.15rem 5vw`), preserving its natural horizontal orientation.
    - **Unclipped 3D Globe Calibration:** Fixed sphere clipping at top and bottom by setting `camera = PerspectiveCamera(45, aspect, 0.1, 1000)` at `z = 25`, calibrated sphere radius to `7.5` (`inner = 7.0`), and added `overflow: visible;` on `.hero-3d-container`. The globe maintains a 25% safety margin inside the camera frustum, rendering as a complete, unclipped, spherical wireframe from every angle and during hover rotation.
-   - **My Projects 3 Vertical Cards (`#projects-page`):** Converted the 3 secondary web apps (Vanguard, Apex, Ather) from horizontal landscape strips into 3 equal **vertical cards side-by-side** (`grid-template-columns: repeat(3, 1fr); gap: 1.5rem;`), fitting 100% within the viewport height with zero vertical scrolling. Enriched each card with verified technical architecture subtitles, 3 detailed feature bullet points, and tech stack badges, completely eliminating empty blank space.
+   - **My Projects 3 Vertical Cards (`#projects-page`):** Converted the 3 secondary web apps (Vanguard, Apex, Ather) from horizontal landscape strips into 3 equal **vertical cards side-by-side** (`grid-template-columns: repeat(3, 1fr); gap: 1.25rem;`), fitting 100% within the viewport height with zero vertical scrolling.
+   - **Rich Engineering Details & Zero Blank Space:** Completely eliminated empty black space across all 3 cards by enriching them with:
+     - **Live Status Header:** Category tags alongside glowing green pulsing status pills (`[ LIVE // ONLINE ]`).
+     - **Architectural Subtitles & Descriptions:** Verified technical identity directly from the project source files.
+     - **Technical Specs Matrix:** A 4-item HUD grid per card highlighting `TYPE`, `ROLE`, `DESIGN/THEME`, and `ENGINE/PIPELINE`.
+     - **Engineering Highlights:** 3 concrete architectural bullet points per card detailing typography pairings, preloader canvas engines, dual-axis matrix scroll, and predictive modeling pipelines.
+     - **Brutalist Tech Stack Pills:** Styled badge tags (`HTML5`, `CSS3 Grid`, `React 18`, `Canvas API`, `Glassmorphism`, etc.) providing clear technical categorization above the connection button.

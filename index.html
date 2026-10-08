@@ -1090,11 +1090,11 @@
     }
 
     .overlay-content {
-      padding: 2vh 5vw 2.5vh 5vw;
+      padding: 1.5vh 4vw 2vh 4vw;
       flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
       height: calc(100vh - 58px);
       max-height: calc(100vh - 58px);
       box-sizing: border-box;
@@ -1103,24 +1103,24 @@
 
     .overlay-content h1 {
       font-family: 'Syncopate', sans-serif;
-      font-size: clamp(1.6rem, 2.8vw, 2.4rem);
-      margin-bottom: 0.2rem;
+      font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+      margin-bottom: 0.15rem;
       line-height: 1.1;
     }
 
     .overlay-content .subtitle {
-      margin-top: 0.2rem !important;
-      margin-bottom: 1.5vh !important;
-      font-size: clamp(0.8rem, 1vw, 0.95rem);
+      margin-top: 0.15rem !important;
+      margin-bottom: 1vh !important;
+      font-size: clamp(0.78rem, 0.95vw, 0.9rem);
     }
 
     .projects-overlay .projects-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+      gap: 1.25rem;
       flex: 1;
       width: 100%;
-      margin-top: 2vh !important;
+      margin-top: 1vh !important;
       padding: 0;
       min-height: 0;
       box-sizing: border-box;
@@ -1130,18 +1130,19 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 1.4rem 1.45rem;
+      padding: 1.25rem 1.35rem;
       height: 100%;
       min-height: 0;
       border: 1px solid var(--glass-border);
       background: var(--glass-bg);
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
       box-sizing: border-box;
+      overflow: hidden;
     }
 
     .projects-overlay .projects-grid .glass-card:hover {
       border-color: var(--electric-blue);
-      transform: translateY(-6px);
+      transform: translateY(-5px);
       box-shadow: 0 0 30px rgba(0, 85, 255, 0.25);
     }
 
@@ -1150,68 +1151,141 @@
       flex-direction: column;
       height: 100%;
       justify-content: space-between;
+      min-height: 0;
+    }
+
+    .projects-overlay .card-header-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.4rem;
     }
 
     .projects-overlay .projects-grid .tag {
-      margin-bottom: 0.45rem;
-      font-size: 0.68rem;
-      padding: 0.18rem 0.55rem;
+      margin-bottom: 0;
+      font-size: 0.65rem;
+      padding: 0.15rem 0.5rem;
       letter-spacing: 0.5px;
       display: inline-block;
       align-self: flex-start;
     }
 
+    .projects-overlay .status-indicator {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      color: #00ff88;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .projects-overlay .status-dot {
+      width: 6px;
+      height: 6px;
+      background: #00ff88;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #00ff88;
+      display: inline-block;
+      animation: status-pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes status-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.85); }
+    }
+
     .projects-overlay .projects-grid h2 {
       font-family: 'Syncopate', sans-serif;
-      font-size: clamp(0.88rem, 1.1vw, 1.1rem);
-      margin-bottom: 0.3rem;
+      font-size: clamp(0.85rem, 1.05vw, 1.05rem);
+      margin-bottom: 0.25rem;
       line-height: 1.25;
       color: var(--bone-white);
       word-break: break-word;
     }
 
     .projects-overlay .overlay-project-sub {
-      font-size: 0.73rem;
+      font-size: 0.72rem;
       color: var(--bone-white);
       font-weight: 600;
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.3rem;
       line-height: 1.35;
     }
 
     .projects-overlay .overlay-project-desc {
-      font-size: 0.72rem;
-      line-height: 1.42;
-      margin-bottom: 0.5rem;
+      font-size: 0.71rem;
+      line-height: 1.4;
+      margin-bottom: 0.45rem;
       color: var(--text-muted);
+    }
+
+    .projects-overlay .overlay-specs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.3rem 0.5rem;
+      background: rgba(0, 85, 255, 0.04);
+      border: 1px solid rgba(0, 85, 255, 0.16);
+      padding: 0.45rem 0.6rem;
+      margin-bottom: 0.5rem;
+      border-radius: 2px;
+    }
+
+    .projects-overlay .spec-item {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.63rem;
+      color: var(--bone-white);
+      letter-spacing: 0.3px;
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .projects-overlay .spec-label {
+      color: var(--electric-blue);
+      font-weight: 700;
+      margin-right: 0.25rem;
     }
 
     .projects-overlay .overlay-project-bullets {
       padding-left: 0.95rem;
-      margin-bottom: 0.55rem;
+      margin-bottom: 0.45rem;
       list-style-type: square;
     }
 
     .projects-overlay .overlay-project-bullets li {
-      font-size: 0.7rem;
-      line-height: 1.38;
-      margin-bottom: 0.3rem;
+      font-size: 0.69rem;
+      line-height: 1.35;
+      margin-bottom: 0.25rem;
       color: var(--text-muted);
       word-break: break-word;
     }
 
-    .projects-overlay .overlay-project-stack {
-      font-size: 0.69rem;
-      color: var(--electric-blue);
-      line-height: 1.35;
+    .projects-overlay .overlay-stack-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
       border-top: 1px dashed rgba(0, 85, 255, 0.25);
       padding-top: 0.45rem;
-      margin-bottom: 0.65rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .projects-overlay .stack-pill {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      padding: 0.14rem 0.45rem;
+      background: rgba(0, 85, 255, 0.08);
+      border: 1px solid rgba(0, 85, 255, 0.28);
+      color: var(--bone-white);
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      border-radius: 2px;
     }
 
     .projects-overlay .projects-grid .link-btn {
       margin-top: 0;
       padding: 0.5rem 1rem;
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       text-align: center;
       width: 100%;
       letter-spacing: 1px;
@@ -1283,64 +1357,121 @@
     </div>
     <div class="overlay-content">
       <h1><span class="highlight-name">MY</span> PROJECTS</h1>
-      <p class="subtitle" style="margin-top: 1rem;">Secondary web applications and interactive frameworks.</p>
+      <p class="subtitle">Secondary web applications and interactive frameworks.</p>
       
-      <div class="projects-grid" style="margin-top: 1.5vh; padding: 0;">
+      <div class="projects-grid">
+        <!-- Card 01: Vanguard -->
         <div class="glass-card">
           <div class="card-content">
             <div>
-              <span class="tag">Web App 01 // Editorial Design</span>
+              <div class="card-header-meta">
+                <span class="tag">Web App 01</span>
+                <span class="status-indicator"><span class="status-dot"></span> LIVE // ONLINE</span>
+              </div>
               <h2>[ PROJECT ALPHA : Vanguard ]</h2>
               <p class="overlay-project-sub">Creative Editorial Agency & Design Showcase</p>
               <p class="overlay-project-desc">Fusing Data Science with creative editorial design to architect high-impact digital experiences.</p>
+              
+              <div class="overlay-specs-grid">
+                <div class="spec-item"><span class="spec-label">TYPE:</span>Agency Showcase</div>
+                <div class="spec-item"><span class="spec-label">ROLE:</span>Frontend Arch.</div>
+                <div class="spec-item"><span class="spec-label">DESIGN:</span>Brutalist Editorial</div>
+                <div class="spec-item"><span class="spec-label">ENGINE:</span>Canvas Preloader</div>
+              </div>
+
               <ul class="overlay-project-bullets">
                 <li>Engineered high-fashion brutalist layouts with Playfair Display & DM Sans typography pairing.</li>
                 <li>Built custom interactive preloader sequences and full-viewport project discovery galleries.</li>
                 <li>Integrated responsive client showcase grids with high-contrast monochrome and crimson styling.</li>
               </ul>
             </div>
+
             <div>
-              <p class="overlay-project-stack"><strong>Stack:</strong> HTML5, CSS3, JavaScript (ES6+), Canvas, Responsive</p>
+              <div class="overlay-stack-pills">
+                <span class="stack-pill">HTML5</span>
+                <span class="stack-pill">CSS3 Grid</span>
+                <span class="stack-pill">JavaScript ES6+</span>
+                <span class="stack-pill">Canvas API</span>
+                <span class="stack-pill">Responsive UI</span>
+              </div>
               <a href="projects/vanguard.html" class="link-btn">Initialize Connection &rarr;</a>
             </div>
           </div>
         </div>
 
+        <!-- Card 02: Apex -->
         <div class="glass-card">
           <div class="card-content">
             <div>
-              <span class="tag">Web App 02 // React Matrix</span>
+              <div class="card-header-meta">
+                <span class="tag">Web App 02</span>
+                <span class="status-indicator"><span class="status-dot"></span> LIVE // ONLINE</span>
+              </div>
               <h2>[ PROJECT BETA : Apex ]</h2>
               <p class="overlay-project-sub">Brutalist Horizontal Work Matrix Engine</p>
               <p class="overlay-project-desc">Dynamic React-driven matrix engine featuring brutalist horizontal work scroll and terminal boot.</p>
+              
+              <div class="overlay-specs-grid">
+                <div class="spec-item"><span class="spec-label">TYPE:</span>Interactive Engine</div>
+                <div class="spec-item"><span class="spec-label">ROLE:</span>React Developer</div>
+                <div class="spec-item"><span class="spec-label">THEME:</span>Sunset Matrix</div>
+                <div class="spec-item"><span class="spec-label">NAV:</span>Horizontal Canvas</div>
+              </div>
+
               <ul class="overlay-project-bullets">
                 <li>Constructed custom terminal system boot sequence with animated memory buffer logs.</li>
                 <li>Architected dual-axis horizontal canvas scroll engine for seamless project exploration.</li>
                 <li>Implemented custom difference cursor states, reactive UI hooks, and sunset orange styling.</li>
               </ul>
             </div>
+
             <div>
-              <p class="overlay-project-stack"><strong>Stack:</strong> React 18, JavaScript (ES6+), CSS3 Grid, Custom Cursor</p>
+              <div class="overlay-stack-pills">
+                <span class="stack-pill">React 18</span>
+                <span class="stack-pill">JavaScript ES6+</span>
+                <span class="stack-pill">CSS3 Matrix</span>
+                <span class="stack-pill">Custom Cursor</span>
+                <span class="stack-pill">Terminal Boot</span>
+              </div>
               <a href="projects/apex.html" class="link-btn">Initialize Connection &rarr;</a>
             </div>
           </div>
         </div>
 
+        <!-- Card 03: Ather -->
         <div class="glass-card">
           <div class="card-content">
             <div>
-              <span class="tag">Web App 03 // Glassmorphism UI</span>
+              <div class="card-header-meta">
+                <span class="tag">Web App 03</span>
+                <span class="status-indicator"><span class="status-dot"></span> LIVE // ONLINE</span>
+              </div>
               <h2>[ PROJECT GAMMA : Ather ]</h2>
               <p class="overlay-project-sub">Minimalist Computational Pipeline Interface</p>
               <p class="overlay-project-desc">Minimalist glassmorphism interface highlighting predictive computational pipelines and research workflows.</p>
+              
+              <div class="overlay-specs-grid">
+                <div class="spec-item"><span class="spec-label">TYPE:</span>Research Systems</div>
+                <div class="spec-item"><span class="spec-label">ROLE:</span>UI/UX & Modeler</div>
+                <div class="spec-item"><span class="spec-label">PALETTE:</span>Cream & Slate</div>
+                <div class="spec-item"><span class="spec-label">PIPELINE:</span>Predictive Math</div>
+              </div>
+
               <ul class="overlay-project-bullets">
                 <li>Designed warm cream aesthetic with slate typography and frosted glass panel mechanics.</li>
                 <li>Showcases interactive computational pipelines, mathematical models, and research methodologies.</li>
                 <li>Crafted subtle micro-interactions, responsive typography scaling, and streamlined UI hierarchy.</li>
               </ul>
             </div>
+
             <div>
-              <p class="overlay-project-stack"><strong>Stack:</strong> HTML5, Vanilla CSS3, JavaScript, UI/UX Systems</p>
+              <div class="overlay-stack-pills">
+                <span class="stack-pill">HTML5</span>
+                <span class="stack-pill">Vanilla CSS3</span>
+                <span class="stack-pill">JavaScript</span>
+                <span class="stack-pill">Glassmorphism</span>
+                <span class="stack-pill">UI/UX Systems</span>
+              </div>
               <a href="projects/ather.html" class="link-btn">Initialize Connection &rarr;</a>
             </div>
           </div>
