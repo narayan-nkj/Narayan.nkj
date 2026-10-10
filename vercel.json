@@ -2,6 +2,10 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/phoenix", "destination": "https://the-phoenix-protocol.vercel.app", "permanent": false },
+    { "source": "/phoenix-protocol", "destination": "https://the-phoenix-protocol.vercel.app", "permanent": false }
+  ],
   "rewrites": [
     { "source": "/vanguard", "destination": "/projects/vanguard.html" },
     { "source": "/apex", "destination": "/projects/apex.html" },
