@@ -85,7 +85,7 @@ Narayan.nkj/
 
 ### 3. Key Projects Showcase
 - **S.A.G.A.R. (Ocean-X)** — Seabed survey analysis & acoustic anomaly detection built for Smart India Hackathon (ONNX Runtime, MapLibre, FastAPI, PyTorch).
-- **Phoenix Protocol** — Custom backend scripts, data handling & automated network security compliance engine (Python, Flask, Vite).
+- **Phoenix Protocol** — Custom backend scripts, data handling & automated network security compliance engine (Python, Flask, Vite). [[Live Demo](https://the-phoenix-protocol.vercel.app) | [GitHub](https://github.com/HeX-ecutioner/phoenix-protocol)]
 - **Interactive Portfolios & Dashboards** — Data-driven applications with void black & brutalist glassmorphism (React, Three.js, Flask).
 - **PhantomDeps** — Pre-install AI dependency verification gate preventing AI coding agent package hallucinations (TypeScript, AST Parsing, IBM Bob Hooks).
 
