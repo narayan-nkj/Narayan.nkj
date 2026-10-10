@@ -368,7 +368,7 @@
     }
 
     .manifesto-section {
-      padding: 15vh 0;
+      padding: clamp(4rem, 12vh, 15vh) 0;
       background-color: var(--bg-dark);
       border-bottom: 1px solid var(--border-color);
     }
@@ -376,19 +376,31 @@
     .manifesto-grid {
       display: grid;
       grid-template-columns: 1fr 2fr;
-      gap: 4rem;
+      gap: clamp(2rem, 5vw, 4rem);
     }
 
     .manifesto-text {
       font-family: var(--font-sans);
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      line-height: 1.1;
+      font-size: clamp(1.5rem, 4vw, 3.5rem);
+      line-height: 1.2;
       font-weight: 500;
-      letter-spacing: -1px;
+      letter-spacing: -0.5px;
+      overflow-wrap: break-word;
+    }
+
+    @media (max-width: 768px) {
+      .manifesto-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .manifesto-text {
+        font-size: clamp(1.35rem, 5.5vw, 2.25rem);
+        line-height: 1.3;
+      }
     }
 
     .work-section {
-      padding: 15vh 0;
+      padding: clamp(4rem, 12vh, 15vh) 0;
       background-color: var(--bg-light);
       color: var(--text-dark);
     }
@@ -397,14 +409,15 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      margin-bottom: 5rem;
+      margin-bottom: clamp(2.5rem, 6vh, 5rem);
       border-bottom: 1px solid rgba(0,0,0,0.1);
-      padding-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      gap: 1rem;
     }
 
     .work-header h2 {
       font-family: var(--font-serif);
-      font-size: clamp(3rem, 8vw, 6rem);
+      font-size: clamp(2.25rem, 7vw, 6rem);
       font-weight: 400;
       line-height: 1;
     }
@@ -418,6 +431,13 @@
     .project-card {
       position: relative;
       cursor: pointer;
+      border-radius: 2px;
+      transition: outline 0.2s ease;
+    }
+
+    .project-card:focus-visible {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 4px;
     }
 
     .project-1 { grid-column: 1 / 8; }
@@ -428,9 +448,10 @@
     .project-image {
       width: 100%;
       aspect-ratio: 4/5;
-      background-color: #ddd;
+      background-color: #222;
       overflow: hidden;
       margin-bottom: 1.5rem;
+      position: relative;
     }
     
     .project-1 .project-image { aspect-ratio: 16/9; }
@@ -440,12 +461,14 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.8s var(--ease-out-expo);
+      transition: transform 0.8s var(--ease-out-expo), filter 0.8s var(--ease-out-expo);
       filter: grayscale(20%);
+      display: block;
     }
 
-    .project-card:hover .project-image img {
-      transform: scale(1.05);
+    .project-card:hover .project-image img,
+    .project-card:focus-visible .project-image img {
+      transform: scale(1.04);
       filter: grayscale(0%);
     }
 
@@ -453,41 +476,68 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
+      gap: 1rem;
     }
 
     .project-info h3 {
       font-family: var(--font-sans);
-      font-size: 1.5rem;
+      font-size: clamp(1.2rem, 2vw, 1.5rem);
       font-weight: 700;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.35rem;
     }
 
     .project-tags {
       font-family: var(--font-sans);
-      font-size: 0.9rem;
+      font-size: clamp(0.8rem, 1.5vw, 0.9rem);
       color: #666;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
+    @media (max-width: 768px) {
+      .work-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+      }
+
+      .project-1, .project-2, .project-3, .project-4 {
+        grid-column: auto;
+        margin-top: 0 !important;
+        width: 100%;
+      }
+
+      .project-image,
+      .project-1 .project-image,
+      .project-4 .project-image {
+        aspect-ratio: 16/10;
+        margin-bottom: 1rem;
+      }
+
+      .work-header {
+        align-items: center;
+      }
+    }
+
     .capabilities-section {
-      padding: 15vh 0;
+      padding: clamp(4rem, 12vh, 15vh) 0;
       background-color: var(--bg-dark);
       border-top: 1px solid var(--border-color);
     }
 
     .cap-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 3rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(2rem, 3.5vw, 3rem);
     }
 
     .cap-column h3 {
       font-family: var(--font-serif);
-      font-size: 2.5rem;
+      font-size: clamp(1.8rem, 2.5vw, 2.5rem);
       font-weight: 400;
       margin-bottom: 2rem;
       color: var(--accent-color);
+      overflow-wrap: break-word;
     }
 
     .cap-list {
@@ -496,17 +546,47 @@
 
     .cap-list li {
       font-family: var(--font-sans);
-      font-size: 1.2rem;
+      font-size: clamp(0.95rem, 1.2vw, 1.2rem);
       padding: 1rem 0;
       border-bottom: 1px solid var(--border-color);
       display: flex;
       justify-content: space-between;
+      align-items: center;
       transition: color 0.3s;
       cursor: default;
+      overflow-wrap: break-word;
+      word-break: normal;
     }
 
     .cap-list li:hover {
       color: var(--accent-color);
+    }
+
+    @media (max-width: 960px) and (min-width: 769px) {
+      .cap-grid {
+        gap: 2rem;
+      }
+      .cap-column h3 {
+        font-size: 1.85rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .cap-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+      }
+
+      .cap-column h3 {
+        font-size: 2rem;
+        margin-bottom: 1.25rem;
+      }
+
+      .cap-list li {
+        font-size: 1.05rem;
+        padding: 0.85rem 0;
+      }
     }
 
     footer {
@@ -654,7 +734,7 @@
 
         <div class="work-grid">
           
-          <div class="project-card project-1 reveal-up">
+          <div class="project-card project-1 reveal-up" tabindex="0" role="region" aria-label="Featured Project: Vision">
             <div class="project-image">
               <img src="../assets/images/3.jpg" alt="Vision Stare" fetchpriority="high" decoding="async">
             </div>
@@ -667,7 +747,7 @@
             </div>
           </div>
 
-          <div class="project-card project-2 reveal-up" style="transition-delay: 0.1s;">
+          <div class="project-card project-2 reveal-up" style="transition-delay: 0.1s;" tabindex="0" role="region" aria-label="Featured Project: The Transit">
             <div class="project-image">
               <img src="../assets/images/1.jpeg" alt="The Transit" loading="lazy" decoding="async">
             </div>
@@ -680,7 +760,7 @@
             </div>
           </div>
 
-          <div class="project-card project-3 reveal-up">
+          <div class="project-card project-3 reveal-up" tabindex="0" role="region" aria-label="Featured Project: Tech">
             <div class="project-image">
               <img src="../assets/images/4.jpeg" alt="Enduring Thesis Grind" loading="lazy" decoding="async">
             </div>
@@ -693,7 +773,7 @@
             </div>
           </div>
 
-          <div class="project-card project-4 reveal-up" style="transition-delay: 0.1s;">
+          <div class="project-card project-4 reveal-up" style="transition-delay: 0.1s;" tabindex="0" role="region" aria-label="Featured Project: Inward Focus">
             <div class="project-image">
               <img src="../assets/images/2.jpeg" alt="Inward Focus" loading="lazy" decoding="async">
             </div>
