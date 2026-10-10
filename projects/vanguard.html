@@ -52,6 +52,10 @@
       overflow: hidden;
     }
 
+    body.menu-open {
+      overflow: hidden;
+    }
+
     #preloader {
       position: fixed;
       top: 0;
@@ -127,28 +131,39 @@
 
     nav {
       position: fixed;
-      top: 0; left: 0; width: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 2rem 4vw;
-      z-index: 100;
+      padding: clamp(1.25rem, 3vw, 2rem) clamp(1.25rem, 4vw, 4rem);
+      z-index: 1000;
       mix-blend-mode: difference;
+    }
+
+    nav.menu-open {
+      mix-blend-mode: normal;
     }
 
     .logo {
       font-family: var(--font-sans);
       font-weight: 900;
-      font-size: 1.5rem;
+      font-size: clamp(1.25rem, 2.5vw, 1.5rem);
       text-transform: uppercase;
       letter-spacing: -1px;
       color: #fff;
       text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      z-index: 1002;
     }
 
     .nav-links {
       display: flex;
-      gap: 3rem;
+      gap: clamp(1.5rem, 3vw, 3rem);
+      align-items: center;
     }
 
     .nav-links a {
@@ -159,6 +174,15 @@
       font-size: 0.9rem;
       text-transform: uppercase;
       letter-spacing: 1px;
+      transition: color 0.2s, opacity 0.2s;
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 0.25rem;
+    }
+
+    .nav-links a:hover {
+      opacity: 0.7;
     }
 
     .nav-btn {
@@ -171,11 +195,118 @@
       font-size: 0.9rem;
       text-transform: uppercase;
       transition: background 0.3s, color 0.3s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      white-space: nowrap;
     }
 
     .nav-btn:hover {
       background: #fff;
       color: #000;
+    }
+
+    .nav-btn-mobile {
+      display: none;
+    }
+
+    .nav-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      width: 48px;
+      height: 48px;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      z-index: 1002;
+      border-radius: 4px;
+    }
+
+    .nav-toggle-icon {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      width: 24px;
+      height: 18px;
+    }
+
+    .nav-toggle .bar {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background-color: #fff;
+      transition: transform 0.3s var(--ease-out-expo), opacity 0.2s ease;
+      transform-origin: center;
+    }
+
+    .nav-toggle[aria-expanded="true"] .bar-1 {
+      transform: translateY(4px) rotate(45deg);
+    }
+
+    .nav-toggle[aria-expanded="true"] .bar-2 {
+      transform: translateY(-4px) rotate(-45deg);
+    }
+
+    @media (max-width: 860px) {
+      .nav-btn-desktop {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        background-color: var(--bg-dark);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        padding: 4rem 2rem 2rem;
+        z-index: 1001;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        transition: opacity 0.3s ease, transform 0.3s var(--ease-out-expo), visibility 0s 0.3s;
+        pointer-events: none;
+      }
+
+      .nav-links.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+        transition: opacity 0.3s ease, transform 0.3s var(--ease-out-expo), visibility 0s 0s;
+      }
+
+      .nav-links a {
+        font-size: 1.25rem;
+        letter-spacing: 2px;
+      }
+
+      .nav-btn-mobile {
+        display: inline-flex;
+        margin-top: 1rem;
+        border-color: var(--accent-color);
+        color: var(--text-light);
+        padding: 0.85rem 2rem;
+      }
+
+      .nav-btn-mobile:hover {
+        background: var(--accent-color);
+        color: var(--text-light);
+      }
     }
 
     .hero {
@@ -471,15 +602,25 @@
     <div class="loader-bottom bracket-title" id="loader-text">[ Initializing Protocol ]</div>
   </div>
 
-  <nav>
-    <a href="../index.html#projects" class="logo">Vanguard</a>
-    <div class="nav-links">
-      <a href="../index.html#projects">Back to Portfolio</a>
-      <a href="#work">Work</a>
-      <a href="#capabilities">Expertise</a>
-      <a href="#about">About us</a>
+  <nav id="main-nav" aria-label="Main Navigation">
+    <a href="../index.html#projects" class="logo" aria-label="Vanguard Homepage">Vanguard</a>
+    
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
+      <span class="nav-toggle-icon" aria-hidden="true">
+        <span class="bar bar-1"></span>
+        <span class="bar bar-2"></span>
+      </span>
+    </button>
+
+    <div class="nav-links" id="nav-links">
+      <a href="../index.html#projects" class="nav-link">Back to Portfolio</a>
+      <a href="#work" class="nav-link">Work</a>
+      <a href="#capabilities" class="nav-link">Expertise</a>
+      <a href="#about" class="nav-link">About us</a>
+      <a href="mailto:narayankumarjha9631@gmail.com" class="nav-btn nav-btn-mobile">Start a project</a>
     </div>
-    <a href="mailto:narayankumarjha9631@gmail.com" class="nav-btn">Start a project</a>
+
+    <a href="mailto:narayankumarjha9631@gmail.com" class="nav-btn nav-btn-desktop">Start a project</a>
   </nav>
 
   <main>
@@ -633,9 +774,55 @@
     document.addEventListener('contextmenu', (e) => e.preventDefault());
 
     document.addEventListener("DOMContentLoaded", () => {
+      const navToggle = document.getElementById('nav-toggle');
+      const navLinks = document.getElementById('nav-links');
+      const mainNav = document.getElementById('main-nav');
+      
+      // Mobile Nav Drawer Toggle
+      function closeNavDrawer() {
+        if (!navToggle || !navLinks) return;
+        navToggle.setAttribute('aria-expanded', 'false');
+        navLinks.classList.remove('open');
+        document.body.classList.remove('menu-open');
+        if (mainNav) mainNav.classList.remove('menu-open');
+      }
+
+      function openNavDrawer() {
+        if (!navToggle || !navLinks) return;
+        navToggle.setAttribute('aria-expanded', 'true');
+        navLinks.classList.add('open');
+        document.body.classList.add('menu-open');
+        if (mainNav) mainNav.classList.add('menu-open');
+      }
+
+      if (navToggle) {
+        navToggle.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+          if (isExpanded) {
+            closeNavDrawer();
+          } else {
+            openNavDrawer();
+          }
+        });
+      }
+
+      if (navLinks) {
+        navLinks.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            closeNavDrawer();
+          });
+        });
+      }
+
+      // Keyboard support: Escape closes drawer first, then navigates back to portfolio
       window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-          window.location.href = '../index.html#projects';
+          if (navToggle && navToggle.getAttribute('aria-expanded') === 'true') {
+            closeNavDrawer();
+          } else {
+            window.location.href = '../index.html#projects';
+          }
         }
       });
 
