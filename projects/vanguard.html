@@ -58,23 +58,24 @@
 
     #preloader {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       background-color: var(--bg-dark);
       z-index: 99999;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 2rem 4vw;
-      transition: transform 1.2s var(--ease-out-expo);
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      transition: transform 1s var(--ease-out-expo), opacity 0.4s ease;
       will-change: transform;
     }
 
     #preloader.hidden {
       transform: translateY(-100%);
       pointer-events: none;
+      visibility: hidden;
+      transition: transform 1s var(--ease-out-expo), visibility 0s 1s;
     }
 
     .loader-top {
@@ -85,7 +86,7 @@
     .loader-center {
       align-self: center;
       font-family: var(--font-serif);
-      font-size: clamp(6rem, 20vw, 20rem);
+      font-size: clamp(4.5rem, 18vw, 20rem);
       font-weight: 400;
       font-style: italic;
       line-height: 1;
@@ -96,9 +97,9 @@
 
     .loader-percent {
       font-family: var(--font-sans);
-      font-size: clamp(1.5rem, 4vw, 3rem);
+      font-size: clamp(1.25rem, 3.5vw, 3rem);
       font-style: normal;
-      margin-left: 1rem;
+      margin-left: 0.75rem;
       color: var(--accent-color);
     }
 
@@ -122,7 +123,7 @@
     .bracket-title {
       font-family: var(--font-sans);
       text-transform: uppercase;
-      font-size: 0.8rem;
+      font-size: clamp(0.7rem, 1.8vw, 0.8rem);
       letter-spacing: 2px;
       font-weight: 600;
       margin-bottom: 2rem;
@@ -361,9 +362,9 @@
 
     .hero-manifesto {
       font-family: var(--font-sans);
-      font-size: clamp(1.2rem, 3vw, 2rem);
+      font-size: clamp(1.05rem, 2.5vw, 2rem);
       font-weight: 400;
-      line-height: 1.4;
+      line-height: 1.5;
       max-width: 800px;
     }
 
@@ -642,6 +643,12 @@
       opacity: 0.7;
     }
 
+    .footer-links a:focus-visible,
+    .footer-bottom a:focus-visible {
+      outline: 2px solid var(--bg-dark);
+      outline-offset: 4px;
+    }
+
     @media (max-width: 768px) {
       .footer-bottom {
         flex-direction: column;
@@ -661,17 +668,52 @@
       opacity: 0;
       transform: translateY(40px);
       transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+      will-change: opacity, transform;
     }
 
     .reveal-up.active {
       opacity: 1;
       transform: translateY(0);
     }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 4px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      body.loading {
+        overflow: auto !important;
+      }
+
+      #preloader {
+        display: none !important;
+      }
+
+      .reveal-up {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+
+      .project-card:hover .project-image img,
+      .project-card:focus-visible .project-image img {
+        transform: none !important;
+      }
+    }
   </style>
 </head>
 <body class="loading">
 
-  <div id="preloader">
+  <div id="preloader" role="status" aria-live="polite">
     <div class="loader-top bracket-title">[ Vanguard Agency ]</div>
     
     <div class="loader-center">
@@ -705,8 +747,8 @@
 
   <main>
     <section class="hero">
-      <div class="hero-bg"></div>
-      <div class="hero-overlay"></div>
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-overlay" aria-hidden="true"></div>
       <div class="container">
         <span class="bracket-title">[ We are Vanguard ]</span>
         <h1 class="reveal-up">All in or <i>nothing.</i></h1>
@@ -714,7 +756,7 @@
       </div>
     </section>
 
-    <section class="manifesto-section" id="about">
+    <section class="manifesto-section" id="about" aria-label="About Vanguard">
       <div class="container manifesto-grid">
         <div>
           <span class="bracket-title">[ Who we are ]</span>
@@ -725,7 +767,7 @@
       </div>
     </section>
 
-    <section class="work-section" id="work">
+    <section class="work-section" id="work" aria-label="Featured Work">
       <div class="container">
         <div class="work-header">
           <h2 class="reveal-up">Featured work</h2>
@@ -790,7 +832,7 @@
       </div>
     </section>
 
-    <section class="capabilities-section" id="capabilities">
+    <section class="capabilities-section" id="capabilities" aria-label="Capabilities and Expertise">
       <div class="container">
         <span class="bracket-title">[ What we do ]</span>
         <div class="cap-grid">
@@ -853,11 +895,17 @@
     // Silently disable right-click
     document.addEventListener('contextmenu', (e) => e.preventDefault());
 
-    document.addEventListener("DOMContentLoaded", () => {
+    function init() {
+      const loaderCount = document.getElementById('loader-count');
+      const loaderText = document.getElementById('loader-text');
+      const preloader = document.getElementById('preloader');
       const navToggle = document.getElementById('nav-toggle');
       const navLinks = document.getElementById('nav-links');
       const mainNav = document.getElementById('main-nav');
       
+      let updateLoader = null;
+      let loaderDismissed = false;
+
       // Mobile Nav Drawer Toggle
       function closeNavDrawer() {
         if (!navToggle || !navLinks) return;
@@ -906,10 +954,58 @@
         }
       });
 
-      const loaderCount = document.getElementById('loader-count');
-      const loaderText = document.getElementById('loader-text');
-      const preloader = document.getElementById('preloader');
-      
+      // Dismiss Loader safely & reliably
+      function dismissLoader(immediate = false) {
+        if (loaderDismissed) return;
+        loaderDismissed = true;
+        if (updateLoader) clearInterval(updateLoader);
+
+        if (immediate) {
+          if (preloader) {
+            preloader.classList.add('hidden');
+            preloader.style.visibility = 'hidden';
+            preloader.style.display = 'none';
+          }
+          document.body.classList.remove('loading');
+          document.querySelectorAll('.reveal-up').forEach(el => el.classList.add('active'));
+          return;
+        }
+
+        if (preloader) {
+          preloader.classList.add('hidden');
+        }
+        document.body.classList.remove('loading');
+
+        setTimeout(() => {
+          if (preloader) {
+            preloader.style.visibility = 'hidden';
+          }
+          document.querySelectorAll('.hero .reveal-up').forEach(el => {
+            el.classList.add('active');
+          });
+          checkInitialVisibility();
+        }, 350);
+      }
+
+      // Check reduced motion preference
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        dismissLoader(true);
+        return;
+      }
+
+      // BFCache support for back/forward navigation
+      window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+          dismissLoader(true);
+        }
+      });
+
+      // Safety timeout (never leave page stuck)
+      const safetyTimer = setTimeout(() => {
+        dismissLoader(false);
+      }, 1800);
+
       let count = 0;
       const texts = [
         "[ Initializing Protocol ]", 
@@ -918,38 +1014,29 @@
         "[ System Ready ]"
       ];
       
-      const updateLoader = setInterval(() => {
-        count += Math.floor(Math.random() * 8) + 1; 
+      updateLoader = setInterval(() => {
+        count += Math.floor(Math.random() * 9) + 4; 
         
         if (count >= 100) {
           count = 100;
-          clearInterval(updateLoader);
-          
-          setTimeout(() => {
-            preloader.classList.add('hidden');
-            document.body.classList.remove('loading');
-            
-            setTimeout(() => {
-              document.querySelectorAll('.hero .reveal-up').forEach(el => {
-                el.classList.add('active');
-              });
-            }, 300); 
-            
-          }, 400);
+          clearTimeout(safetyTimer);
+          dismissLoader(false);
         }
         
-        loaderCount.textContent = count;
+        if (loaderCount) loaderCount.textContent = count;
         
-        if (count < 30) loaderText.textContent = texts[0];
-        else if (count < 60) loaderText.textContent = texts[1];
-        else if (count < 90) loaderText.textContent = texts[2];
-        else loaderText.textContent = texts[3];
-        
-      }, 50);
+        if (loaderText) {
+          if (count < 30) loaderText.textContent = texts[0];
+          else if (count < 60) loaderText.textContent = texts[1];
+          else if (count < 90) loaderText.textContent = texts[2];
+          else loaderText.textContent = texts[3];
+        }
+      }, 45);
 
+      // Scroll Reveal Observer
       const revealOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px" 
+        threshold: 0.05,
+        rootMargin: "0px 0px 0px 0px" 
       };
 
       const revealObserver = new IntersectionObserver((entries) => {
@@ -964,7 +1051,29 @@
       document.querySelectorAll('.reveal-up:not(.hero .reveal-up)').forEach(el => {
         revealObserver.observe(el);
       });
-    });
+
+      // Trigger reveal for any elements already visible
+      function checkInitialVisibility() {
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        document.querySelectorAll('.reveal-up:not(.active)').forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < vh && rect.bottom > 0) {
+            el.classList.add('active');
+            revealObserver.unobserve(el);
+          }
+        });
+      }
+
+      // Check on scroll and resize
+      window.addEventListener('scroll', checkInitialVisibility, { passive: true });
+      window.addEventListener('resize', checkInitialVisibility, { passive: true });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
   </script>
 </body>
 </html>
