@@ -1,31 +1,46 @@
-# 🌐 Narayan Kumar Jha — Cybernetic Portfolio Suite
+<div align="center">
 
-<p align="center">
-  <a href="https://narayan-nkj.vercel.app">
-    <img src="https://img.shields.io/badge/Live_Production-narayan--nkj.vercel.app-0055FF?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo" />
-  </a>
-  <a href="https://github.com/narayan-nkj/Narayan.nkj">
-    <img src="https://img.shields.io/badge/Repository-Narayan.nkj-000000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Repo" />
-  </a>
-  <img src="https://img.shields.io/badge/WebGL-Three.js_r128-0055FF?style=for-the-badge&logo=three.js&logoColor=white" alt="Three.js" />
-  <img src="https://img.shields.io/badge/Runtime-React_18-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React 18" />
-  <img src="https://img.shields.io/badge/Hosting-Vercel_Edge-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" />
+# 🌐 NARAYAN KUMAR JHA
+### Cybernetic Portfolio Suite // Personal Interactive Showcase
+
+<br />
+
+[![Live Production](https://img.shields.io/badge/Live_Production-narayan--nkj.vercel.app-0055FF?style=for-the-badge&logo=vercel&logoColor=white)](https://narayan-nkj.vercel.app)
+[![Repository](https://img.shields.io/badge/Repository-Narayan.nkj-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/narayan-nkj/Narayan.nkj)
+[![License](https://img.shields.io/badge/License-Proprietary_%7C_All_Rights_Reserved-red?style=for-the-badge)](https://narayan-nkj.vercel.app)
+[![Three.js](https://img.shields.io/badge/WebGL-Three.js_r128-0055FF?style=for-the-badge&logo=three.js&logoColor=white)](https://narayan-nkj.vercel.app)
+[![React](https://img.shields.io/badge/Runtime-React_18-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://narayan-nkj.vercel.app)
+
+<br /><br />
+
+🔗 **Official Production Showcase**: [**https://narayan-nkj.vercel.app**](https://narayan-nkj.vercel.app)
+
+<p>
+  <strong>Creative Developer & Data Scientist</strong><br />
+  <em>Synthesizing foundational Computer Science Engineering paradigms (B.Tech at BPPIMT)<br />with advanced predictive analytics, linear algebra, and data logic (BS in Data Science at IIT Madras).</em>
 </p>
+
+</div>
 
 ---
 
-## ⚡ Live Deployment
+## 🔒 Proprietary Notice & Intellectual Property Rights
 
-🔗 **Official Portfolio URL**: [**https://narayan-nkj.vercel.app**](https://narayan-nkj.vercel.app)
-
-> **Creative Developer & Data Scientist**  
-> Synthesizing foundational Computer Science & Engineering paradigms (B.Tech at BPPIMT) with advanced predictive analytics, linear algebra, and data logic (BS in Data Science & Applications at IIT Madras).
+> ### ⚠️ Strict View-Only Access Notice
+>
+> **Copyright &copy; 2026 Narayan Kumar Jha. All Rights Reserved.**
+>
+> This repository and its associated web architecture, source code, 3D WebGL scenes, brutalist design systems, custom audio utilities, and visual assets are the **sole proprietary intellectual property of Narayan Kumar Jha**.
+>
+> - **Exhibition & Review Only**: This project is published publicly on GitHub strictly for portfolio viewing, technical evaluation, and demonstration purposes.
+> - **Strictly No Cloning or Replication**: Unauthorized copying, cloning, reproducing, distributing, modifying, sub-licensing, or deploying this project or any part of its source code for personal or commercial use without express prior written consent from the author is strictly prohibited.
+> - **Original Personal Work**: This portfolio represents authentic creative engineering and data science projects designed solely by and for Narayan Kumar Jha.
 
 ---
 
 ## 🏛️ Ecosystem Architecture
 
-The portfolio is structured as a multi-layered cybernetic system comprising an interactive master command hub and three dedicated standalone deep-dive project environments:
+The portfolio is architected as an interconnected cybernetic web ecosystem comprising a master command hub and three specialized sub-applications:
 
 ```
 Narayan.nkj/
@@ -39,8 +54,8 @@ Narayan.nkj/
 │   └── ather.html            # Project Gamma (Cream Minimalist & Computational Pipeline)
 ├── index.html                # Master Hub: 3D Three.js Globe, HUD, Key Projects, Skills & Engagements
 ├── vercel.json               # Zero-config edge routing, clean URLs & immutable caching
-├── package.json              # Project metadata & developer automation scripts
-└── README.md                 # Complete technical documentation & architecture guide
+├── package.json              # Project metadata
+└── README.md                 # Technical documentation & proprietary notice
 ```
 
 ---
@@ -56,7 +71,7 @@ Narayan.nkj/
 
 ---
 
-## 🚀 Key Features
+## 🚀 Key Engineering Features
 
 ### 1. 3D WebGL Cybernetic Globe & HUD Telemetry
 - Procedurally rendered `THREE.IcosahedronGeometry` wireframe core with inner absorption sphere and 350+ interactive floating starfield particles.
@@ -94,50 +109,32 @@ Balanced 8-cluster competency grid covering:
 
 ---
 
-## ⚡ Performance & Vercel Edge Optimizations
+## ⚡ Performance & Edge Deployments
 
 - **Zero-Config Clean URLs**: Configured via [`vercel.json`](./vercel.json) for canonical routing (`/vanguard`, `/apex`, `/ather`) alongside backwards-compatible static file endpoints.
-- **Aggressive Caching**: Immutable asset caching headers (`Cache-Control: public, max-age=31536000, immutable`) for all images and script bundles.
+- **Aggressive Edge Caching**: Immutable asset caching headers (`Cache-Control: public, max-age=31536000, immutable`) for high Core Web Vitals scores.
 - **Security Hardening**: Enforces `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, and `Referrer-Policy: strict-origin-when-cross-origin`.
 - **Precompiled React Runtime**: Eliminates client-side Babel transpilation overhead in `projects/apex.html`, saving ~3.5 MB of CDN downloads for instantaneous rendering.
 - **Fluid Viewport Ergonomics**: Implements modern dynamic viewport units (`100dvh`), `clamp()` typography scaling, and smooth hardware-accelerated transforms.
 
 ---
 
-## 🛠️ Local Development Setup
-
-To run and test the portfolio locally:
-
-```bash
-# Clone the repository
-git clone https://github.com/narayan-nkj/Narayan.nkj.git
-
-# Navigate into the project directory
-cd Narayan.nkj
-
-# Option 1: Run with Python 3 built-in HTTP server
-python3 -m http.server 3000
-
-# Option 2: Run with Node.js serve
-npx serve .
-```
-
-Navigate to `http://localhost:3000` in any modern web browser.
-
----
+<div align="center">
 
 ## 📬 Contact & Connect
 
-- **Live Portfolio**: [https://narayan-nkj.vercel.app](https://narayan-nkj.vercel.app)
-- **GitHub**: [@narayan-nkj](https://github.com/narayan-nkj)
-- **LinkedIn**: [Narayan Kumar Jha](https://www.linkedin.com/in/narayan-kumar-jha-4bb65638b)
-- **Devfolio**: [@Vasu_0153](https://devfolio.co/@Vasu_0153)
-- **Email**: [narayankumarjha9631@gmail.com](mailto:narayankumarjha9631@gmail.com)
-- **Phone**: +91 8777623129
-- **Location**: Kolkata, India
-
----
-
-<p align="center">
-  <sub>Designed & engineered with precision by <strong>Narayan Kumar Jha</strong> &copy; 2026. All rights reserved.</sub>
+<p>
+  <strong>Official Portfolio:</strong> <a href="https://narayan-nkj.vercel.app">https://narayan-nkj.vercel.app</a><br />
+  <strong>GitHub:</strong> <a href="https://github.com/narayan-nkj">@narayan-nkj</a> &nbsp;&bull;&nbsp;
+  <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/narayan-kumar-jha-4bb65638b">Narayan Kumar Jha</a> &nbsp;&bull;&nbsp;
+  <strong>Devfolio:</strong> <a href="https://devfolio.co/@Vasu_0153">@Vasu_0153</a><br />
+  <strong>Email:</strong> <a href="mailto:narayankumarjha9631@gmail.com">narayankumarjha9631@gmail.com</a> &nbsp;&bull;&nbsp;
+  <strong>Phone:</strong> +91 8777623129 &nbsp;&bull;&nbsp;
+  <strong>Location:</strong> Kolkata, India
 </p>
+
+<br />
+
+<sub>Designed & engineered with precision by <strong>Narayan Kumar Jha</strong> &copy; 2026. All rights reserved. Not for duplication.</sub>
+
+</div>
