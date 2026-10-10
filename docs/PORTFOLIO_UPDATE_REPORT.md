@@ -58,7 +58,7 @@
 | **Education: IIT Madras** | BS in Data Science and Applications (Online Program) | Listed in bio/company | BS in Data Science & Applications (2026 - Present) | Updated to exact CV title; removed unverified dates. |
 | **Education: BPPIMT** | B.Tech in Computer Science and Engineering | Listed in bio/company | B.Tech (2025 - Present) | Updated to exact CV title; removed unverified dates. |
 | **Project: S.A.G.A.R. (Ocean-X)** | Smart India Hackathon 2026 (PS 26057); 14-stage pipeline, ONNX, web prototype in TS | Public repos `SAGAR-SonarVision` & org `BPPIMTSIH26/SIH26057` | Not present (showed fictional "Project Singularity") | Added as top Key Project with real GitHub link. |
-| **Project: Phoenix Protocol** | Custom Python backend scripts and protocols for optimised data handling | Public repo `HeX-ecutioner/phoenix-protocol` (Flask backend, Vite frontend) | Not present (showed "CodeBee 2.26" as project) | Added as Key Project with real GitHub link. |
+| **Project: Phoenix Protocol** | Custom Python backend scripts and protocols for optimised data handling | Public repo `HeX-ecutioner/phoenix-protocol` (Flask backend, Vite frontend); deployed at `https://the-phoenix-protocol.vercel.app` | Not present (showed "CodeBee 2.26" as project) | Added as Key Project with real GitHub link and live Vercel deployment. |
 | **Project: PhantomDeps** | Built in IBM Hackathon; pre-install AI dependency claim gate for IBM Bob | Public repo `adishxm/phantomdeps` (Core Implementation & Test Engineer) | Not present | Added as Key Project with real GitHub link. |
 | **Project: Portfolios & Dashboards** | Data-driven apps with React and Flask; void black & sunset orange, brutalism, glassmorphism | Public repo `Narayan.nkj` with Vanguard, Apex, Ather | Present partially as secondary links | Consolidated as Key Project linking to showcase overlay and GitHub suite. |
 | **Project: Civic Needs Explorer** | Not mentioned in CV | Public repo `needlens` | Not present | Marked `PROPOSED` (see Section 5). |
@@ -131,7 +131,7 @@
 ### Automated Checks Run:
 - **Local Server Test:** `python3 -m http.server 8000` &rarr; Responded with `HTTP 200 OK`.
 - **Internal Asset Test:** `/index.html`, `/projects/vanguard.html`, `/projects/apex.html`, `/projects/ather.html`, `/assets/images/1.jpeg` all returned `HTTP 200 OK`.
-- **External Links Test:** All external URLs (`https://github.com/narayan-nkj`, `https://github.com/narayan-nkj/SAGAR-SonarVision`, `https://github.com/HeX-ecutioner/phoenix-protocol`, `https://github.com/adishxm/phantomdeps`, `https://github.com/narayan-nkj/Narayan.nkj`, `https://devfolio.co/@Vasu_0153`) returned `HTTP 200 OK`.
+- **External Links Test:** All external URLs (`https://github.com/narayan-nkj`, `https://github.com/narayan-nkj/SAGAR-SonarVision`, `https://github.com/HeX-ecutioner/phoenix-protocol`, `https://the-phoenix-protocol.vercel.app`, `https://github.com/adishxm/phantomdeps`, `https://github.com/narayan-nkj/Narayan.nkj`, `https://devfolio.co/@Vasu_0153`) returned `HTTP 200 OK`.
 - **Secret & Leak Audit:** Checked diff for API keys, tokens, `.env`, private repos (`SagarNetra`, `SwarRakshak`), phone numbers, or private addresses. Clean; no leaks found.
 
 ---
