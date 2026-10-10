@@ -294,14 +294,15 @@
     }
 
     .hero-3d-container {
-      flex: 1;
-      height: clamp(380px, 55vh, 520px);
+      flex: 1.25;
+      height: clamp(480px, 66vh, 660px);
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
       pointer-events: auto; 
       overflow: visible;
+      min-width: 420px;
     }
 
     .hud-overlay {
@@ -309,13 +310,17 @@
       top: 0; left: 0; width: 100%; height: 100%;
       pointer-events: none;
       z-index: 10;
-      opacity: 0.85;
-      transition: opacity 0.4s ease;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s ease;
       color: var(--electric-blue);
     }
 
-    .hero-3d-container:hover .hud-overlay {
+    .hero-3d-container:hover .hud-overlay,
+    .hero-3d-container:focus-within .hud-overlay {
       opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
     }
 
     .hud-text {
@@ -1524,19 +1529,19 @@
       <div class="hero-3d-container" id="canvas-container" style="cursor: pointer;">
         <div class="hud-overlay">
           <svg class="hud-lines-svg">
-            <line x1="5%" y1="18%" x2="25%" y2="18%" class="hud-line" />
-            <line x1="25%" y1="18%" x2="45%" y2="40%" class="hud-line" />
+            <line x1="5%" y1="18%" x2="22%" y2="18%" class="hud-line" />
+            <line x1="22%" y1="18%" x2="38%" y2="34%" class="hud-line" />
             
-            <line x1="95%" y1="33%" x2="75%" y2="33%" class="hud-line" />
-            <line x1="75%" y1="33%" x2="60%" y2="45%" class="hud-line" />
+            <line x1="95%" y1="32%" x2="78%" y2="32%" class="hud-line" />
+            <line x1="78%" y1="32%" x2="64%" y2="44%" class="hud-line" />
             
-            <line x1="90%" y1="83%" x2="70%" y2="83%" class="hud-line" />
-            <line x1="70%" y1="83%" x2="55%" y2="60%" class="hud-line" />
+            <line x1="90%" y1="82%" x2="72%" y2="82%" class="hud-line" />
+            <line x1="72%" y1="82%" x2="58%" y2="64%" class="hud-line" />
           </svg>
 
-          <div class="hud-crosshair" style="top: 18%; left: 25%;">+</div>
-          <div class="hud-crosshair" style="top: 33%; left: 75%;">+</div>
-          <div class="hud-crosshair" style="top: 83%; left: 70%;">+</div>
+          <div class="hud-crosshair" style="top: 18%; left: 22%;">+</div>
+          <div class="hud-crosshair" style="top: 32%; left: 78%;">+</div>
+          <div class="hud-crosshair" style="top: 82%; left: 72%;">+</div>
 
           <div class="hud-text hud-top-left">PORTFOLIO_C0_01<br><span style="color: var(--text-main)">PROJECT_SINGULARITY</span></div>
           <div class="hud-text hud-center-right">SYS_LOAD 35.11<br><span style="color: var(--text-main)">+01.73</span></div>
@@ -1963,17 +1968,18 @@
       renderer.setPixelRatio(window.devicePixelRatio);
       container.appendChild(renderer.domElement);
 
-      const geometry = new THREE.IcosahedronGeometry(7.5, 2);
+      // Reduced circle size by 30% (11.25 -> 7.85, inner 10.5 -> 7.35) so it doesn't get cut
+      const geometry = new THREE.IcosahedronGeometry(7.85, 2);
       const material = new THREE.MeshBasicMaterial({ 
         color: 0x0055FF, 
         wireframe: true, 
         transparent: true, 
-        opacity: 0.5 
+        opacity: 0.45 
       });
       
       const sphereMesh = new THREE.Mesh(geometry, material);
       
-      const innerGeometry = new THREE.IcosahedronGeometry(7.0, 2);
+      const innerGeometry = new THREE.IcosahedronGeometry(7.35, 2);
       const innerMaterial = new THREE.MeshBasicMaterial({ color: 0x050505 });
       const innerMesh = new THREE.Mesh(innerGeometry, innerMaterial);
       
@@ -1984,25 +1990,25 @@
       scene.add(group);
       
       const particlesGeometry = new THREE.BufferGeometry();
-      const particlesCount = 300;
+      const particlesCount = 350;
       const posArray = new Float32Array(particlesCount * 3);
       
       for(let i = 0; i < particlesCount * 3; i++) {
-        posArray[i] = (Math.random() - 0.5) * 50;
+        posArray[i] = (Math.random() - 0.5) * 55;
       }
       
       particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
       const particlesMaterial = new THREE.PointsMaterial({
-        size: 0.15,
+        size: 0.16,
         color: 0x0055FF,
         transparent: true,
-        opacity: 0.8
+        opacity: 0.85
       });
       
       const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
       scene.add(particlesMesh);
 
-      camera.position.z = 25; 
+      camera.position.z = 26; 
 
       let mouseX = 0;
       let mouseY = 0;
