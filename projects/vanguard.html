@@ -130,6 +130,12 @@
       display: block;
     }
 
+    #about,
+    #work,
+    #capabilities {
+      scroll-margin-top: clamp(5.5rem, 12vh, 8rem);
+    }
+
     nav {
       position: fixed;
       top: 0;
@@ -141,10 +147,22 @@
       padding: clamp(1.25rem, 3vw, 2rem) clamp(1.25rem, 4vw, 4rem);
       z-index: 1000;
       mix-blend-mode: difference;
+      transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease, padding 0.3s ease;
+    }
+
+    nav.scrolled {
+      background-color: rgba(18, 18, 18, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-color);
+      mix-blend-mode: normal;
+      padding-top: clamp(0.85rem, 2vw, 1.25rem);
+      padding-bottom: clamp(0.85rem, 2vw, 1.25rem);
     }
 
     nav.menu-open {
       mix-blend-mode: normal;
+      background-color: var(--bg-dark);
     }
 
     .logo {
@@ -163,11 +181,11 @@
 
     .nav-links {
       display: flex;
-      gap: clamp(1.5rem, 3vw, 3rem);
+      gap: clamp(1.25rem, 2.5vw, 2.5rem);
       align-items: center;
     }
 
-    .nav-links a {
+    .nav-links a.nav-link {
       color: #fff;
       text-decoration: none;
       font-family: var(--font-sans);
@@ -182,7 +200,7 @@
       padding: 0 0.25rem;
     }
 
-    .nav-links a:hover {
+    .nav-links a.nav-link:hover {
       opacity: 0.7;
     }
 
@@ -206,10 +224,6 @@
     .nav-btn:hover {
       background: #fff;
       color: #000;
-    }
-
-    .nav-btn-mobile {
-      display: none;
     }
 
     .nav-toggle {
@@ -255,10 +269,6 @@
     }
 
     @media (max-width: 860px) {
-      .nav-btn-desktop {
-        display: none;
-      }
-
       .nav-toggle {
         display: flex;
       }
@@ -291,20 +301,21 @@
         transition: opacity 0.3s ease, transform 0.3s var(--ease-out-expo), visibility 0s 0s;
       }
 
-      .nav-links a {
+      .nav-links a.nav-link {
         font-size: 1.25rem;
         letter-spacing: 2px;
       }
 
-      .nav-btn-mobile {
+      .nav-links .nav-btn {
         display: inline-flex;
         margin-top: 1rem;
         border-color: var(--accent-color);
         color: var(--text-light);
         padding: 0.85rem 2rem;
+        font-size: 1rem;
       }
 
-      .nav-btn-mobile:hover {
+      .nav-links .nav-btn:hover {
         background: var(--accent-color);
         color: var(--text-light);
       }
@@ -666,8 +677,8 @@
 
     .reveal-up {
       opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+      transform: translateY(20px);
+      transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
       will-change: opacity, transform;
     }
 
@@ -727,22 +738,20 @@
   <nav id="main-nav" aria-label="Main Navigation">
     <a href="../index.html#projects" class="logo" aria-label="Vanguard Homepage">Vanguard</a>
     
+    <div class="nav-links" id="nav-links">
+      <a href="../index.html#projects" class="nav-link">Back to Portfolio</a>
+      <a href="#work" class="nav-link">Work</a>
+      <a href="#capabilities" class="nav-link">Expertise</a>
+      <a href="#about" class="nav-link">About us</a>
+      <a href="mailto:narayankumarjha9631@gmail.com" class="nav-btn">Start a project</a>
+    </div>
+
     <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
       <span class="nav-toggle-icon" aria-hidden="true">
         <span class="bar bar-1"></span>
         <span class="bar bar-2"></span>
       </span>
     </button>
-
-    <div class="nav-links" id="nav-links">
-      <a href="../index.html#projects" class="nav-link">Back to Portfolio</a>
-      <a href="#work" class="nav-link">Work</a>
-      <a href="#capabilities" class="nav-link">Expertise</a>
-      <a href="#about" class="nav-link">About us</a>
-      <a href="mailto:narayankumarjha9631@gmail.com" class="nav-btn nav-btn-mobile">Start a project</a>
-    </div>
-
-    <a href="mailto:narayankumarjha9631@gmail.com" class="nav-btn nav-btn-desktop">Start a project</a>
   </nav>
 
   <main>
@@ -847,7 +856,7 @@
             </ul>
           </div>
 
-          <div class="cap-column reveal-up" style="transition-delay: 0.1s;">
+          <div class="cap-column reveal-up">
             <h3>Data Science & Math</h3>
             <ul class="cap-list">
               <li><span>Linear Algebra & Vector Spaces</span></li>
@@ -858,7 +867,7 @@
             </ul>
           </div>
 
-          <div class="cap-column reveal-up" style="transition-delay: 0.2s;">
+          <div class="cap-column reveal-up">
             <h3>Design & Architecture</h3>
             <ul class="cap-list">
               <li><span>Brutalist Aesthetics & UI/UX</span></li>
@@ -905,6 +914,18 @@
       
       let updateLoader = null;
       let loaderDismissed = false;
+
+      // Dynamic header appearance on scroll to prevent content collision
+      function updateNavScrolled() {
+        if (!mainNav) return;
+        if (window.scrollY > 40) {
+          mainNav.classList.add('scrolled');
+        } else {
+          mainNav.classList.remove('scrolled');
+        }
+      }
+      window.addEventListener('scroll', updateNavScrolled, { passive: true });
+      updateNavScrolled();
 
       // Mobile Nav Drawer Toggle
       function closeNavDrawer() {
