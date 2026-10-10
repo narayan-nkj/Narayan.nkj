@@ -32,6 +32,7 @@
     {
       "name": "phoenix-protocol",
       "html_url": "https://github.com/HeX-ecutioner/phoenix-protocol",
+      "homepage": "https://the-phoenix-protocol.vercel.app",
       "description": "Network security compliance auditor and optimized data handling scripts with Flask backend and Vite frontend.",
       "primary_language": "Python",
       "languages": ["Python", "JavaScript", "HTML", "CSS"],
@@ -72,6 +73,7 @@
       ],
       "role": "Creator & Maintainer",
       "pushed_at": "2026-10-08T16:50:20Z"
+    },
     {
       "name": "phantomdeps",
       "html_url": "https://github.com/adishxm/phantomdeps",
