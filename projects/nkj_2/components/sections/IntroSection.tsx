@@ -52,7 +52,7 @@ export default function IntroSection() {
   ];
 
   return (
-    <section id="approach" className="relative py-28 sm:py-36 px-4 sm:px-8 max-w-7xl mx-auto z-10">
+    <section id="approach" className="relative py-28 sm:py-36 px-4 sm:px-8 lg:px-12 xl:px-16 w-full max-w-[1800px] 2xl:max-w-[1920px] mx-auto z-10">
       
       {/* Section Identifier */}
       <div className="flex items-center space-x-3 font-meta text-xs text-[var(--accent-primary)] uppercase tracking-widest mb-10">
@@ -66,7 +66,7 @@ export default function IntroSection() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={containerVariants}
-        className="max-w-4xl"
+        className="max-w-5xl"
       >
         <motion.p
           variants={itemVariants}
@@ -80,7 +80,7 @@ export default function IntroSection() {
 
         <motion.p
           variants={itemVariants}
-          className="mt-8 text-base sm:text-lg text-[#9A9AA0] font-light leading-relaxed max-w-3xl"
+          className="mt-8 text-base sm:text-lg text-[#9A9AA0] font-light leading-relaxed max-w-4xl"
         >
           Balancing dual academic pursuits in Computer Science Engineering (B.Tech) and Data Science &amp; Applications (<span className="text-[#F2F1EE]">IIT Madras</span>).
           I focus on transforming complex mathematical algorithms into seamless, nocturnal software systems that captivate and perform.
