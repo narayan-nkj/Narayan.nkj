@@ -63,17 +63,16 @@
     }
 
     body {
-      background-color: var(--bg-void);
+      background-color: #050505;
       color: var(--text-main);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       line-height: 1.6;
       background-image: 
-        radial-gradient(circle at 50% 0%, rgba(255, 69, 32, 0.08) 0%, transparent 50%),
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      background-size: 100% 100%, 48px 48px, 48px 48px;
-      background-position: top center, center center, center center;
+        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+      background-size: 50px 50px;
+      background-position: center center;
     }
 
     @media (pointer: fine) {
@@ -110,15 +109,15 @@
     .custom-cursor-outline {
       width: 44px;
       height: 44px;
-      border: 1px solid rgba(255, 69, 32, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.45);
       transition: width 0.25s var(--ease-out-expo), height 0.25s var(--ease-out-expo), border-color 0.2s;
     }
 
     .custom-cursor-outline.hovered {
-      width: 64px;
-      height: 64px;
-      border-color: var(--accent-flame);
-      background: rgba(255, 69, 32, 0.08);
+      width: 60px;
+      height: 60px;
+      border-color: #ffffff;
+      background: transparent;
     }
 
     /* ----------------------------------------------------
@@ -198,7 +197,7 @@
       height: 100%;
       width: 0%;
       background: linear-gradient(90deg, var(--accent-flame), var(--accent-amber));
-      box-shadow: 0 0 16px var(--accent-flame);
+      box-shadow: none;
       transition: width 0.05s linear;
     }
 
@@ -275,7 +274,7 @@
       height: 8px;
       border-radius: 50%;
       background: var(--accent-flame);
-      box-shadow: 0 0 8px var(--accent-flame);
+      box-shadow: none;
     }
 
     .time-badge {
@@ -387,7 +386,7 @@
     .escape-btn:hover {
       background: var(--accent-flame);
       color: #ffffff;
-      box-shadow: 0 0 20px rgba(255, 69, 32, 0.4);
+      box-shadow: none;
     }
 
     /* ----------------------------------------------------
@@ -431,7 +430,7 @@
       height: 8px;
       border-radius: 50%;
       background: #34d399;
-      box-shadow: 0 0 10px #34d399;
+      box-shadow: none;
       animation: beaconPulse 2s infinite;
     }
 
@@ -518,7 +517,7 @@
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 25px rgba(255, 69, 32, 0.5);
+      box-shadow: none;
     }
 
     .btn-secondary {
@@ -928,7 +927,7 @@
       height: 18px;
       border-radius: 50%;
       background: var(--accent-flame);
-      box-shadow: 0 0 10px var(--accent-flame);
+      box-shadow: none;
       cursor: pointer;
     }
 
