@@ -10,7 +10,7 @@ export default function DataScienceSystems() {
   const [activeModel, setActiveModel] = useState<"projection" | "eigen" | "gradient">("projection");
 
   return (
-    <section id="data-systems" className="py-28 px-4 sm:px-8 max-w-7xl mx-auto z-10 relative">
+    <section id="data-systems" className="py-28 px-4 sm:px-8 lg:px-12 xl:px-16 w-full max-w-[1800px] 2xl:max-w-[1920px] mx-auto z-10 relative">
       
       <div className="border-b border-white/10 pb-8 mb-12">
         <span className="font-mono text-xs text-[#ff4520] tracking-widest uppercase block mb-2">
@@ -19,7 +19,7 @@ export default function DataScienceSystems() {
         <h2 className="section-title text-[#f4f4f5]">
           Data Science &amp; Systems Engineering
         </h2>
-        <p className="mt-4 text-base sm:text-lg text-[#a1a1aa] font-light max-w-3xl leading-relaxed">
+        <p className="mt-4 text-base sm:text-lg text-[#a1a1aa] font-light max-w-5xl leading-relaxed">
           Grounding digital interfaces in mathematical rigor. Developing predictive pipelines,
           multivariate calculus optimizations, and high-dimensional vector spaces at <strong className="text-[#f4f4f5] font-semibold">IIT Madras</strong>.
         </p>

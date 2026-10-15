@@ -40,16 +40,21 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none; 
+            cursor: auto; 
+        }
+
+        html:not(.no-custom-cursor) * {
+            cursor: none !important; 
         }
 
         html.no-custom-cursor * {
-            cursor: auto; 
+            cursor: auto !important; 
         }
         
         html.no-custom-cursor a,
-        html.no-custom-cursor button {
-            cursor: pointer;
+        html.no-custom-cursor button,
+        html.no-custom-cursor [role="button"] {
+            cursor: pointer !important;
         }
 
         body {

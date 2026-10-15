@@ -11,7 +11,7 @@ export default function SelectedWorks() {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   return (
-    <section id="work" className="py-28 px-4 sm:px-8 max-w-7xl mx-auto z-10 relative">
+    <section id="work" className="py-28 px-4 sm:px-8 lg:px-12 xl:px-16 w-full max-w-[1800px] 2xl:max-w-[1920px] mx-auto z-10 relative">
       
       {/* Section Header with View Toggle */}
       <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-white/10 pb-8 gap-6 mb-12">

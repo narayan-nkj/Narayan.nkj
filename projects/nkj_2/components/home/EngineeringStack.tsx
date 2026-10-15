@@ -14,7 +14,7 @@ const ICON_MAP: Record<string, React.ElementType> = {
 
 export default function EngineeringStack() {
   return (
-    <section id="capabilities" className="py-28 px-4 sm:px-8 max-w-7xl mx-auto z-10 relative">
+    <section id="capabilities" className="py-28 px-4 sm:px-8 lg:px-12 xl:px-16 w-full max-w-[1800px] 2xl:max-w-[1920px] mx-auto z-10 relative">
       
       <div className="border-b border-white/10 pb-8 mb-12">
         <span className="font-mono text-xs text-[#ff4520] tracking-widest uppercase block mb-2">

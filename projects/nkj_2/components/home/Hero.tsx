@@ -14,7 +14,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-[92vh] flex flex-col justify-between pt-36 pb-16 px-4 sm:px-8 max-w-7xl mx-auto z-10">
+    <section className="relative min-h-[92vh] flex flex-col justify-between pt-36 pb-16 px-4 sm:px-8 lg:px-12 xl:px-16 w-full max-w-[1800px] 2xl:max-w-[1920px] mx-auto z-10">
       
       {/* Top Metadata Ribbon */}
       <motion.div
@@ -76,7 +76,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.55 }}
-          className="mt-8 sm:mt-10 max-w-3xl text-base sm:text-lg md:text-xl text-[#a1a1aa] font-light leading-relaxed"
+          className="mt-8 sm:mt-10 max-w-5xl text-base sm:text-lg md:text-xl text-[#a1a1aa] font-light leading-relaxed"
         >
           Undergraduate combining foundational Computer Science Engineering (B.Tech) with specialized
           mathematical vector spaces and predictive modeling from <strong className="text-[#f4f4f5] font-semibold">IIT Madras</strong>.

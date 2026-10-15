@@ -34,8 +34,12 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none;
             outline: none;
+        }
+
+        body.custom-cursor-active,
+        body.custom-cursor-active * {
+            cursor: none !important;
         }
 
         body {
@@ -552,30 +556,34 @@
         let outlineX = mouseX;
         let outlineY = mouseY;
 
-        window.addEventListener('mousemove', (e) => {
+        const activateCursor = () => {
+            document.body.classList.add('custom-cursor-active');
             dot.style.opacity = '1';
             outline.style.opacity = '1';
+        };
+
+        const deactivateCursor = () => {
+            document.body.classList.remove('custom-cursor-active');
+            dot.style.opacity = '0';
+            outline.style.opacity = '0';
+        };
+
+        window.addEventListener('mousemove', (e) => {
+            activateCursor();
             mouseX = e.clientX;
             mouseY = e.clientY;
             dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
         }, { passive: true });
 
-        document.addEventListener('mouseleave', () => {
-            dot.style.opacity = '0';
-            outline.style.opacity = '0';
-        });
-
-        window.addEventListener('blur', () => {
-            dot.style.opacity = '0';
-            outline.style.opacity = '0';
-        });
-
+        document.addEventListener('mouseleave', deactivateCursor);
+        document.addEventListener('mouseenter', activateCursor);
+        window.addEventListener('blur', deactivateCursor);
+        window.addEventListener('focus', deactivateCursor);
         document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                dot.style.opacity = '0';
-                outline.style.opacity = '0';
-            }
+            if (document.hidden) deactivateCursor();
         });
+        window.addEventListener('pagehide', deactivateCursor);
+        window.addEventListener('beforeunload', deactivateCursor);
 
         const loopCursor = () => {
             outlineX += (mouseX - outlineX) * 0.15;

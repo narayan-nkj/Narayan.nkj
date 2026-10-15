@@ -68,7 +68,10 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     @media (pointer: fine) {
-      body, a, button, .glass-card, .hero-3d-container, .close-btn, .globe-view-btn { cursor: none !important; }
+      body.custom-cursor-active,
+      body.custom-cursor-active * {
+        cursor: none !important;
+      }
     }
 
     body {
@@ -2272,21 +2275,40 @@
 
       const cursorDot = document.querySelector('.cursor-dot');
       const cursorOutline = document.querySelector('.cursor-outline');
-      
-      window.addEventListener('mousemove', (e) => {
-        cursorDot.style.left = `${e.clientX}px`;
-        cursorDot.style.top = `${e.clientY}px`;
-        
-        cursorOutline.animate({
-          left: `${e.clientX}px`,
-          top: `${e.clientY}px`
-        }, { duration: 150, fill: "forwards" });
-      }, { passive: true });
-
       const orb = document.querySelector('.glow-orb');
-      
-      document.addEventListener('mousemove', (e) => {
-        if (!orb.classList.contains('expanded')) {
+      let cursorActive = false;
+
+      function activateCursor() {
+        if (!cursorActive) {
+          cursorActive = true;
+          document.body.classList.add('custom-cursor-active');
+          if (cursorDot) cursorDot.style.opacity = '1';
+          if (cursorOutline) cursorOutline.style.opacity = '1';
+          if (orb) orb.classList.remove('expanded');
+        }
+      }
+
+      function deactivateCursor() {
+        cursorActive = false;
+        document.body.classList.remove('custom-cursor-active');
+        if (cursorDot) cursorDot.style.opacity = '0';
+        if (cursorOutline) cursorOutline.style.opacity = '0';
+        if (orb) orb.classList.add('expanded');
+      }
+
+      window.addEventListener('mousemove', (e) => {
+        activateCursor();
+        if (cursorDot) {
+          cursorDot.style.left = `${e.clientX}px`;
+          cursorDot.style.top = `${e.clientY}px`;
+        }
+        if (cursorOutline) {
+          cursorOutline.animate({
+            left: `${e.clientX}px`,
+            top: `${e.clientY}px`
+          }, { duration: 150, fill: "forwards" });
+        }
+        if (orb && !orb.classList.contains('expanded')) {
           requestAnimationFrame(() => {
             orb.style.left = `${e.clientX}px`;
             orb.style.top = `${e.clientY}px`;
@@ -2294,33 +2316,15 @@
         }
       }, { passive: true });
 
-      document.addEventListener('mouseleave', () => {
-        orb.classList.add('expanded');
-        cursorDot.style.opacity = '0';
-        cursorOutline.style.opacity = '0';
-      });
-
-      document.addEventListener('mouseenter', (e) => {
-        orb.classList.remove('expanded');
-        orb.style.left = `${e.clientX}px`;
-        orb.style.top = `${e.clientY}px`;
-        cursorDot.style.opacity = '1';
-        cursorOutline.style.opacity = '1';
-      });
-
-      window.addEventListener('blur', () => {
-        orb.classList.add('expanded');
-        cursorDot.style.opacity = '0';
-        cursorOutline.style.opacity = '0';
-      });
-
+      document.addEventListener('mouseleave', deactivateCursor);
+      document.addEventListener('mouseenter', activateCursor);
+      window.addEventListener('blur', deactivateCursor);
+      window.addEventListener('focus', deactivateCursor);
       document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-          orb.classList.add('expanded');
-          cursorDot.style.opacity = '0';
-          cursorOutline.style.opacity = '0';
-        }
+        if (document.hidden) deactivateCursor();
       });
+      window.addEventListener('pagehide', deactivateCursor);
+      window.addEventListener('beforeunload', deactivateCursor);
 
       // Project Navigation / Switcher listeners
       document.querySelectorAll('.pnav-pill, .nav-switch-btn').forEach(btn => {

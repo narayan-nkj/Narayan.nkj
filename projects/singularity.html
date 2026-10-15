@@ -23,10 +23,10 @@
        1. DESIGN TOKENS & RESET
        ---------------------------------------------------- */
     :root {
-      --bg-void: #09090b;
-      --bg-surface: #121215;
-      --bg-card: rgba(22, 22, 28, 0.7);
-      --bg-card-hover: rgba(28, 28, 36, 0.9);
+      --bg-void: #000000;
+      --bg-surface: #0e0e11;
+      --bg-card: rgba(18, 18, 22, 0.7);
+      --bg-card-hover: rgba(26, 26, 32, 0.9);
       --border-subtle: rgba(255, 255, 255, 0.08);
       --border-strong: rgba(255, 255, 255, 0.18);
       
@@ -57,13 +57,13 @@
 
     html {
       scroll-behavior: smooth;
-      background-color: var(--bg-void);
+      background-color: #000000;
       color: var(--text-main);
       font-family: var(--font-display);
     }
 
     body {
-      background-color: #050505;
+      background-color: #000000;
       color: var(--text-main);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
@@ -73,16 +73,13 @@
         linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
       background-size: 50px 50px;
       background-position: center center;
+      background-attachment: fixed;
     }
 
     @media (pointer: fine) {
       body.custom-cursor-active,
-      body.custom-cursor-active a,
-      body.custom-cursor-active button,
-      body.custom-cursor-active input,
-      body.custom-cursor-active textarea,
-      body.custom-cursor-active select {
-        cursor: none;
+      body.custom-cursor-active * {
+        cursor: none !important;
       }
     }
 
@@ -134,7 +131,7 @@
       inset: 0;
       width: 100vw;
       height: 100vh;
-      background: #060608;
+      background: #000000;
       z-index: 99990;
       display: flex;
       flex-direction: column;
@@ -239,14 +236,17 @@
       top: 0;
       left: 0;
       right: 0;
+      width: 100%;
       z-index: 1000;
-      padding: 1.25rem clamp(1rem, 4vw, 3rem);
+      padding: 1.25rem clamp(1.25rem, 3.5vw, 3.5rem);
+      box-sizing: border-box;
       pointer-events: none;
     }
 
     .header-inner {
-      max-width: 1300px;
-      margin: 0 auto;
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -399,17 +399,20 @@
        5. HERO SECTION
        ---------------------------------------------------- */
     .hero-container {
-      max-width: 1300px;
-      margin: 0 auto;
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
       min-height: 92vh;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 8.5rem clamp(1rem, 4vw, 3rem) 3.5rem;
+      padding: 8.5rem clamp(1.25rem, 3.5vw, 3.5rem) 3.5rem;
+      box-sizing: border-box;
       position: relative;
     }
 
     .hero-ribbon {
+      width: 100%;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -458,6 +461,7 @@
 
     .hero-main {
       margin: 4rem 0;
+      width: 100%;
     }
 
     .hero-kicker {
@@ -484,7 +488,7 @@
 
     .hero-narrative {
       margin-top: 2rem;
-      max-width: 820px;
+      max-width: min(100%, 1050px);
       font-size: clamp(1rem, 1.4vw, 1.25rem);
       color: var(--text-muted);
       font-weight: 300;
@@ -590,13 +594,16 @@
        6. SECTION HEADERS & GENERAL CARD
        ---------------------------------------------------- */
     section {
-      padding: clamp(4rem, 8vw, 7rem) clamp(1rem, 4vw, 3rem);
-      max-width: 1300px;
-      margin: 0 auto;
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: clamp(4rem, 8vw, 7rem) clamp(1.25rem, 3.5vw, 3.5rem);
+      box-sizing: border-box;
       position: relative;
     }
 
     .section-header-block {
+      width: 100%;
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
@@ -623,7 +630,7 @@
     }
 
     .section-desc {
-      max-width: 750px;
+      max-width: min(100%, 980px);
       color: var(--text-muted);
       font-size: 1.05rem;
       font-weight: 300;
@@ -641,7 +648,7 @@
 
     .studio-card:hover {
       border-color: var(--border-strong);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      box-shadow: none;
     }
 
     /* ----------------------------------------------------
@@ -1408,9 +1415,11 @@
        ---------------------------------------------------- */
     footer {
       border-top: 1px solid var(--border-subtle);
-      padding: clamp(3rem, 6vw, 5rem) clamp(1rem, 4vw, 3rem);
-      max-width: 1300px;
-      margin: 0 auto;
+      padding: clamp(3rem, 6vw, 5rem) clamp(1.25rem, 3.5vw, 3.5rem);
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      box-sizing: border-box;
     }
 
     .footer-grid {
@@ -1418,6 +1427,7 @@
       grid-template-columns: 1fr;
       gap: 2.5rem;
       margin-bottom: 3.5rem;
+      width: 100%;
     }
 
     @media (min-width: 768px) {
@@ -1437,7 +1447,7 @@
     .footer-brand-side p {
       color: var(--text-muted);
       font-size: 0.9rem;
-      max-width: 450px;
+      max-width: min(100%, 550px);
       line-height: 1.6;
     }
 
@@ -1479,6 +1489,7 @@
       font-family: var(--font-mono);
       font-size: 0.75rem;
       color: var(--text-dim);
+      width: 100%;
     }
 
     .back-to-top-btn {
@@ -1492,6 +1503,20 @@
       align-items: center;
       gap: 0.4rem;
       cursor: pointer;
+    }
+
+    /* ----------------------------------------------------
+       13. GLOBAL FULL-WIDTH RESPONSIVE VIEWPORT SYSTEM
+       ---------------------------------------------------- */
+    @media (min-width: 2000px) {
+      .header-inner,
+      .hero-container,
+      section,
+      footer {
+        max-width: 1920px;
+        margin-left: auto;
+        margin-right: auto;
+      }
     }
   </style>
 </head>
