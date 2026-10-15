@@ -639,20 +639,23 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
             grid-auto-rows: 60px;
-            gap: 2px;
-            padding: 2px;
-            opacity: 0.4;
+            gap: 3px;
+            padding: 3px;
+            opacity: 0.55;
+            pointer-events: none;
         }
 
         .grid-tile {
-            background-color: #222;
-            will-change: transform;
+            background-color: #1a1a1a;
+            will-change: transform, background-color;
             border-radius: 2px;
-            transition: background-color 0.3s ease, transform 0.2s ease-out;
+            transform: translate3d(0, 0, 0);
+            transition: background-color 0.35s ease;
         }
         
         .grid-tile.active {
             background-color: var(--accent);
+            box-shadow: 0 0 12px rgba(255, 0, 0, 0.45);
         }
 
         @media (max-width: 768px) {
@@ -976,7 +979,7 @@
             </div>
             <div class="interactive-header">
                 <h2 class="text-huge">PROXIMITY<br>FIELD</h2>
-                <p>Move cursor to distort the grid.</p>
+                <p>Move cursor or scroll to distort the grid.</p>
             </div>
         </section>
     </main>
@@ -1349,28 +1352,33 @@
             const rows = Math.floor(window.innerHeight / tileArea) + 1;
             const totalTiles = cols * rows;
             
+            const fragment = document.createDocumentFragment();
             for(let i = 0; i < totalTiles; i++) {
                 const tile = document.createElement('div');
                 tile.className = 'grid-tile';
-                DOM.gridWrapper.appendChild(tile);
+                fragment.appendChild(tile);
             }
+            DOM.gridWrapper.appendChild(fragment);
             return document.querySelectorAll('.grid-tile');
         };
 
         let tiles = generateGrid();
-        let tileRects = [];
+        let tileData = [];
 
         const calculateRects = () => {
-            tileRects = Array.from(tiles).map(tile => {
+            tileData = Array.from(tiles).map(tile => {
                 return {
                     el: tile,
                     x: tile.offsetLeft + tile.offsetWidth / 2,
-                    y: tile.offsetTop + tile.offsetHeight / 2
+                    y: tile.offsetTop + tile.offsetHeight / 2,
+                    isActive: false,
+                    lastScale: 1,
+                    lastRot: 0
                 };
             });
         };
 
-        setTimeout(calculateRects, 500);
+        setTimeout(calculateRects, 300);
 
         let resizeTimer;
         window.addEventListener('resize', () => {
@@ -1381,33 +1389,147 @@
             }, 250);
         });
 
-        if (!isTouch && !prefersReducedMotion) {
-            DOM.gridWrapper.parentElement.addEventListener('mousemove', (e) => {
-                const wrapperRect = DOM.gridWrapper.getBoundingClientRect();
-                const mx = e.clientX - wrapperRect.left;
-                const my = e.clientY - wrapperRect.top;
-                const maxDist = 250;
+        // Mouse coordinates relative to lab section
+        let targetMouseX = -9999;
+        let targetMouseY = -9999;
+        let smoothMouseX = -9999;
+        let smoothMouseY = -9999;
+        let isMouseOver = false;
 
-                tileRects.forEach(rect => {
-                    const dist = Math.hypot(mx - rect.x, my - rect.y);
-                    if (dist < maxDist) {
-                        const scale = 1 - ((maxDist - dist) / maxDist) * 0.7; 
-                        rect.el.style.transform = `scale(${scale}) rotate(${((maxDist-dist)/maxDist)*45}deg)`;
-                        rect.el.classList.add('active');
-                    } else {
-                        rect.el.style.transform = 'scale(1) rotate(0deg)';
-                        rect.el.classList.remove('active');
-                    }
-                });
-            });
+        const labSection = DOM.gridWrapper ? DOM.gridWrapper.parentElement : null;
 
-            DOM.gridWrapper.parentElement.addEventListener('mouseleave', () => {
-                tileRects.forEach(rect => {
-                    rect.el.style.transform = 'scale(1) rotate(0deg)';
-                    rect.el.classList.remove('active');
-                });
+        window.addEventListener('mousemove', (e) => {
+            if (!labSection) return;
+            const rect = labSection.getBoundingClientRect();
+            if (e.clientY >= rect.top - 80 && e.clientY <= rect.bottom + 80 &&
+                e.clientX >= rect.left && e.clientX <= rect.right) {
+                targetMouseX = e.clientX - rect.left;
+                targetMouseY = e.clientY - rect.top;
+                isMouseOver = true;
+                if (smoothMouseX === -9999) {
+                    smoothMouseX = targetMouseX;
+                    smoothMouseY = targetMouseY;
+                }
+            } else {
+                isMouseOver = false;
+            }
+        }, { passive: true });
+
+        if (labSection) {
+            labSection.addEventListener('mouseleave', () => {
+                isMouseOver = false;
             });
         }
+
+        // Scroll tracking & kinetic wave interpolation
+        let currentScroll = window.scrollY || 0;
+        let targetScroll = currentScroll;
+        let smoothScroll = currentScroll;
+        let scrollVelocity = 0;
+        let lastScroll = currentScroll;
+
+        const updateScroll = (y, velocity) => {
+            targetScroll = y;
+            if (velocity !== undefined && !isNaN(velocity)) {
+                scrollVelocity = velocity;
+            } else {
+                const delta = targetScroll - lastScroll;
+                scrollVelocity = delta;
+                lastScroll = targetScroll;
+            }
+        };
+
+        window.addEventListener('scroll', () => {
+            updateScroll(window.scrollY);
+        }, { passive: true });
+
+        if (typeof lenis !== 'undefined' && lenis && typeof lenis.on === 'function') {
+            lenis.on('scroll', (e) => {
+                updateScroll(e.scroll, e.velocity);
+            });
+        }
+
+        // Run animation loop via RAF when section is near or in view
+        let isLabVisible = true;
+        if ('IntersectionObserver' in window && labSection) {
+            const observer = new IntersectionObserver((entries) => {
+                isLabVisible = entries[0].isIntersecting;
+            }, { rootMargin: '120px 0px' });
+            observer.observe(labSection);
+        }
+
+        const animateGrid = () => {
+            if (isLabVisible && tileData.length > 0 && !prefersReducedMotion) {
+                // Smooth damping of mouse position
+                if (isMouseOver) {
+                    smoothMouseX += (targetMouseX - smoothMouseX) * 0.12;
+                    smoothMouseY += (targetMouseY - smoothMouseY) * 0.12;
+                } else {
+                    smoothMouseX += (-9999 - smoothMouseX) * 0.08;
+                    smoothMouseY += (-9999 - smoothMouseY) * 0.08;
+                }
+
+                // Smooth damping of scroll values
+                smoothScroll += (targetScroll - smoothScroll) * 0.1;
+                scrollVelocity *= 0.92;
+
+                const maxDist = 280;
+                const velMag = Math.min(Math.abs(scrollVelocity) * 0.04, 1.2);
+
+                for (let i = 0; i < tileData.length; i++) {
+                    const tile = tileData[i];
+
+                    // 1. SCROLL-DRIVEN WAVE ANIMATION
+                    const waveX = tile.x * 0.005;
+                    const waveY = tile.y * 0.003;
+                    const scrollPhase = smoothScroll * 0.007;
+                    const wave = Math.sin((waveX + waveY) - scrollPhase);
+                    const wave2 = Math.cos((waveX - waveY * 0.8) + scrollPhase * 0.7);
+                    const combinedWave = (wave + wave2) * 0.5;
+
+                    const scrollScale = 1 + (combinedWave * 0.18 * (0.35 + velMag * 0.65));
+                    const scrollRot = (combinedWave * 14) + (scrollVelocity * 0.35);
+
+                    // 2. MOUSE PROXIMITY DISTORTION
+                    let finalScale = scrollScale;
+                    let finalRot = scrollRot;
+                    let active = false;
+
+                    const dist = Math.hypot(smoothMouseX - tile.x, smoothMouseY - tile.y);
+                    if (dist < maxDist) {
+                        const proximity = 1 - (dist / maxDist);
+                        const mouseScale = 1 - (proximity * 0.68);
+                        const mouseRot = proximity * 45;
+                        
+                        finalScale = mouseScale * scrollScale;
+                        finalRot = mouseRot + scrollRot;
+                        if (proximity > 0.15) {
+                            active = true;
+                        }
+                    }
+
+                    // Apply transform only when change is perceptible for optimal rendering
+                    if (Math.abs(finalScale - tile.lastScale) > 0.003 || Math.abs(finalRot - tile.lastRot) > 0.15) {
+                        tile.el.style.transform = `scale(${finalScale.toFixed(3)}) rotate(${finalRot.toFixed(1)}deg)`;
+                        tile.lastScale = finalScale;
+                        tile.lastRot = finalRot;
+                    }
+
+                    if (active !== tile.isActive) {
+                        tile.isActive = active;
+                        if (active) {
+                            tile.el.classList.add('active');
+                        } else {
+                            tile.el.classList.remove('active');
+                        }
+                    }
+                }
+            }
+
+            requestAnimationFrame(animateGrid);
+        };
+
+        requestAnimationFrame(animateGrid);
 
         /* =========================================
            9. BACK TO TOP & KEYBOARD ESCAPE
