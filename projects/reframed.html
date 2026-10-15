@@ -1000,10 +1000,37 @@
             let ringX = globalMouseX;
             let ringY = globalMouseY;
 
+            const showCustomCursor = () => {
+                if (DOM.cursorDot && DOM.cursorRing) {
+                    DOM.cursorDot.style.opacity = '1';
+                    DOM.cursorRing.style.opacity = '1';
+                    document.documentElement.classList.remove('no-custom-cursor');
+                }
+            };
+
+            const hideCustomCursor = () => {
+                if (DOM.cursorDot && DOM.cursorRing) {
+                    DOM.cursorDot.style.opacity = '0';
+                    DOM.cursorRing.style.opacity = '0';
+                    document.documentElement.classList.add('no-custom-cursor');
+                }
+            };
+
             window.addEventListener('mousemove', (e) => {
+                showCustomCursor();
                 globalMouseX = e.clientX;
                 globalMouseY = e.clientY;
+            }, { passive: true });
+
+            document.addEventListener('mouseleave', hideCustomCursor);
+            document.addEventListener('mouseenter', showCustomCursor);
+            window.addEventListener('blur', hideCustomCursor);
+            window.addEventListener('focus', hideCustomCursor);
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) hideCustomCursor();
             });
+            window.addEventListener('pagehide', hideCustomCursor);
+            window.addEventListener('beforeunload', hideCustomCursor);
 
             const renderCursor = () => {
                 dotX += (globalMouseX - dotX) * 0.5;
