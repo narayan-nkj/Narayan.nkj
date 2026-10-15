@@ -25,7 +25,7 @@ export default function TimelineSection() {
   ];
 
   return (
-    <section id="experience" className="relative py-28 sm:py-36 px-4 sm:px-8 max-w-7xl mx-auto z-10">
+    <section id="experience" className="relative py-28 sm:py-36 px-4 sm:px-8 lg:px-12 xl:px-16 w-full max-w-[1800px] 2xl:max-w-[1920px] mx-auto z-10">
       
       {/* Section Identifier */}
       <div className="flex items-center space-x-3 font-meta text-xs text-[var(--accent-primary)] uppercase tracking-widest mb-3">

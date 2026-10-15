@@ -24,7 +24,7 @@ export default function CapabilitiesSection() {
   const [activeShaderPass, setActiveShaderPass] = useState<"volumetric" | "crdt" | "bloom">("volumetric");
 
   return (
-    <section id="capabilities" className="relative py-28 sm:py-36 px-4 sm:px-8 max-w-7xl mx-auto z-10">
+    <section id="capabilities" className="relative py-28 sm:py-36 px-4 sm:px-8 lg:px-12 xl:px-16 w-full max-w-[1800px] 2xl:max-w-[1920px] mx-auto z-10">
       
       {/* Section Identifier */}
       <div className="flex items-center space-x-3 font-meta text-xs text-[var(--accent-primary)] uppercase tracking-widest mb-3">
@@ -37,7 +37,7 @@ export default function CapabilitiesSection() {
           <h2 className="font-editorial text-4xl sm:text-5xl font-bold text-[#F2F1EE] tracking-tight">
             Technical Matrix &amp; Systems
           </h2>
-          <p className="mt-3 max-w-2xl text-sm sm:text-base text-[#9A9AA0] font-light">
+          <p className="mt-3 max-w-4xl text-sm sm:text-base text-[#9A9AA0] font-light">
             Disciplines refined over years of building high-concurrency client engines,
             custom graphics shaders, and meticulous component architectures.
           </p>
