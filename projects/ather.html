@@ -553,9 +553,28 @@
         let outlineY = mouseY;
 
         window.addEventListener('mousemove', (e) => {
+            dot.style.opacity = '1';
+            outline.style.opacity = '1';
             mouseX = e.clientX;
             mouseY = e.clientY;
             dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+        }, { passive: true });
+
+        document.addEventListener('mouseleave', () => {
+            dot.style.opacity = '0';
+            outline.style.opacity = '0';
+        });
+
+        window.addEventListener('blur', () => {
+            dot.style.opacity = '0';
+            outline.style.opacity = '0';
+        });
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                dot.style.opacity = '0';
+                outline.style.opacity = '0';
+            }
         });
 
         const loopCursor = () => {
