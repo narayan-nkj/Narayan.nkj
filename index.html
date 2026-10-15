@@ -2308,6 +2308,20 @@
         cursorOutline.style.opacity = '1';
       });
 
+      window.addEventListener('blur', () => {
+        orb.classList.add('expanded');
+        cursorDot.style.opacity = '0';
+        cursorOutline.style.opacity = '0';
+      });
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          orb.classList.add('expanded');
+          cursorDot.style.opacity = '0';
+          cursorOutline.style.opacity = '0';
+        }
+      });
+
       // Project Navigation / Switcher listeners
       document.querySelectorAll('.pnav-pill, .nav-switch-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
