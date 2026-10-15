@@ -76,8 +76,13 @@
     }
 
     @media (pointer: fine) {
-      body, a, button, input, textarea, select {
-        cursor: none !important;
+      body.custom-cursor-active,
+      body.custom-cursor-active a,
+      body.custom-cursor-active button,
+      body.custom-cursor-active input,
+      body.custom-cursor-active textarea,
+      body.custom-cursor-active select {
+        cursor: none;
       }
     }
 
@@ -97,7 +102,8 @@
       border-radius: 50%;
       pointer-events: none;
       z-index: 99999;
-      transition: opacity 0.3s ease;
+      opacity: 0;
+      transition: opacity 0.2s ease;
     }
 
     .custom-cursor-dot {
@@ -2215,19 +2221,69 @@
       setInterval(updateClock, 1000);
       updateClock();
 
-      // --- 4. CUSTOM DIFFERENCE CURSOR ---
+      // --- 4. CUSTOM DIFFERENCE CURSOR WITH TAB / PAGE RESTORATION ---
       const cursorDot = document.getElementById('cursor-dot');
       const cursorOutline = document.getElementById('cursor-outline');
+      let cursorActive = false;
+
+      function activateCustomCursor() {
+        if (!cursorActive) {
+          cursorActive = true;
+          document.body.classList.add('custom-cursor-active');
+          cursorDot.style.opacity = '1';
+          cursorOutline.style.opacity = '1';
+        }
+      }
+
+      function deactivateCustomCursor() {
+        cursorActive = false;
+        document.body.classList.remove('custom-cursor-active');
+        cursorDot.style.opacity = '0';
+        cursorOutline.style.opacity = '0';
+      }
 
       window.addEventListener('mousemove', (e) => {
+        activateCustomCursor();
         cursorDot.style.left = e.clientX + 'px';
         cursorDot.style.top = e.clientY + 'px';
 
         cursorOutline.animate({
           left: e.clientX + 'px',
           top: e.clientY + 'px'
-        }, { duration: 250, fill: 'forwards' });
+        }, { duration: 150, fill: 'forwards' });
       }, { passive: true });
+
+      // When mouse moves out of viewport (e.g. towards tabs or outside window)
+      document.addEventListener('mouseleave', () => {
+        deactivateCustomCursor();
+      });
+
+      document.addEventListener('mouseenter', () => {
+        activateCustomCursor();
+      });
+
+      // When switching tabs, window loses focus, or document becomes hidden
+      window.addEventListener('blur', () => {
+        deactivateCustomCursor();
+      });
+
+      window.addEventListener('focus', () => {
+        deactivateCustomCursor();
+      });
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          deactivateCustomCursor();
+        }
+      });
+
+      window.addEventListener('pagehide', () => {
+        deactivateCustomCursor();
+      });
+
+      window.addEventListener('beforeunload', () => {
+        deactivateCustomCursor();
+      });
 
       document.querySelectorAll('a, button, input, textarea, .color-swatch-dot').forEach(el => {
         el.addEventListener('mouseenter', () => {
