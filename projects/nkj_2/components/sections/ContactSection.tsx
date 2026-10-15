@@ -30,7 +30,7 @@ export default function ContactSection() {
   };
 
   return (
-    <footer id="contact" className="relative pt-28 pb-16 px-4 sm:px-8 max-w-7xl mx-auto z-10 border-t border-white/10">
+    <footer id="contact" className="relative pt-28 pb-16 px-4 sm:px-8 lg:px-12 xl:px-16 w-full max-w-[1800px] 2xl:max-w-[1920px] mx-auto z-10 border-t border-white/10">
       
       {/* Availability Status Ribbon */}
       <div className="flex flex-wrap items-center justify-between gap-4 font-meta text-xs mb-16">
