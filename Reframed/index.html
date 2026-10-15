@@ -549,80 +549,65 @@
             width: clamp(280px, 30vw, 400px);
             aspect-ratio: 4/5;
             overflow: hidden;
-            background-color: #000;
+            background-color: #050505;
             flex-shrink: 0;
+            display: block;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .gallery-visual-wrap {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.8s var(--ease), filter 0.5s ease;
+            filter: grayscale(15%) contrast(1.05);
+            will-change: transform;
             display: block;
         }
 
-        .gen-visual {
-            width: 100%;
-            height: 100%;
-            transition: transform 0.8s var(--ease);
-            will-change: transform;
-        }
-
-        .visual-1 {
-            background: 
-                radial-gradient(circle at 30% 30%, transparent 20%, #111 21%, #111 25%, transparent 26%),
-                radial-gradient(circle at 70% 70%, transparent 20%, #222 21%, #222 25%, transparent 26%),
-                linear-gradient(45deg, #0a0a0a, #1a1a1a);
-            background-size: 50px 50px, 70px 70px, 100% 100%;
-        }
-
-        .visual-2 {
-            background: repeating-linear-gradient(
-                -45deg,
-                #000,
-                #000 15px,
-                #222 15px,
-                #222 30px
-            );
-        }
-
-        .visual-3 {
-            background: 
-                linear-gradient(90deg, #111 2px, transparent 2px),
-                linear-gradient(0deg, #111 2px, transparent 2px);
-            background-size: 40px 40px;
-            background-color: #050505;
-        }
-        
-        .visual-4 {
-            background: conic-gradient(from 180deg at 50% 50%, #000, #333, #000, #333, #000);
-        }
-
-        .visual-5 {
-            background: 
-                radial-gradient(circle at center, transparent 30%, #000 70%),
-                repeating-radial-gradient(circle at center, #222, #222 10px, #000 10px, #000 20px);
-        }
-
-        .visual-6 {
-            background: 
-                linear-gradient(135deg, var(--accent) 0%, transparent 50%),
-                linear-gradient(225deg, #222 0%, #000 100%);
-            opacity: 0.8;
-            mix-blend-mode: screen;
-        }
-
-        .gallery-item:hover .gen-visual {
-            transform: scale(1.05);
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.08);
+            filter: grayscale(0%) contrast(1.12);
         }
 
         .gallery-meta {
             position: absolute;
             bottom: 0; left: 0; width: 100%;
-            padding: 1.5rem;
+            padding: 1.25rem 1.5rem;
             color: #fff;
             display: flex;
             justify-content: space-between;
+            align-items: center;
             transform: translateY(100%);
-            transition: transform 0.6s var(--ease);
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            transition: transform 0.5s var(--ease);
+            background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            z-index: 2;
+            pointer-events: none;
         }
 
         .gallery-item:hover .gallery-meta {
             transform: translateY(0);
+        }
+
+        @media (hover: none) {
+            .gallery-meta {
+                transform: translateY(0);
+                background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+            }
         }
 
         /* =========================================
@@ -822,65 +807,161 @@
         <section id="work" class="gallery-section theme-light">
             <div class="gallery-header">
                 <h2 class="text-huge">SELECTED<br>WORKS</h2>
-                <p>(06)</p>
+                <p>(12)</p>
             </div>
             
             <div class="gallery-track-container" id="gallery-track-wrap">
                 <div class="gallery-track">
                     
-                    <!-- SET 1 (Original Items) -->
+                    <!-- SET 1 (User Portfolio Works from assets/images) -->
                     <div class="gallery-set">
                         <a href="#work" class="gallery-item">
-                            <div class="gen-visual visual-1"></div>
-                            <div class="gallery-meta"><span>Project 01</span><span>RADIAL</span></div>
+                            <div class="gallery-visual-wrap">
+                                <img src="../assets/images/A.jpeg" alt="Dharma Chariot" class="gallery-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-meta"><span>Dharma Chariot</span><span>DIGITAL ART</span></div>
                         </a>
                         <a href="#work" class="gallery-item">
-                            <div class="gen-visual visual-2"></div>
-                            <div class="gallery-meta"><span>Project 02</span><span>STRIPE</span></div>
+                            <div class="gallery-visual-wrap">
+                                <img src="../assets/images/B.jpeg" alt="Station Transit" class="gallery-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-meta"><span>Station Transit</span><span>CINEMATOGRAPHY</span></div>
                         </a>
                         <a href="#work" class="gallery-item">
-                            <div class="gen-visual visual-3"></div>
-                            <div class="gallery-meta"><span>Project 03</span><span>MATRIX</span></div>
+                            <div class="gallery-visual-wrap">
+                                <img src="../assets/images/C.jpeg" alt="Pasoori Session" class="gallery-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-meta"><span>Pasoori Session</span><span>VISUAL AESTHETICS</span></div>
                         </a>
                         <a href="#work" class="gallery-item">
-                            <div class="gen-visual visual-4"></div>
-                            <div class="gallery-meta"><span>Project 04</span><span>CONIC</span></div>
+                            <div class="gallery-visual-wrap">
+                                <img src="../assets/images/D.jpeg" alt="Wayfarer Route" class="gallery-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-meta"><span>Wayfarer Route</span><span>STREET PHOTOGRAPHY</span></div>
                         </a>
                         <a href="#work" class="gallery-item">
-                            <div class="gen-visual visual-5"></div>
-                            <div class="gallery-meta"><span>Project 05</span><span>ECLIPSE</span></div>
+                            <div class="gallery-visual-wrap">
+                                <img src="../assets/images/E.jpeg" alt="Window View" class="gallery-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-meta"><span>Window View</span><span>MINIMALIST FRAMING</span></div>
                         </a>
                         <a href="#work" class="gallery-item">
-                            <div class="gen-visual visual-6"></div>
-                            <div class="gallery-meta"><span>Project 06</span><span>PRISM</span></div>
+                            <div class="gallery-visual-wrap">
+                                <img src="../assets/images/F.jpeg" alt="Crimson Ledger" class="gallery-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-meta"><span>Crimson Ledger</span><span>KEY ART POSTER</span></div>
+                        </a>
+                        <a href="#work" class="gallery-item">
+                            <div class="gallery-visual-wrap">
+                                <img src="../assets/images/G.jpeg" alt="Labyrinth Neo-Noir" class="gallery-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-meta"><span>Labyrinth Neo-Noir</span><span>TYPOGRAPHY DESIGN</span></div>
+                        </a>
+                        <a href="#work" class="gallery-item">
+                            <div class="gallery-visual-wrap">
+                                <img src="../assets/images/H.jpeg" alt="Dast-e-Bayaan" class="gallery-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-meta"><span>Dast-e-Bayaan</span><span>TITLE POSTER</span></div>
+                        </a>
+                        <a href="#work" class="gallery-item">
+                            <div class="gallery-visual-wrap">
+                                <img src="../assets/images/I.jpeg" alt="Capture Sunlight" class="gallery-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-meta"><span>Capture Sunlight</span><span>CHIAROSCURO ART</span></div>
+                        </a>
+                        <a href="#work" class="gallery-item">
+                            <div class="gallery-visual-wrap">
+                                <img src="../assets/images/1.jpeg" alt="The Transit" class="gallery-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-meta"><span>The Transit</span><span>ANALOG STREET</span></div>
+                        </a>
+                        <a href="#work" class="gallery-item">
+                            <div class="gallery-visual-wrap">
+                                <img src="../assets/images/2.jpeg" alt="Inward Focus" class="gallery-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-meta"><span>Inward Focus</span><span>MONOCHROME PORTRAIT</span></div>
+                        </a>
+                        <a href="#work" class="gallery-item">
+                            <div class="gallery-visual-wrap">
+                                <img src="../assets/images/3.jpg" alt="Vision Stare" class="gallery-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-meta"><span>Vision Stare</span><span>EDITORIAL VISION</span></div>
                         </a>
                     </div>
 
-                    <!-- SET 2 (Exact Duplicate for Infinite Loop) -->
+                    <!-- SET 2 (Exact Duplicate for Seamless Infinite Marquee Loop) -->
                     <div class="gallery-set">
                         <a href="#work" class="gallery-item">
-                            <div class="gen-visual visual-1"></div>
-                            <div class="gallery-meta"><span>Project 01</span><span>RADIAL</span></div>
+                            <div class="gallery-visual-wrap">
+                                <img src="../assets/images/A.jpeg" alt="Dharma Chariot" class="gallery-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-meta"><span>Dharma Chariot</span><span>DIGITAL ART</span></div>
                         </a>
                         <a href="#work" class="gallery-item">
-                            <div class="gen-visual visual-2"></div>
-                            <div class="gallery-meta"><span>Project 02</span><span>STRIPE</span></div>
+                            <div class="gallery-visual-wrap">
+                                <img src="../assets/images/B.jpeg" alt="Station Transit" class="gallery-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-meta"><span>Station Transit</span><span>CINEMATOGRAPHY</span></div>
                         </a>
                         <a href="#work" class="gallery-item">
-                            <div class="gen-visual visual-3"></div>
-                            <div class="gallery-meta"><span>Project 03</span><span>MATRIX</span></div>
+                            <div class="gallery-visual-wrap">
+                                <img src="../assets/images/C.jpeg" alt="Pasoori Session" class="gallery-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-meta"><span>Pasoori Session</span><span>VISUAL AESTHETICS</span></div>
                         </a>
                         <a href="#work" class="gallery-item">
-                            <div class="gen-visual visual-4"></div>
-                            <div class="gallery-meta"><span>Project 04</span><span>CONIC</span></div>
+                            <div class="gallery-visual-wrap">
+                                <img src="../assets/images/D.jpeg" alt="Wayfarer Route" class="gallery-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-meta"><span>Wayfarer Route</span><span>STREET PHOTOGRAPHY</span></div>
                         </a>
                         <a href="#work" class="gallery-item">
-                            <div class="gen-visual visual-5"></div>
-                            <div class="gallery-meta"><span>Project 05</span><span>ECLIPSE</span></div>
+                            <div class="gallery-visual-wrap">
+                                <img src="../assets/images/E.jpeg" alt="Window View" class="gallery-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-meta"><span>Window View</span><span>MINIMALIST FRAMING</span></div>
                         </a>
                         <a href="#work" class="gallery-item">
-                            <div class="gen-visual visual-6"></div>
-                            <div class="gallery-meta"><span>Project 06</span><span>PRISM</span></div>
+                            <div class="gallery-visual-wrap">
+                                <img src="../assets/images/F.jpeg" alt="Crimson Ledger" class="gallery-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-meta"><span>Crimson Ledger</span><span>KEY ART POSTER</span></div>
+                        </a>
+                        <a href="#work" class="gallery-item">
+                            <div class="gallery-visual-wrap">
+                                <img src="../assets/images/G.jpeg" alt="Labyrinth Neo-Noir" class="gallery-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-meta"><span>Labyrinth Neo-Noir</span><span>TYPOGRAPHY DESIGN</span></div>
+                        </a>
+                        <a href="#work" class="gallery-item">
+                            <div class="gallery-visual-wrap">
+                                <img src="../assets/images/H.jpeg" alt="Dast-e-Bayaan" class="gallery-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-meta"><span>Dast-e-Bayaan</span><span>TITLE POSTER</span></div>
+                        </a>
+                        <a href="#work" class="gallery-item">
+                            <div class="gallery-visual-wrap">
+                                <img src="../assets/images/I.jpeg" alt="Capture Sunlight" class="gallery-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-meta"><span>Capture Sunlight</span><span>CHIAROSCURO ART</span></div>
+                        </a>
+                        <a href="#work" class="gallery-item">
+                            <div class="gallery-visual-wrap">
+                                <img src="../assets/images/1.jpeg" alt="The Transit" class="gallery-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-meta"><span>The Transit</span><span>ANALOG STREET</span></div>
+                        </a>
+                        <a href="#work" class="gallery-item">
+                            <div class="gallery-visual-wrap">
+                                <img src="../assets/images/2.jpeg" alt="Inward Focus" class="gallery-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-meta"><span>Inward Focus</span><span>MONOCHROME PORTRAIT</span></div>
+                        </a>
+                        <a href="#work" class="gallery-item">
+                            <div class="gallery-visual-wrap">
+                                <img src="../assets/images/3.jpg" alt="Vision Stare" class="gallery-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-meta"><span>Vision Stare</span><span>EDITORIAL VISION</span></div>
                         </a>
                     </div>
                     
