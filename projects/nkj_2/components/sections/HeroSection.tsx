@@ -34,7 +34,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-between pt-32 pb-12 px-4 sm:px-8 max-w-7xl mx-auto z-10">
+    <section className="relative min-h-screen flex flex-col justify-between pt-32 pb-12 px-4 sm:px-8 lg:px-12 xl:px-16 w-full max-w-[1800px] 2xl:max-w-[1920px] mx-auto z-10">
       
       {/* Top Metadata Ribbon */}
       <motion.div
@@ -88,7 +88,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-8 sm:mt-10 max-w-2xl"
+          className="mt-8 sm:mt-10 max-w-4xl"
         >
           <p className="text-base sm:text-lg md:text-xl text-[#9A9AA0] font-light leading-relaxed">
             Analytical undergraduate combining core systems engineering (B.Tech) with specialized
