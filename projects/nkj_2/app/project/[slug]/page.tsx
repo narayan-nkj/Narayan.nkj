@@ -28,7 +28,7 @@ export default async function ProjectPage({
 
   return (
     <CaseStudyClientWrapper project={project} nextProject={nextProject}>
-      <div className="min-h-screen pt-32 pb-24 px-4 sm:px-8 max-w-5xl mx-auto z-10 relative">
+      <div className="min-h-screen pt-32 pb-24 px-4 sm:px-8 lg:px-12 xl:px-16 w-full max-w-[1500px] 2xl:max-w-[1700px] mx-auto z-10 relative">
         
         {/* Back Link */}
         <div className="mb-12">
