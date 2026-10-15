@@ -15,6 +15,9 @@
   - `projects/vanguard.html` (Project Alpha — Vanguard: Creative digital agency portfolio with high-contrast editorial design).
   - `projects/apex.html` (Project Beta — Apex: React-driven matrix engine with brutalist horizontal scroll).
   - `projects/ather.html` (Project Gamma — Ather: Minimalist glassmorphism terminal interface).
+  - `projects/reframed.html` (Project Delta — Reframed: Kinetic generative architecture & reactive canvas system).
+  - `projects/singularity.html` (Project Epsilon — Singularity / NKJ 2.0: Next-Gen computational matrix, Web Audio API haptics, and IIT Madras data science lab).
+  - `projects/nkj_2/` (Full Next.js source project for Studio 105 / Singularity platform).
 - **Assets:** `assets/images/` (Curated photography and art showcases: `1.jpeg`–`4.jpeg`, `3.jpg`, `A.jpeg`–`I.jpeg`).
 - **Configuration & Routing:** `vercel.json` (Custom clean URL rewrites, asset caching headers, security headers).
 - **Package Spec:** `package.json` (Local preview scripts via `npx serve .`).

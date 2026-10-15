@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Narayan Kumar Jha | Creative Developer & Data Scientist</title>
   <meta name="description" content="Portfolio of Narayan Kumar Jha — Dual-degree student (B.Tech CSE & BS Data Science at IIT Madras) specialising in machine learning, acoustic processing, and full-stack web development.">
-  <meta name="keywords" content="Narayan Kumar Jha, Creative Developer, Data Scientist, IIT Madras, BPPIMT, SAGAR, Ocean-X, Phoenix Protocol, PhantomDeps, IBM Hackathon, TIU Hackathon, Acoustic Processing, ONNX, Three.js, React, Kolkata">
+  <meta name="keywords" content="Narayan Kumar Jha, Creative Developer, Data Scientist, IIT Madras, BPPIMT, SAGAR, Ocean-X, Phoenix Protocol, PhantomDeps, Reframed, Kinetic Architecture, IBM Hackathon, TIU Hackathon, Acoustic Processing, ONNX, Three.js, React, Kolkata">
   <meta name="author" content="Narayan Kumar Jha">
   <meta name="theme-color" content="#050505">
 
@@ -48,6 +48,8 @@
   }
   </script>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
   <style>
@@ -1187,7 +1189,7 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: center; /* In centre of page vertically */
+      justify-content: flex-start;
       align-items: stretch; /* Fill width, no blank sides */
       min-height: calc(100vh - 58px);
       min-height: calc(100dvh - 58px);
@@ -1253,11 +1255,12 @@
 
     .projects-overlay .projects-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: clamp(1.2rem, 2vw, 2.2rem);
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: clamp(1rem, 1.4vw, 1.6rem);
       width: 100%;
       box-sizing: border-box;
       align-items: stretch;
+      padding-bottom: 2.5rem;
     }
 
     .projects-overlay .projects-grid .glass-card {
@@ -1481,6 +1484,13 @@
       animation: cardHighlight 1.2s ease-out;
     }
 
+    @media (max-width: 1300px) and (min-width: 901px) {
+      .projects-overlay .projects-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.25rem !important;
+      }
+    }
+
     @media (max-width: 900px) {
       .projects-overlay {
         overflow-y: auto !important;
@@ -1563,6 +1573,8 @@
           <button class="pnav-pill active" data-target="card-vanguard">[ 01 VANGUARD ]</button>
           <button class="pnav-pill" data-target="card-apex">[ 02 APEX ]</button>
           <button class="pnav-pill" data-target="card-ather">[ 03 ATHER ]</button>
+          <button class="pnav-pill" data-target="card-reframed">[ 04 REFRAMED ]</button>
+          <button class="pnav-pill" data-target="card-singularity">[ 05 SINGULARITY ]</button>
         </div>
       </div>
       
@@ -1608,6 +1620,8 @@
                   <div>
                     <button class="nav-switch-btn" data-target="card-apex">Apex &rarr;</button>
                     <button class="nav-switch-btn" data-target="card-ather">Ather &rarr;</button>
+                    <button class="nav-switch-btn" data-target="card-reframed">Reframed &rarr;</button>
+                    <button class="nav-switch-btn" data-target="card-singularity">Singularity &rarr;</button>
                   </div>
                 </div>
               </div>
@@ -1656,6 +1670,8 @@
                   <div>
                     <button class="nav-switch-btn" data-target="card-vanguard">&larr; Vanguard</button>
                     <button class="nav-switch-btn" data-target="card-ather">Ather &rarr;</button>
+                    <button class="nav-switch-btn" data-target="card-reframed">Reframed &rarr;</button>
+                    <button class="nav-switch-btn" data-target="card-singularity">Singularity &rarr;</button>
                   </div>
                 </div>
               </div>
@@ -1704,6 +1720,109 @@
                   <div>
                     <button class="nav-switch-btn" data-target="card-vanguard">&larr; Vanguard</button>
                     <button class="nav-switch-btn" data-target="card-apex">&larr; Apex</button>
+                    <button class="nav-switch-btn" data-target="card-reframed">Reframed &rarr;</button>
+                    <button class="nav-switch-btn" data-target="card-singularity">Singularity &rarr;</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 04: Reframed -->
+        <div class="glass-card" id="card-reframed">
+          <div class="card-content">
+            <div>
+              <div class="card-header-meta">
+                <span class="tag">Web App 04</span>
+                <span class="status-indicator"><span class="status-dot"></span> LIVE // ONLINE</span>
+              </div>
+              <h2>[ PROJECT DELTA : Reframed ]</h2>
+              <p class="overlay-project-sub">Kinetic Generative Architecture & Canvas System</p>
+              <p class="overlay-project-desc">Experimental algorithmic frontend architecture featuring real-time kinetic particle network, proximity field distortion, and generative CSS works.</p>
+              
+              <div class="overlay-specs-grid">
+                <div class="spec-item"><span class="spec-label">TYPE:</span>Generative UI</div>
+                <div class="spec-item"><span class="spec-label">ROLE:</span>Frontend Arch.</div>
+                <div class="spec-item"><span class="spec-label">DESIGN:</span>Brutalist Kinetic</div>
+                <div class="spec-item"><span class="spec-label">ENGINE:</span>Vector Particle Net</div>
+              </div>
+
+              <ul class="overlay-project-bullets">
+                <li>Engineered reactive 2D canvas particle network with real-time cursor repulsion and distance-aware vector linkages.</li>
+                <li>Constructed infinite algorithmic generative art gallery utilizing zero external image assets with pure mathematical CSS gradients.</li>
+                <li>Implemented interactive multi-tile proximity distortion field with dynamic matrix scaling and rotation physics.</li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="overlay-stack-pills">
+                <span class="stack-pill">Canvas API</span>
+                <span class="stack-pill">JavaScript ES6+</span>
+                <span class="stack-pill">Generative CSS</span>
+                <span class="stack-pill">Lenis Scroll</span>
+                <span class="stack-pill">Interaction Physics</span>
+              </div>
+              <div class="card-actions-wrapper">
+                <a href="projects/reframed.html" class="link-btn">Initialize Connection &rarr;</a>
+                <div class="card-nav-switch">
+                  <span class="nav-switch-label">SWITCH TO:</span>
+                  <div>
+                    <button class="nav-switch-btn" data-target="card-vanguard">&larr; Vanguard</button>
+                    <button class="nav-switch-btn" data-target="card-apex">&larr; Apex</button>
+                    <button class="nav-switch-btn" data-target="card-ather">&larr; Ather</button>
+                    <button class="nav-switch-btn" data-target="card-singularity">Singularity &rarr;</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 05: Singularity (NKJ 2.0) -->
+        <div class="glass-card" id="card-singularity">
+          <div class="card-content">
+            <div>
+              <div class="card-header-meta">
+                <span class="tag">Web App 05</span>
+                <span class="status-indicator"><span class="status-dot"></span> LIVE // ONLINE</span>
+              </div>
+              <h2>[ PROJECT EPSILON : Singularity (NKJ 2.0) ]</h2>
+              <p class="overlay-project-sub">Computational Matrix, Web Audio Haptics &amp; Data Science Lab</p>
+              <p class="overlay-project-desc">Tactile nocturnal exhibition combining kinetic SVG vector engines, Web Audio API soundscapes, and interactive linear algebra simulations from IIT Madras.</p>
+              
+              <div class="overlay-specs-grid">
+                <div class="spec-item"><span class="spec-label">TYPE:</span>Matrix &amp; Lab</div>
+                <div class="spec-item"><span class="spec-label">ROLE:</span>Lead Architect</div>
+                <div class="spec-item"><span class="spec-label">ENGINE:</span>Web Audio &amp; SVG</div>
+                <div class="spec-item"><span class="spec-label">RESEARCH:</span>IIT Madras Math</div>
+              </div>
+
+              <ul class="overlay-project-bullets">
+                <li>Engineered real-time vector subspace &amp; eigenvalue spectrum laboratory with Gram-Schmidt verification.</li>
+                <li>Synthesized zero-dependency procedural Web Audio oscillator haptics and tactile tone response.</li>
+                <li>Architected five deep-dive case studies spanning signal DSP, brutalist typography, and symposium telemetry.</li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="overlay-stack-pills">
+                <span class="stack-pill">TypeScript</span>
+                <span class="stack-pill">Web Audio API</span>
+                <span class="stack-pill">Vector Linear Algebra</span>
+                <span class="stack-pill">Kinetic SVG</span>
+                <span class="stack-pill">Dark Editorial UI</span>
+                <span class="stack-pill">Interactive Lab</span>
+              </div>
+              <div class="card-actions-wrapper">
+                <a href="projects/singularity.html" class="link-btn">Initialize Connection &rarr;</a>
+                <div class="card-nav-switch">
+                  <span class="nav-switch-label">SWITCH TO:</span>
+                  <div>
+                    <button class="nav-switch-btn" data-target="card-vanguard">&larr; Vanguard</button>
+                    <button class="nav-switch-btn" data-target="card-apex">&larr; Apex</button>
+                    <button class="nav-switch-btn" data-target="card-ather">&larr; Ather</button>
+                    <button class="nav-switch-btn" data-target="card-reframed">&larr; Reframed</button>
                   </div>
                 </div>
               </div>
@@ -1836,12 +1955,13 @@
             <p class="project-sub">Data-Driven Applications with React & Flask</p>
             <ul>
               <li>Constructed high-impact web apps with void black & brutalist glassmorphism.</li>
-              <li>Architected custom showcases (Vanguard, Apex, Ather) with 3D WebGL scenes.</li>
-              <li>Engineered modular frontend components and low-latency audio utilities.</li>
+              <li>Architected custom showcases (Vanguard, Apex, Ather, Reframed, Singularity) with 3D WebGL & vector labs.</li>
+              <li>Engineered modular frontend components and low-latency Web Audio utilities.</li>
             </ul>
-            <p class="project-stack"><strong>Stack:</strong> React, Flask, JavaScript (ES6+), Three.js, CSS3</p>
+            <p class="project-stack"><strong>Stack:</strong> React, Flask, TypeScript, Three.js, Web Audio, CSS3</p>
             <div class="project-actions">
-              <a href="#projects" class="link-btn open-overlay-link">View Showcase &rarr;</a>
+              <a href="projects/singularity.html" class="link-btn">Singularity Demo &rarr;</a>
+              <a href="#projects" class="link-btn open-overlay-link">View Suite (5 Apps) &rarr;</a>
               <a href="https://github.com/narayan-nkj/Narayan.nkj" target="_blank" rel="noopener noreferrer" class="link-btn">GitHub Suite &rarr;</a>
             </div>
           </div>
@@ -2161,7 +2281,7 @@
           left: `${e.clientX}px`,
           top: `${e.clientY}px`
         }, { duration: 150, fill: "forwards" });
-      });
+      }, { passive: true });
 
       const orb = document.querySelector('.glow-orb');
       
@@ -2172,7 +2292,7 @@
             orb.style.top = `${e.clientY}px`;
           });
         }
-      });
+      }, { passive: true });
 
       document.addEventListener('mouseleave', () => {
         orb.classList.add('expanded');
@@ -2273,7 +2393,7 @@
       document.addEventListener('mousemove', (event) => {
         mouseX = (event.clientX - windowHalfX);
         mouseY = (event.clientY - windowHalfY);
-      });
+      }, { passive: true });
       
       container.addEventListener('mouseenter', () => { isHovered = true; });
       container.addEventListener('mouseleave', () => { isHovered = false; });

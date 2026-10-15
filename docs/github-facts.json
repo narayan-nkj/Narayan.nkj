@@ -68,7 +68,7 @@
       "tech_stack": ["Vanilla HTML5", "Vanilla CSS3", "JavaScript", "Three.js", "React UMD"],
       "features": [
         "Interactive 3D wireframe icosahedron and orbital system",
-        "Modular project showcases (Vanguard, Apex, Ather)",
+        "Modular project showcases (Vanguard, Apex, Ather, Reframed, Singularity)",
         "Responsive brutalist and glassmorphism interface"
       ],
       "role": "Creator & Maintainer",
