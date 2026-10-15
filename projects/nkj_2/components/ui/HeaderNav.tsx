@@ -48,8 +48,8 @@ export default function HeaderNav() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 px-4 sm:px-8 py-5 pointer-events-none">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+    <header className="fixed top-0 left-0 right-0 z-40 px-4 sm:px-8 lg:px-12 xl:px-16 py-5 pointer-events-none">
+      <div className="w-full max-w-[1800px] 2xl:max-w-[1920px] mx-auto flex items-center justify-between">
         
         {/* Monogram / Brand */}
         <div className="flex items-center space-x-3 pointer-events-auto">
