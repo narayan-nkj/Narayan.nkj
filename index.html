@@ -1487,14 +1487,176 @@
       animation: cardHighlight 1.2s ease-out;
     }
 
-    @media (max-width: 1300px) and (min-width: 901px) {
+    @media (min-width: 1025px) {
+      .projects-overlay {
+        overflow-y: hidden !important;
+        overflow-x: hidden !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+      }
+      .overlay-header {
+        padding: 0.45rem clamp(1.2rem, 2vw, 3rem) !important;
+      }
+      .overlay-content {
+        height: calc(100vh - 46px) !important;
+        height: calc(100dvh - 46px) !important;
+        max-height: calc(100vh - 46px) !important;
+        max-height: calc(100dvh - 46px) !important;
+        min-height: 0 !important;
+        padding: 0.5rem clamp(1rem, 1.8vw, 2.5rem) 0.6rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        overflow: hidden !important;
+      }
+      .projects-header-block {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        flex-wrap: wrap !important;
+        gap: 0.35rem 1rem !important;
+        margin-bottom: 0.45rem !important;
+        flex-shrink: 0 !important;
+      }
+      .overlay-content h1 {
+        font-size: clamp(1.1rem, 1.5vw, 1.4rem) !important;
+        margin-bottom: 0 !important;
+        line-height: 1.1 !important;
+      }
+      .overlay-content .subtitle {
+        font-size: clamp(0.7rem, 0.78vw, 0.78rem) !important;
+        margin: 0 !important;
+      }
+      .projects-nav-selector {
+        margin-top: 0 !important;
+        gap: 0.35rem !important;
+      }
+      .projects-nav-selector .pnav-label {
+        font-size: 0.65rem !important;
+      }
+      .pnav-pill {
+        font-size: 0.65rem !important;
+        padding: 0.18rem 0.5rem !important;
+      }
       .projects-overlay .projects-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 1.25rem !important;
+        grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+        gap: clamp(0.4rem, 0.7vw, 0.75rem) !important;
+        flex: 1 !important;
+        min-height: 0 !important;
+        padding-bottom: 0 !important;
+        align-items: stretch !important;
+      }
+      .projects-overlay .projects-grid .glass-card {
+        padding: clamp(0.55rem, 0.9vh, 0.85rem) clamp(0.45rem, 0.65vw, 0.75rem) !important;
+        height: 100% !important;
+        max-height: 100% !important;
+        overflow-y: auto !important;
+        scrollbar-width: none !important;
+      }
+      .projects-overlay .projects-grid .glass-card::-webkit-scrollbar {
+        display: none !important;
+      }
+      .projects-overlay .card-header-meta {
+        margin-bottom: 0.25rem !important;
+      }
+      .projects-overlay .projects-grid .tag {
+        font-size: 0.64rem !important;
+        padding: 0.12rem 0.38rem !important;
+      }
+      .projects-overlay .status-indicator {
+        font-size: 0.62rem !important;
+      }
+      .projects-overlay .projects-grid h2 {
+        font-size: clamp(0.72rem, 0.8vw, 0.88rem) !important;
+        margin-bottom: 0.18rem !important;
+        line-height: 1.2 !important;
+      }
+      .projects-overlay .overlay-project-sub {
+        font-size: 0.68rem !important;
+        margin-bottom: 0.18rem !important;
+        line-height: 1.25 !important;
+      }
+      .projects-overlay .overlay-project-desc {
+        font-size: 0.68rem !important;
+        line-height: 1.32 !important;
+        margin-bottom: 0.3rem !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+      }
+      .projects-overlay .overlay-specs-grid {
+        padding: 0.35rem 0.45rem !important;
+        gap: 0.18rem 0.35rem !important;
+        margin-bottom: 0.3rem !important;
+      }
+      .projects-overlay .spec-item {
+        font-size: clamp(0.6rem, 0.66vw, 0.7rem) !important;
+        line-height: 1.25 !important;
+      }
+      .projects-overlay .spec-label {
+        font-size: 0.6rem !important;
+        margin-right: 0.18rem !important;
+      }
+      .projects-overlay .overlay-project-bullets {
+        padding-left: 0.85rem !important;
+        margin-bottom: 0.3rem !important;
+      }
+      .projects-overlay .overlay-project-bullets li {
+        font-size: 0.65rem !important;
+        line-height: 1.26 !important;
+        margin-bottom: 0.15rem !important;
+      }
+      .projects-overlay .overlay-stack-pills {
+        padding-top: 0.25rem !important;
+        margin-bottom: 0.35rem !important;
+        gap: 0.2rem !important;
+      }
+      .projects-overlay .stack-pill {
+        font-size: 0.58rem !important;
+        padding: 0.1rem 0.32rem !important;
+      }
+      .projects-overlay .card-actions-wrapper {
+        margin-top: 0.2rem !important;
+        gap: 0.25rem !important;
+      }
+      .projects-overlay .projects-grid .link-btn {
+        padding: 0.4rem 0.65rem !important;
+        font-size: 0.66rem !important;
+        letter-spacing: 0.6px !important;
+      }
+      .projects-overlay .card-nav-switch {
+        display: none !important;
       }
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 1024px) and (min-width: 769px) {
+      .projects-overlay {
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+      }
+      .overlay-content {
+        height: auto !important;
+        min-height: calc(100vh - 58px) !important;
+        min-height: calc(100dvh - 58px) !important;
+        max-height: none !important;
+        overflow-y: visible !important;
+        padding: 1.2rem 1.5rem 3.5rem 1.5rem !important;
+      }
+      .projects-overlay .projects-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.25rem !important;
+        height: auto !important;
+        padding-bottom: 2rem !important;
+      }
+      .projects-overlay .projects-grid .glass-card {
+        height: auto !important;
+        min-height: auto !important;
+        padding: 1.25rem !important;
+      }
+    }
+
+    @media (max-width: 768px) {
       .projects-overlay {
         overflow-y: auto !important;
         -webkit-overflow-scrolling: touch;
@@ -1506,18 +1668,19 @@
         max-height: none !important;
         overflow-y: visible !important;
         justify-content: flex-start !important;
-        padding: 1.5rem 1.25rem 5rem 1.25rem !important;
+        padding: 1.2rem 1rem 4.5rem 1rem !important;
       }
       .projects-overlay .projects-grid {
         grid-template-columns: 1fr !important;
-        gap: 2rem !important;
+        gap: 1.5rem !important;
         height: auto !important;
+        padding-bottom: 2.5rem !important;
       }
       .projects-overlay .projects-grid .glass-card {
         height: auto !important;
         min-height: auto !important;
         overflow: visible !important;
-        padding: 1.5rem 1.25rem !important;
+        padding: 1.25rem 1rem !important;
       }
     }
     
@@ -1568,8 +1731,10 @@
     </div>
     <div class="overlay-content">
       <div class="projects-header-block">
-        <h1><span class="highlight-name">MY</span> PROJECTS</h1>
-        <p class="subtitle">Secondary web applications and interactive frameworks.</p>
+        <div class="projects-title-meta">
+          <h1><span class="highlight-name">MY</span> PROJECTS</h1>
+          <p class="subtitle">Secondary web applications and interactive frameworks.</p>
+        </div>
         
         <div class="projects-nav-selector">
           <span class="pnav-label">QUICK SWITCH:</span>
